@@ -20,7 +20,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function ServicesResidential() {
     const residentialAreas = [
         {
@@ -136,7 +135,6 @@ export default function ServicesResidential() {
             iconBg: "from-yellow-100 to-yellow-200",
         },
     ];
-
     return (
         <Section background="gray" aria-labelledby="residential-heading">
             <SectionHeader
@@ -146,13 +144,12 @@ export default function ServicesResidential() {
                 subtitle="Our comprehensive residential inspection covers every major system and component following InterNACHI Standards of Practice for thorough evaluation and your complete peace of mind"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid-cards-3"
             >
                 {residentialAreas.map((area, index: number) => (
                     <motion.div
@@ -162,7 +159,7 @@ export default function ServicesResidential() {
                     >
                         <Card
                             hover={true}
-                            className="bg-white p-8 group cursor-pointer h-full"
+                            className="card-premium group cursor-pointer h-full"
                             initial="rest"
                             whileHover="hover"
                             tabIndex={0}
@@ -171,9 +168,9 @@ export default function ServicesResidential() {
                         >
                             <motion.div
                                 variants={cardHover}
-                                className="h-full flex flex-col"
+                                className="card-content h-full flex flex-col"
                             >
-                                <div className="mb-6">
+                                <div className="mb-8 flex justify-center">
                                     <IconBox
                                         icon={<area.icon className="w-8 h-8" />}
                                         gradient={area.iconBg}
@@ -181,22 +178,21 @@ export default function ServicesResidential() {
                                         className="group-hover:scale-110 transition-transform duration-300"
                                     />
                                 </div>
-
-                                <h3
-                                    id={`area-${index}-title`}
-                                    className="text-xl font-bold text-slate-800 mb-4 group-hover:text-primary transition-colors"
-                                >
-                                    {area.title}
-                                </h3>
-
-                                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
-                                    {area.description}
-                                </p>
-
-                                <FeatureList
-                                    features={area.details}
-                                    iconColor="text-emerald-500"
-                                />
+                                <div className="text-center flex-grow flex flex-col">
+                                    <h3
+                                        id={`area-${index}-title`}
+                                        className="text-xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                    >
+                                        {area.title}
+                                    </h3>
+                                    <p className="text-slate-600 mb-8 leading-relaxed flex-grow text-base">
+                                        {area.description}
+                                    </p>
+                                    <FeatureList
+                                        features={area.details}
+                                        iconColor="text-emerald-500"
+                                    />
+                                </div>
                             </motion.div>
                         </Card>
                     </motion.div>

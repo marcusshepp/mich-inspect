@@ -22,7 +22,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function ServicesAdditional() {
     const additionalServices = [
         {
@@ -152,7 +151,6 @@ export default function ServicesAdditional() {
             popular: true,
         },
     ];
-
     return (
         <Section
             background="white"
@@ -165,13 +163,12 @@ export default function ServicesAdditional() {
                 subtitle="Advanced inspection services tailored to unique property needs and specific industry requirements"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid-cards-3"
             >
                 {additionalServices.map((service, index: number) => (
                     <motion.div
@@ -181,7 +178,7 @@ export default function ServicesAdditional() {
                     >
                         <Card
                             hover={true}
-                            className={`bg-white p-8 group cursor-pointer relative overflow-hidden h-full ${service.popular ? "ring-2 ring-secondary/20" : ""}`}
+                            className={`card-premium group cursor-pointer relative overflow-hidden h-full ${service.popular ? "ring-2 ring-secondary/20" : ""}`}
                             initial="rest"
                             whileHover="hover"
                             tabIndex={0}
@@ -189,16 +186,15 @@ export default function ServicesAdditional() {
                             aria-labelledby={`service-${index}-title`}
                         >
                             {service.popular && (
-                                <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-secondary to-secondary-600 text-white text-xs font-bold rounded-full">
+                                <div className="absolute top-6 right-6 px-4 py-2 bg-gradient-to-r from-secondary to-secondary-600 text-white text-xs font-bold rounded-full z-10">
                                     Popular
                                 </div>
                             )}
-
                             <motion.div
                                 variants={cardHover}
-                                className="h-full flex flex-col"
+                                className="card-content h-full flex flex-col"
                             >
-                                <div className="mb-6">
+                                <div className="mb-8 flex justify-center">
                                     <IconBox
                                         icon={
                                             <service.icon className="w-8 h-8" />
@@ -208,38 +204,39 @@ export default function ServicesAdditional() {
                                         className="group-hover:scale-110 transition-transform duration-300 shadow-lg"
                                     />
                                 </div>
-
-                                <h3
-                                    id={`service-${index}-title`}
-                                    className="text-xl font-bold text-slate-800 mb-4 group-hover:text-primary transition-colors"
-                                >
-                                    {service.title}
-                                </h3>
-
-                                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
-                                    {service.description}
-                                </p>
-
-                                <ul className="space-y-3 mb-6" role="list">
-                                    {service.features.map(
-                                        (
-                                            feature: string,
-                                            featureIndex: number,
-                                        ) => (
-                                            <li
-                                                key={featureIndex}
-                                                className="flex items-center text-sm text-slate-700"
-                                            >
-                                                <ArrowRight className="w-4 h-4 text-secondary mr-3 flex-shrink-0" />
-                                                {feature}
-                                            </li>
-                                        ),
-                                    )}
-                                </ul>
-
-                                <div className="flex items-center text-primary font-semibold text-sm group-hover:text-secondary transition-colors pt-4 border-t border-slate-100">
-                                    <span>Learn More</span>
-                                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <div className="text-center flex-grow flex flex-col">
+                                    <h3
+                                        id={`service-${index}-title`}
+                                        className="text-xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                    >
+                                        {service.title}
+                                    </h3>
+                                    <p className="text-slate-600 mb-8 leading-relaxed text-base">
+                                        {service.description}
+                                    </p>
+                                    <ul
+                                        className="space-y-4 mb-8 flex-grow"
+                                        role="list"
+                                    >
+                                        {service.features.map(
+                                            (
+                                                feature: string,
+                                                featureIndex: number,
+                                            ) => (
+                                                <li
+                                                    key={featureIndex}
+                                                    className="flex items-center text-sm text-slate-700 leading-relaxed"
+                                                >
+                                                    <ArrowRight className="w-4 h-4 text-secondary mr-3 flex-shrink-0" />
+                                                    {feature}
+                                                </li>
+                                            ),
+                                        )}
+                                    </ul>
+                                    <div className="flex items-center justify-center text-primary font-semibold text-sm group-hover:text-secondary transition-colors pt-6 border-t border-slate-100">
+                                        <span>Learn More</span>
+                                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                    </div>
                                 </div>
                             </motion.div>
                         </Card>

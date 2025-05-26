@@ -18,7 +18,6 @@ import {
     Zap,
     Camera,
 } from "lucide-react";
-
 export default function AboutCertifications() {
     const certifications = [
         {
@@ -71,7 +70,6 @@ export default function AboutCertifications() {
             color: "from-red-500 to-red-600",
         },
     ];
-
     return (
         <Section background="gray" aria-labelledby="certifications-heading">
             <SectionHeader
@@ -81,13 +79,12 @@ export default function AboutCertifications() {
                 subtitle="Our extensive certifications ensure you receive the most comprehensive and professional inspection services available"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid-cards-3"
             >
                 {certifications.map((cert, index: number) => (
                     <motion.div
@@ -97,7 +94,7 @@ export default function AboutCertifications() {
                     >
                         <Card
                             hover={true}
-                            className="bg-white p-6 group cursor-pointer h-full"
+                            className="card-premium group cursor-pointer h-full"
                             initial="rest"
                             whileHover="hover"
                             role="article"
@@ -105,27 +102,27 @@ export default function AboutCertifications() {
                         >
                             <motion.div
                                 variants={cardHover}
-                                className="h-full flex flex-col"
+                                className="card-content"
                             >
-                                <div className="mb-6">
+                                <div className="mb-8 flex justify-center">
                                     <IconBox
                                         icon={<cert.icon className="w-8 h-8" />}
                                         gradient={cert.color}
-                                        size="md"
+                                        size="lg"
                                         className="group-hover:scale-110 transition-transform duration-300 shadow-lg"
                                     />
                                 </div>
-
-                                <h3
-                                    id={`cert-${index}-title`}
-                                    className="text-lg font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors leading-tight flex-grow-0"
-                                >
-                                    {cert.title}
-                                </h3>
-
-                                <p className="text-slate-600 text-sm leading-relaxed flex-grow">
-                                    {cert.description}
-                                </p>
+                                <div className="text-center flex-grow flex flex-col">
+                                    <h3
+                                        id={`cert-${index}-title`}
+                                        className="text-xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors leading-tight"
+                                    >
+                                        {cert.title}
+                                    </h3>
+                                    <p className="text-slate-600 text-base leading-relaxed flex-grow">
+                                        {cert.description}
+                                    </p>
+                                </div>
                             </motion.div>
                         </Card>
                     </motion.div>

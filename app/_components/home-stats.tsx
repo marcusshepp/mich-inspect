@@ -11,7 +11,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function HomeStats() {
     const trustIndicators = [
         {
@@ -47,7 +46,6 @@ export default function HomeStats() {
             gradient: "from-yellow-500 to-yellow-600",
         },
     ];
-
     return (
         <Section background="gradient" aria-labelledby="trust-heading">
             <SectionHeader
@@ -57,13 +55,12 @@ export default function HomeStats() {
                 subtitle="Over a decade of experience serving Michigan homeowners with excellence and integrity"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+                className="grid-cards-4"
             >
                 {trustIndicators.map((indicator, index: number) => (
                     <motion.div
@@ -73,7 +70,7 @@ export default function HomeStats() {
                     >
                         <Card
                             hover={true}
-                            className="p-8 bg-white group cursor-pointer text-center"
+                            className="card-premium group cursor-pointer text-center"
                             initial="rest"
                             whileHover="hover"
                             role="article"
@@ -81,9 +78,9 @@ export default function HomeStats() {
                         >
                             <motion.div
                                 variants={cardHover}
-                                className="flex flex-col items-center"
+                                className="card-content-lg flex flex-col items-center justify-center"
                             >
-                                <div className="mb-6">
+                                <div className="mb-8">
                                     <IconBox
                                         icon={
                                             <indicator.icon className="w-8 h-8" />
@@ -93,10 +90,9 @@ export default function HomeStats() {
                                         className="group-hover:scale-110 transition-transform duration-300"
                                     />
                                 </div>
-
                                 <motion.div
                                     id={`stat-${index}-number`}
-                                    className="text-4xl lg:text-5xl font-extrabold text-slate-800 mb-3 group-hover:text-primary transition-colors"
+                                    className="text-5xl lg:text-6xl font-extrabold text-slate-800 mb-4 group-hover:text-primary transition-colors"
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     <AnimatedCounter
@@ -123,8 +119,7 @@ export default function HomeStats() {
                                         }
                                     />
                                 </motion.div>
-
-                                <div className="text-slate-600 font-semibold text-lg">
+                                <div className="text-slate-600 font-semibold text-lg leading-tight">
                                     {indicator.label}
                                 </div>
                             </motion.div>

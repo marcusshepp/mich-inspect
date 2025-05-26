@@ -16,7 +16,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function ServicesTechnology() {
     const technologyHighlights = [
         {
@@ -59,7 +58,6 @@ export default function ServicesTechnology() {
             gradient: "from-cyan-500 to-cyan-600",
         },
     ];
-
     return (
         <Section background="dark" aria-labelledby="technology-heading">
             <SectionHeader
@@ -72,13 +70,12 @@ export default function ServicesTechnology() {
                 title="State-of-the-Art Inspection Technology"
                 subtitle="We utilize cutting-edge equipment and advanced technology to provide the most comprehensive and accurate inspections available in the industry"
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid lg:grid-cols-3 gap-8"
+                className="grid-cards-3"
             >
                 {technologyHighlights.map((tech, index: number) => (
                     <motion.div
@@ -88,7 +85,7 @@ export default function ServicesTechnology() {
                     >
                         <Card
                             hover={true}
-                            className="glass rounded-3xl p-8 border border-white/20 backdrop-blur-sm group cursor-pointer h-full"
+                            className="glass rounded-3xl border border-white/20 backdrop-blur-lg group cursor-pointer h-full bg-white/5 hover:bg-white/10 shadow-2xl hover:shadow-white/10"
                             initial="rest"
                             whileHover="hover"
                             role="article"
@@ -96,9 +93,9 @@ export default function ServicesTechnology() {
                         >
                             <motion.div
                                 variants={cardHover}
-                                className="h-full flex flex-col text-center"
+                                className="card-content-lg h-full flex flex-col text-center"
                             >
-                                <div className="mb-6 flex justify-center">
+                                <div className="mb-8 flex justify-center">
                                     <IconBox
                                         icon={
                                             <tech.icon className="w-10 h-10" />
@@ -108,19 +105,16 @@ export default function ServicesTechnology() {
                                         className="group-hover:scale-110 transition-transform duration-300 shadow-2xl"
                                     />
                                 </div>
-
                                 <h3
                                     id={`tech-${index}-title`}
-                                    className="text-2xl font-bold mb-4 group-hover:text-secondary transition-colors"
+                                    className="text-2xl font-bold mb-6 group-hover:text-secondary transition-colors text-white"
                                 >
                                     {tech.title}
                                 </h3>
-
-                                <p className="text-slate-300 leading-relaxed mb-6 group-hover:text-white transition-colors flex-grow">
+                                <p className="text-slate-300 leading-relaxed mb-8 group-hover:text-white transition-colors flex-grow text-base">
                                     {tech.description}
                                 </p>
-
-                                <ul className="space-y-3" role="list">
+                                <ul className="space-y-4" role="list">
                                     {tech.features.map(
                                         (
                                             feature: string,
@@ -128,9 +122,9 @@ export default function ServicesTechnology() {
                                         ) => (
                                             <li
                                                 key={featureIndex}
-                                                className="flex items-center text-sm text-slate-300 group-hover:text-white transition-colors"
+                                                className="flex items-center text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed"
                                             >
-                                                <CheckCircle className="w-4 h-4 text-secondary mr-3 flex-shrink-0" />
+                                                <CheckCircle className="w-5 h-5 text-secondary mr-4 flex-shrink-0" />
                                                 {feature}
                                             </li>
                                         ),

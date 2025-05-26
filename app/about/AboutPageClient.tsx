@@ -5,6 +5,7 @@ import AboutHero from "app/_components/about-hero";
 import AboutStory from "app/_components/about-story";
 import AboutTeam from "app/_components/about-team";
 import AboutCertifications from "app/_components/about-certifications";
+import Footer from "components/ui/footer";
 
 function PageLoader() {
     return (
@@ -44,6 +45,7 @@ export default function AboutPageContent() {
             <AboutStory />
             <AboutTeam />
             <AboutCertifications />
+            <Footer />
         </div>
     );
 }

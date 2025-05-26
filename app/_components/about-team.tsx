@@ -11,7 +11,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function AboutTeam() {
     const teamMembers = [
         {
@@ -71,7 +70,6 @@ export default function AboutTeam() {
             gradient: "from-emerald-500 to-emerald-600",
         },
     ];
-
     return (
         <Section background="white" aria-labelledby="team-heading">
             <SectionHeader
@@ -81,13 +79,12 @@ export default function AboutTeam() {
                 subtitle="Each team member brings specialized expertise and unwavering commitment to protecting your investment"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+                className="grid-cards-4"
             >
                 {teamMembers.map((member, index: number) => (
                     <motion.div
@@ -97,7 +94,7 @@ export default function AboutTeam() {
                     >
                         <Card
                             hover={true}
-                            className="bg-white group cursor-pointer overflow-hidden h-full"
+                            className="card-premium group cursor-pointer overflow-hidden h-full"
                             initial="rest"
                             whileHover="hover"
                             tabIndex={0}
@@ -108,34 +105,34 @@ export default function AboutTeam() {
                                 variants={cardHover}
                                 className="h-full flex flex-col"
                             >
-                                <div className="relative">
+                                <div className="relative overflow-hidden">
                                     <img
                                         src={member.image}
                                         alt={`Professional headshot of ${member.name}, ${member.title} at ${contactInfo.company}`}
-                                        className="w-full h-64 object-cover"
+                                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                     <div
                                         className={`absolute inset-0 bg-gradient-to-t ${member.gradient}/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                                     />
                                 </div>
-
-                                <div className="p-6 flex-grow flex flex-col">
-                                    <h3
-                                        id={`team-member-${index}-name`}
-                                        className="text-xl font-bold text-slate-800 mb-2 group-hover:text-primary transition-colors"
-                                    >
-                                        {member.name}
-                                    </h3>
-                                    <p
-                                        className={`text-sm font-semibold mb-3 bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent`}
-                                    >
-                                        {member.title}
-                                    </p>
-                                    <p className="text-slate-600 text-sm mb-4 leading-relaxed flex-grow">
-                                        {member.description}
-                                    </p>
-
-                                    <div className="space-y-2">
+                                <div className="card-content flex-grow flex flex-col">
+                                    <div className="text-center mb-6">
+                                        <h3
+                                            id={`team-member-${index}-name`}
+                                            className="text-xl font-bold text-slate-800 mb-2 group-hover:text-primary transition-colors"
+                                        >
+                                            {member.name}
+                                        </h3>
+                                        <p
+                                            className={`text-sm font-semibold mb-4 bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent`}
+                                        >
+                                            {member.title}
+                                        </p>
+                                        <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                                            {member.description}
+                                        </p>
+                                    </div>
+                                    <div className="space-y-3 flex-grow">
                                         {member.specialties.map(
                                             (
                                                 specialty: string,
@@ -145,7 +142,7 @@ export default function AboutTeam() {
                                                     key={specialtyIndex}
                                                     className="flex items-center text-xs text-slate-600"
                                                 >
-                                                    <CheckCircle className="w-3 h-3 text-emerald-500 mr-2 flex-shrink-0" />
+                                                    <CheckCircle className="w-4 h-4 text-emerald-500 mr-3 flex-shrink-0" />
                                                     {specialty}
                                                 </div>
                                             ),

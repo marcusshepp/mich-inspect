@@ -11,7 +11,6 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
-
 export default function HomeServices() {
     const services = [
         {
@@ -71,7 +70,6 @@ export default function HomeServices() {
             iconBg: "from-cyan-100 to-cyan-200",
         },
     ];
-
     return (
         <Section background="gray" aria-labelledby="services-heading">
             <SectionHeader
@@ -81,13 +79,12 @@ export default function HomeServices() {
                 subtitle="From foundation to roof, we inspect every critical component of your investment with military precision and advanced technology"
                 titleGradient={true}
             />
-
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+                className="grid-cards-4"
             >
                 {services.map((service, index: number) => (
                     <motion.div
@@ -97,7 +94,7 @@ export default function HomeServices() {
                     >
                         <Card
                             hover={true}
-                            className="p-8 bg-white group cursor-pointer h-full"
+                            className="card-premium group cursor-pointer h-full"
                             initial="rest"
                             whileHover="hover"
                             tabIndex={0}
@@ -106,9 +103,9 @@ export default function HomeServices() {
                         >
                             <motion.div
                                 variants={cardHover}
-                                className="h-full flex flex-col"
+                                className="card-content-lg h-full flex flex-col"
                             >
-                                <div className="mb-6">
+                                <div className="mb-8 flex justify-center">
                                     <IconBox
                                         icon={
                                             <service.icon className="w-8 h-8" />
@@ -118,22 +115,23 @@ export default function HomeServices() {
                                         className="group-hover:scale-110 transition-transform duration-300"
                                     />
                                 </div>
-
-                                <h3
-                                    id={`service-${index}-title`}
-                                    className="text-2xl font-bold text-slate-800 mb-4 group-hover:text-primary transition-colors"
-                                >
-                                    {service.title}
-                                </h3>
-
-                                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
-                                    {service.description}
-                                </p>
-
-                                <FeatureList
-                                    features={service.features}
-                                    iconColor="text-emerald-500"
-                                />
+                                <div className="text-center flex-grow flex flex-col">
+                                    <h3
+                                        id={`service-${index}-title`}
+                                        className="text-2xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                    >
+                                        {service.title}
+                                    </h3>
+                                    <p className="text-slate-600 mb-8 leading-relaxed text-base">
+                                        {service.description}
+                                    </p>
+                                    <div className="flex-grow">
+                                        <FeatureList
+                                            features={service.features}
+                                            iconColor="text-emerald-500"
+                                        />
+                                    </div>
+                                </div>
                             </motion.div>
                         </Card>
                     </motion.div>

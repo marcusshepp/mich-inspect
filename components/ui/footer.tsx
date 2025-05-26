@@ -11,11 +11,9 @@ import {
 } from "lucide-react";
 import { contactInfo } from "@/lib/contact-info";
 import Link from "next/link";
-import { fadeInUp, staggerContainer } from "./shared";
-
+import { fadeInUp, staggerContainer } from "../shared";
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-
     const footerLinks = [
         {
             title: "Services",
@@ -47,7 +45,6 @@ export default function Footer() {
             ],
         },
     ];
-
     const certificationBadges = [
         {
             name: "InterNACHI Certified",
@@ -70,7 +67,6 @@ export default function Footer() {
             description: "Fast, detailed reporting",
         },
     ];
-
     return (
         <footer
             className="bg-slate-900 text-slate-300 relative overflow-hidden"
@@ -79,16 +75,15 @@ export default function Footer() {
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=400&width=1200')] bg-cover bg-center"></div>
             </div>
-
             <div className="relative z-10">
-                <section className="py-16 px-6 border-b border-slate-800">
+                <section className="py-20 px-6 border-b border-slate-800">
                     <div className="container-custom">
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, margin: "-100px" }}
                             variants={staggerContainer}
-                            className="grid lg:grid-cols-12 gap-12"
+                            className="grid lg:grid-cols-12 gap-16"
                         >
                             <motion.div
                                 variants={fadeInUp}
@@ -112,25 +107,23 @@ export default function Footer() {
                                         </div>
                                     </Link>
                                 </div>
-
-                                <p className="text-slate-400 mb-8 leading-relaxed max-w-md">
+                                <p className="text-slate-400 mb-10 leading-relaxed max-w-md text-base">
                                     Veteran-owned home inspection company
                                     serving Michigan with military precision,
                                     advanced technology, and unwavering
                                     commitment to protecting your investment.
                                 </p>
-
-                                <div className="space-y-4">
+                                <div className="space-y-6">
                                     <motion.a
                                         href={`tel:${contactInfo.phone}`}
-                                        className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group"
+                                        className="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group"
                                         whileHover={{ x: 5 }}
                                     >
-                                        <div className="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+                                        <div className="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
                                             <Phone className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-base">
                                                 {contactInfo.phone}
                                             </p>
                                             <p className="text-sm text-slate-500">
@@ -138,17 +131,16 @@ export default function Footer() {
                                             </p>
                                         </div>
                                     </motion.a>
-
                                     <motion.a
                                         href={`mailto:${contactInfo.email}`}
-                                        className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group"
+                                        className="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group"
                                         whileHover={{ x: 5 }}
                                     >
-                                        <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                                        <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
                                             <Mail className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-base">
                                                 {contactInfo.email}
                                             </p>
                                             <p className="text-sm text-slate-500">
@@ -156,13 +148,12 @@ export default function Footer() {
                                             </p>
                                         </div>
                                     </motion.a>
-
-                                    <div className="flex items-center gap-3 text-slate-300">
-                                        <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                                    <div className="flex items-center gap-4 text-slate-300">
+                                        <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
                                             <MapPin className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-base">
                                                 Service Areas
                                             </p>
                                             <p className="text-sm text-slate-500">
@@ -175,19 +166,18 @@ export default function Footer() {
                                     </div>
                                 </div>
                             </motion.div>
-
                             <motion.div
                                 variants={fadeInUp}
                                 className="lg:col-span-4"
                             >
-                                <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-8">
+                                <div className="grid md:grid-cols-3 lg:grid-cols-1 gap-10">
                                     {footerLinks.map(
                                         (section, index: number) => (
                                             <div key={section.title}>
-                                                <h4 className="text-lg font-semibold text-white mb-4">
+                                                <h4 className="text-lg font-semibold text-white mb-6">
                                                     {section.title}
                                                 </h4>
-                                                <ul className="space-y-3">
+                                                <ul className="space-y-4">
                                                     {section.links.map(
                                                         (
                                                             link,
@@ -203,7 +193,7 @@ export default function Footer() {
                                                                         href={
                                                                             link.href
                                                                         }
-                                                                        className="text-slate-400 hover:text-white transition-colors text-sm"
+                                                                        className="text-slate-400 hover:text-white transition-colors text-sm leading-relaxed"
                                                                     >
                                                                         {
                                                                             link.name
@@ -219,30 +209,29 @@ export default function Footer() {
                                     )}
                                 </div>
                             </motion.div>
-
                             <motion.div
                                 variants={fadeInUp}
                                 className="lg:col-span-3"
                             >
-                                <h4 className="text-lg font-semibold text-white mb-6">
+                                <h4 className="text-lg font-semibold text-white mb-8">
                                     Our Credentials
                                 </h4>
-                                <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
+                                <div className="grid grid-cols-1 gap-4">
                                     {certificationBadges.map(
                                         (badge, index: number) => (
                                             <motion.div
                                                 key={badge.name}
-                                                className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700/50 hover:border-slate-600/50 transition-colors cursor-pointer group"
+                                                className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-slate-600/50 hover:bg-slate-800/70 transition-all cursor-pointer group"
                                                 whileHover={{ scale: 1.02 }}
                                             >
-                                                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                                    <badge.icon className="w-4 h-4 text-white" />
+                                                <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                                                    <badge.icon className="w-5 h-5 text-white" />
                                                 </div>
-                                                <div>
+                                                <div className="flex-grow">
                                                     <p className="text-sm font-semibold text-white group-hover:text-secondary transition-colors">
                                                         {badge.name}
                                                     </p>
-                                                    <p className="text-xs text-slate-500">
+                                                    <p className="text-xs text-slate-500 leading-relaxed">
                                                         {badge.description}
                                                     </p>
                                                 </div>
@@ -254,7 +243,6 @@ export default function Footer() {
                         </motion.div>
                     </div>
                 </section>
-
                 <section className="py-8 px-6">
                     <div className="container-custom">
                         <motion.div
@@ -262,20 +250,19 @@ export default function Footer() {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={fadeInUp}
-                            className="flex flex-col md:flex-row justify-between items-center gap-4"
+                            className="flex flex-col md:flex-row justify-between items-center gap-6"
                         >
                             <div className="text-center md:text-left">
                                 <p className="text-slate-400 text-sm">
                                     &copy; {currentYear} {contactInfo.company}.
                                     All rights reserved.
                                 </p>
-                                <p className="text-slate-500 text-xs mt-1">
+                                <p className="text-slate-500 text-xs mt-2">
                                     InterNACHI Certified • Veteran-Owned •
                                     Michigan Licensed & Insured
                                 </p>
                             </div>
-
-                            <div className="flex items-center gap-4 text-xs text-slate-500">
+                            <div className="flex items-center gap-6 text-xs text-slate-500">
                                 <motion.span
                                     className="hover:text-slate-400 transition-colors cursor-pointer"
                                     whileHover={{ scale: 1.05 }}

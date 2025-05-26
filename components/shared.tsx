@@ -2,13 +2,11 @@
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "lib/utils";
 import { ReactNode, forwardRef } from "react";
-
 interface ButtonProps extends HTMLMotionProps<"button"> {
     variant?: "primary" | "secondary" | "outline" | "ghost";
     size?: "sm" | "md" | "lg";
     children: ReactNode;
 }
-
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (
         { variant = "primary", size = "md", className, children, ...props },
@@ -26,7 +24,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             md: "px-6 py-3 text-base",
             lg: "px-8 py-4 text-lg",
         };
-
         return (
             <motion.button
                 ref={ref}
@@ -46,20 +43,22 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         );
     },
 );
-
 Button.displayName = "Button";
-
 interface CardProps extends HTMLMotionProps<"div"> {
     hover?: boolean;
     children: ReactNode;
 }
-
 export const Card = forwardRef<HTMLDivElement, CardProps>(
     ({ hover = true, className, children, ...props }, ref) => {
         return (
             <motion.div
                 ref={ref}
-                className={cn("card", hover && "card-hover", className)}
+                className={cn(
+                    "bg-white rounded-3xl border border-gray-100 shadow-sm transition-all duration-500 ease-out overflow-hidden",
+                    hover &&
+                        "hover:shadow-2xl hover:shadow-gray-200/50 hover:-translate-y-2 hover:border-gray-200",
+                    className,
+                )}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -71,16 +70,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         );
     },
 );
-
 Card.displayName = "Card";
-
 interface SectionProps {
     children: ReactNode;
     className?: string;
     id?: string;
     background?: "white" | "gray" | "gradient" | "dark";
 }
-
 export const Section: React.FC<SectionProps> = ({
     children,
     className,
@@ -93,12 +89,11 @@ export const Section: React.FC<SectionProps> = ({
         gradient: "bg-gradient-to-br from-primary-50 via-white to-accent-50",
         dark: "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white",
     };
-
     return (
         <section
             id={id}
             className={cn(
-                "py-24 px-6 relative overflow-hidden",
+                "py-32 px-6 relative overflow-hidden",
                 backgroundClasses[background],
                 className,
             )}
@@ -118,7 +113,6 @@ export const Section: React.FC<SectionProps> = ({
         </section>
     );
 };
-
 interface SectionHeaderProps {
     badge?: string;
     badgeIcon?: ReactNode;
@@ -128,7 +122,6 @@ interface SectionHeaderProps {
     centered?: boolean;
     className?: string;
 }
-
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
     badge,
     badgeIcon,
@@ -142,7 +135,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         <motion.div
             className={cn(
                 centered ? "text-center" : "text-left",
-                "mb-20",
+                "mb-24",
                 className,
             )}
             initial={{ opacity: 0, y: 60 }}
@@ -152,7 +145,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         >
             {badge && (
                 <motion.div
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -162,10 +155,9 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                     <span>{badge}</span>
                 </motion.div>
             )}
-
             <h2
                 className={cn(
-                    "text-5xl lg:text-6xl font-bold mb-8",
+                    "text-5xl lg:text-6xl font-bold mb-10 leading-tight",
                     titleGradient ? "text-slate-800" : "text-slate-800",
                 )}
             >
@@ -180,7 +172,6 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                     title
                 )}
             </h2>
-
             {subtitle && (
                 <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
                     {subtitle}
@@ -189,7 +180,6 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </motion.div>
     );
 };
-
 interface IconBoxProps {
     icon: ReactNode;
     gradient?: string;
@@ -197,7 +187,6 @@ interface IconBoxProps {
     className?: string;
     animate?: boolean;
 }
-
 export const IconBox: React.FC<IconBoxProps> = ({
     icon,
     gradient = "from-primary to-primary-600",
@@ -206,22 +195,20 @@ export const IconBox: React.FC<IconBoxProps> = ({
     animate = true,
 }) => {
     const sizeClasses = {
-        sm: "w-12 h-12",
-        md: "w-16 h-16",
-        lg: "w-20 h-20",
+        sm: "w-14 h-14",
+        md: "w-20 h-20",
+        lg: "w-24 h-24",
     };
-
     const iconSizes = {
-        sm: "w-6 h-6",
-        md: "w-8 h-8",
-        lg: "w-10 h-10",
+        sm: "w-7 h-7",
+        md: "w-10 h-10",
+        lg: "w-12 h-12",
     };
-
     return (
         <motion.div
             className={cn(
                 sizeClasses[size],
-                `rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`,
+                `rounded-3xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`,
                 className,
             )}
             whileHover={animate ? { scale: 1.1, rotate: 5 } : {}}
@@ -231,31 +218,29 @@ export const IconBox: React.FC<IconBoxProps> = ({
         </motion.div>
     );
 };
-
 interface FeatureListProps {
     features: string[];
     iconColor?: string;
     className?: string;
 }
-
 export const FeatureList: React.FC<FeatureListProps> = ({
     features,
     iconColor = "text-emerald-500",
     className,
 }) => {
     return (
-        <ul className={cn("space-y-3", className)} role="list">
+        <ul className={cn("space-y-4", className)} role="list">
             {features.map((feature: string, index: number) => (
                 <motion.li
                     key={index}
-                    className="flex items-center text-sm text-slate-700"
+                    className="flex items-center text-sm text-slate-700 leading-relaxed"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.4 }}
                 >
                     <svg
-                        className={cn("w-4 h-4 mr-3 flex-shrink-0", iconColor)}
+                        className={cn("w-5 h-5 mr-4 flex-shrink-0", iconColor)}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                     >
@@ -271,13 +256,11 @@ export const FeatureList: React.FC<FeatureListProps> = ({
         </ul>
     );
 };
-
 interface GradientTextProps {
     children: ReactNode;
     className?: string;
     gradient?: string;
 }
-
 export const GradientText: React.FC<GradientTextProps> = ({
     children,
     className,
@@ -294,7 +277,6 @@ export const GradientText: React.FC<GradientTextProps> = ({
         </span>
     );
 };
-
 interface AnimatedCounterProps {
     from: number;
     to: number;
@@ -302,7 +284,6 @@ interface AnimatedCounterProps {
     suffix?: string;
     className?: string;
 }
-
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     from,
     to,
@@ -330,14 +311,12 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
         </motion.span>
     );
 };
-
 interface FloatingElementProps {
     children: ReactNode;
     delay?: number;
     duration?: number;
     className?: string;
 }
-
 export const FloatingElement: React.FC<FloatingElementProps> = ({
     children,
     delay = 0,
@@ -363,7 +342,6 @@ export const FloatingElement: React.FC<FloatingElementProps> = ({
         </motion.div>
     );
 };
-
 export const fadeInUp = {
     hidden: { opacity: 0, y: 80 },
     visible: {
@@ -372,7 +350,6 @@ export const fadeInUp = {
         transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
     },
 };
-
 export const slideInLeft = {
     hidden: { opacity: 0, x: -100 },
     visible: {
@@ -381,7 +358,6 @@ export const slideInLeft = {
         transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
     },
 };
-
 export const slideInRight = {
     hidden: { opacity: 0, x: 100 },
     visible: {
@@ -390,7 +366,6 @@ export const slideInRight = {
         transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
     },
 };
-
 export const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -401,7 +376,6 @@ export const staggerContainer = {
         },
     },
 };
-
 export const cardHover = {
     rest: {
         scale: 1,
@@ -410,10 +384,10 @@ export const cardHover = {
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
     },
     hover: {
-        scale: 1.05,
-        y: -10,
-        rotateY: 2,
-        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
+        scale: 1.02,
+        y: -8,
+        rotateY: 1,
+        boxShadow: "0 30px 60px rgba(0, 0, 0, 0.15)",
         transition: {
             duration: 0.4,
             ease: [0.25, 0.46, 0.45, 0.94],
