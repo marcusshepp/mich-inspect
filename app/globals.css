@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
     :root {
         --background: 255 255 255;
@@ -72,6 +73,7 @@
         --ring: 59 130 246;
     }
 }
+
 @layer base {
     * {
         @apply border-border;
@@ -86,6 +88,11 @@
         scroll-padding-top: 5rem;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        /* Fix mobile overscroll yellow background */
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+        /* Prevent pull-to-refresh on mobile */
+        overscroll-behavior-y: contain;
     }
     body {
         @apply bg-background text-foreground font-sans;
@@ -96,7 +103,61 @@
         line-height: 1.6;
         overflow-x: hidden;
         min-height: 100vh;
+        /* Prevent mobile overscroll yellow background */
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+        /* Additional mobile fixes */
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        /* Re-enable text selection for text elements */
     }
+
+    /* Re-enable text selection for specific elements */
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    span,
+    a,
+    li {
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+
+    /* Mobile-specific fixes */
+    @media (max-width: 768px) {
+        html,
+        body {
+            /* Prevent bounce scrolling on iOS */
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: none;
+            /* Prevent zoom on input focus */
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            /* Prevent pull-to-refresh */
+            overscroll-behavior: contain;
+        }
+
+        /* Fix viewport on mobile browsers */
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+    }
+
     h1,
     h2,
     h3,
@@ -134,6 +195,7 @@
         touch-action: manipulation;
     }
 }
+
 @layer components {
     .btn {
         @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
@@ -222,6 +284,7 @@
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 }
+
 @layer utilities {
     .scrollbar-hide {
         -ms-overflow-style: none;
@@ -249,6 +312,7 @@
         filter: brightness(1.1);
     }
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -314,6 +378,7 @@
         box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
     }
 }
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -329,10 +394,12 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(100 116 139);
 }
+
 ::selection {
     background: rgba(59, 130, 246, 0.2);
     color: rgb(15 23 42);
 }
+
 .skip-link {
     position: absolute;
     top: -40px;
@@ -351,6 +418,7 @@
     transform: scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -364,6 +432,7 @@
         transform: none !important;
     }
 }
+
 @media (prefers-contrast: high) {
     .border {
         border-width: 2px;

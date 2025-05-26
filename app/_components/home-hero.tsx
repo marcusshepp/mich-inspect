@@ -42,7 +42,7 @@ export default function HomeHero() {
                 style={{ y: heroY }}
                 aria-hidden="true"
             >
-                <div className="absolute inset-0 bg-[url('/attic.jpg?height=1080&width=1920')] bg-cover bg-center bg-no-repeat"></div>
+                <div className="absolute inset-0 bg-[url('/attic.webp?height=1080&width=1920')] bg-cover bg-center bg-no-repeat"></div>
             </motion.div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-transparent to-primary/40" />
@@ -165,7 +165,7 @@ export default function HomeHero() {
                             <div className="relative bg-gradient-to-br from-white via-white to-gray-50 rounded-3xl shadow-2xl overflow-hidden border border-white/20">
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
                                 <img
-                                    src="/attic2.jpg?height=500&width=600"
+                                    src="/attic2.webp?height=500&width=600"
                                     alt="Professional home inspector conducting thermal imaging inspection with advanced equipment"
                                     className="w-full h-80 lg:h-96 object-cover relative z-10"
                                 />
