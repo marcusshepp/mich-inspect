@@ -44,11 +44,14 @@ export default function Header() {
     useEffect(() => {
         if (isMobileMenuOpen) {
             document.body.style.overflow = "hidden";
+            document.body.style.overscrollBehavior = "none";
         } else {
             document.body.style.overflow = "unset";
+            document.body.style.overscrollBehavior = "none";
         }
         return () => {
             document.body.style.overflow = "unset";
+            document.body.style.overscrollBehavior = "none";
         };
     }, [isMobileMenuOpen]);
 
@@ -133,7 +136,6 @@ export default function Header() {
                 className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-accent to-primary z-50 origin-left"
                 style={{ scaleX: scrollIndicatorWidth }}
             />
-
             <motion.header
                 initial="hidden"
                 animate="visible"
@@ -195,7 +197,6 @@ export default function Header() {
                                 </motion.div>
                             </Link>
                         </motion.div>
-
                         <motion.nav
                             variants={itemVariants}
                             className="hidden lg:flex items-center space-x-2"
@@ -241,7 +242,6 @@ export default function Header() {
                                 </motion.div>
                             ))}
                         </motion.nav>
-
                         <div className="flex items-center space-x-4">
                             <motion.div
                                 variants={itemVariants}
@@ -269,7 +269,6 @@ export default function Header() {
                                     {contactInfo.phone}
                                 </motion.a>
                             </motion.div>
-
                             <motion.button
                                 variants={itemVariants}
                                 onClick={toggleMobileMenu}
@@ -308,7 +307,6 @@ export default function Header() {
                     </div>
                 </div>
             </motion.header>
-
             <AnimatePresence mode="wait">
                 {isMobileMenuOpen && (
                     <motion.div
@@ -318,6 +316,7 @@ export default function Header() {
                         variants={mobileMenuVariants}
                         className="fixed inset-0 z-50 lg:hidden"
                         id="mobile-menu"
+                        style={{ overscrollBehavior: "none" }}
                     >
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -325,11 +324,12 @@ export default function Header() {
                             exit={{ opacity: 0 }}
                             className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary-800/95 to-primary-900/95 backdrop-blur-xl"
                             onClick={closeMobileMenu}
+                            style={{ overscrollBehavior: "none" }}
                         />
-
                         <motion.div
                             variants={mobileMenuVariants}
                             className="relative flex flex-col items-center justify-center h-full px-6"
+                            style={{ overscrollBehavior: "none" }}
                         >
                             <motion.button
                                 variants={mobileItemVariants}
@@ -341,7 +341,6 @@ export default function Header() {
                             >
                                 <X className="w-6 h-6" />
                             </motion.button>
-
                             <motion.div
                                 variants={mobileItemVariants}
                                 className="text-center mb-12"
@@ -364,7 +363,6 @@ export default function Header() {
                                     </span>
                                 </div>
                             </motion.div>
-
                             <motion.nav
                                 className="flex flex-col items-center space-y-4 mb-12"
                                 role="navigation"
@@ -397,7 +395,6 @@ export default function Header() {
                                     ),
                                 )}
                             </motion.nav>
-
                             <motion.div
                                 variants={mobileItemVariants}
                                 className="text-center space-y-6"
@@ -420,7 +417,6 @@ export default function Header() {
                                         </div>
                                     </div>
                                 </motion.a>
-
                                 <motion.p className="text-primary-100 text-sm max-w-xs">
                                     Serving{" "}
                                     {contactInfo.serviceAreas
@@ -433,7 +429,6 @@ export default function Header() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
             <div className="h-19 lg:h-21" />
         </>
     );
