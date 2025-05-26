@@ -1,0 +1,3501 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files and files not matching ignore patterns, combined into a single document by Repomix.
+The content has been processed where comments have been removed, empty lines have been removed, content has been formatted for parsing in plain style.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: **/*
+- Files matching these patterns are excluded: tmp/, *.log, *.md
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Code comments have been removed from supported file types
+- Empty lines have been removed from all files
+- Content has been formatted for parsing in plain style
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+app/
+  about/
+    AboutPageClient.tsx
+    AboutPageContent.tsx
+    page.tsx
+  components/
+    Header.tsx
+  services/
+    page.tsx
+    ServicesPageClient.tsx
+    ServicesPageContent.tsx
+  globals.css
+  HomePageClient.tsx
+  layout.tsx
+  page.tsx
+hooks/
+  use-mobile.tsx
+  use-toast.ts
+lib/
+  animations.ts
+  contact-info.ts
+  utils.ts
+public/
+  manifest.json
+  placeholder-logo.svg
+  placeholder.svg
+src/
+  lib/
+    contact-info.ts
+styles/
+  globals.css
+.gitignore
+.prettierrc
+components.json
+next.config.mjs
+package.json
+postcss.config.mjs
+tailwind.config.js
+tsconfig.json
+
+================================================================
+Files
+================================================================
+
+================
+File: .prettierrc
+================
+{
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": false,
+  "printWidth": 80,
+  "tabWidth": 4,
+  "useTabs": false,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "insertPragma": false,
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": false,
+  "embeddedLanguageFormatting": "auto",
+  "singleAttributePerLine": false
+}
+
+================
+File: app/about/AboutPageClient.tsx
+================
+"use client"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import AboutPageContent from "./AboutPageContent"
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+}
+const slideInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const slideInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+}
+function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variant}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+export default function AboutPageClient() {
+  return <AboutPageContent />
+}
+
+================
+File: app/about/AboutPageContent.tsx
+================
+"use client"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
+import { contactInfo } from "@/lib/contact-info"
+import {
+  Award,
+  Shield,
+  CheckCircle,
+  Star,
+  Phone,
+  Mail,
+  Plane,
+  Tractor,
+  Waves,
+  Bike,
+  Home,
+  Droplets,
+  Zap,
+  Camera,
+  Building,
+  FlaskConical,
+} from "lucide-react"
+function PageLoader() {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-primary z-50 flex items-center justify-center"
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+        className="w-16 h-16 border-4 border-white border-t-secondary rounded-full"
+      />
+    </motion.div>
+  )
+}
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const slideInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const slideInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+}
+function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variant}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+export default function AboutPageContent() {
+  const [isLoading, setIsLoading] = useState(true)
+  const heroRef = useRef(null)
+  const isHeroInView = useInView(heroRef, { once: true })
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
+  const teamMembers = [
+    {
+      name: "Charles West",
+      title: "Founder & Lead Inspector",
+      description: "Veteran-owned business leader with 10+ years of inspection experience",
+      image: "/placeholder.svg?height=300&width=300",
+    },
+    {
+      name: "Inspector #2",
+      title: "Senior Home Inspector",
+      description: "Certified professional with expertise in structural evaluations",
+      image: "/placeholder.svg?height=300&width=300",
+    },
+    {
+      name: "Inspector #3",
+      title: "Certified Inspector",
+      description: "Specialist in electrical and HVAC system assessments",
+      image: "/placeholder.svg?height=300&width=300",
+    },
+    {
+      name: "Inspector #4",
+      title: "Certified Inspector",
+      description: "Expert in plumbing systems and moisture detection",
+      image: "/placeholder.svg?height=300&width=300",
+    },
+  ]
+  const certifications = [
+    {
+      title: "State of Michigan Licensed Builder",
+      icon: Building,
+      description: "Official state licensing for construction and building expertise",
+    },
+    {
+      title: "InterNACHI Certified Professional Inspector",
+      icon: Award,
+      description: "International Association of Certified Home Inspectors certification",
+    },
+    {
+      title: "InterNACHI Certified Well and Septic Evaluator",
+      icon: Droplets,
+      description: "Specialized certification for water and septic system evaluation",
+    },
+    {
+      title: "InterNACHI Certified Mold Inspector",
+      icon: FlaskConical,
+      description: "Professional mold detection and assessment certification",
+    },
+    {
+      title: "InterNACHI Certified Radon Tester",
+      icon: Home,
+      description: "Certified to test for dangerous radon gas levels",
+    },
+    {
+      title: "MSU Certified Well and Septic Inspector",
+      icon: Zap,
+      description: "Michigan State University specialized certification program",
+    },
+    {
+      title: "Certified Infrared Thermography Technician",
+      icon: Camera,
+      description: "Advanced thermal imaging technology certification",
+    },
+  ]
+  const values = [
+    {
+      title: "Integrity",
+      description: "We conduct every inspection with unwavering honesty and ethical standards",
+      icon: Shield,
+    },
+    {
+      title: "Honesty",
+      description: "Transparent reporting and clear communication about every finding",
+      icon: CheckCircle,
+    },
+    {
+      title: "Unparalleled Service",
+      description: "Going above and beyond to exceed client expectations every time",
+      icon: Star,
+    },
+  ]
+  const interests = [
+    { name: "Skydiving", icon: Plane, description: "Adrenaline and precision in the sky" },
+    { name: "Farming", icon: Tractor, description: "Working the land with dedication" },
+    { name: "Canoeing", icon: Waves, description: "Peaceful adventures on Michigan waters" },
+    { name: "Harley Riding", icon: Bike, description: "Freedom on the open road" },
+  ]
+  if (isLoading) {
+    return <PageLoader />
+  }
+  return (
+    <div className="min-h-screen">
+      {}
+      <section
+        ref={heroRef}
+        className="relative bg-gradient-to-br from-primary via-primary-800 to-primary-900 text-white py-20 lg:py-32 px-6 overflow-hidden"
+        aria-labelledby="about-hero-heading"
+      >
+        <div className="absolute inset-0 opacity-10" aria-hidden="true">
+          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1200')] bg-cover bg-center"></div>
+        </div>
+        <div className="container mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial="hidden"
+              animate={isHeroInView ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="text-center lg:text-left"
+            >
+              <motion.h1
+                id="about-hero-heading"
+                variants={fadeInUp}
+                className="text-4xl lg:text-6xl font-bold mb-6 leading-tight"
+              >
+                About
+                <span className="block text-secondary">{contactInfo.company}</span>
+              </motion.h1>
+              <motion.p variants={fadeInUp} className="text-xl lg:text-2xl mb-8 text-primary-100 leading-relaxed">
+                A veteran-owned business built on integrity, expertise, and unparalleled service to Michigan homeowners.
+              </motion.p>
+              <motion.div variants={fadeInUp} className="flex items-center gap-4 justify-center lg:justify-start">
+                <div className="bg-secondary w-16 h-16 rounded-full flex items-center justify-center">
+                  <Shield className="w-8 h-8 text-white" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-lg font-semibold">Veteran-Owned Business</p>
+                  <p className="text-primary-200">Serving with military precision</p>
+                </div>
+              </motion.div>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              animate={isHeroInView ? "visible" : "hidden"}
+              variants={slideInRight}
+              className="relative"
+            >
+              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <img
+                  src="/placeholder.svg?height=400&width=600"
+                  alt={`${contactInfo.founder}, founder of ${contactInfo.company}, professional home inspector and military veteran`}
+                  className="w-full h-64 lg:h-80 object-cover"
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"
+                  aria-hidden="true"
+                ></div>
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <p className="font-semibold text-xl">{contactInfo.founder}</p>
+                  <p className="text-sm opacity-90">Founder & Lead Inspector</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-white" aria-labelledby="company-story-heading">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection variant={slideInLeft}>
+              <img
+                src="/placeholder.svg?height=500&width=600"
+                alt={`${contactInfo.founder} transitioning from military service to professional home inspection career`}
+                className="w-full h-96 object-cover rounded-2xl shadow-lg"
+              />
+            </AnimatedSection>
+            <AnimatedSection variant={slideInRight}>
+              <h2 id="company-story-heading" className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+                Our Story
+              </h2>
+              <div className="space-y-6 text-lg text-neutral-600 leading-relaxed">
+                <p>
+                  <strong className="text-neutral-800">{contactInfo.company}</strong> was founded by{" "}
+                  <strong className="text-primary">{contactInfo.founder}</strong>, a dedicated veteran who brought
+                  military precision and integrity to the home inspection industry.
+                </p>
+                <p>
+                  After serving our country with honor, Charlie recognized the need for thorough, honest home
+                  inspections in Michigan. He built {contactInfo.company} on the foundation of military values:
+                  attention to detail, unwavering integrity, and a commitment to service excellence.
+                </p>
+                <p>
+                  What started as a one-man operation has grown into a team of four full-time certified inspectors, each
+                  sharing Charlie's commitment to protecting Michigan families through comprehensive home evaluations.
+                </p>
+                <p className="text-primary font-semibold">
+                  Over 3,500 inspections later, we continue to serve with the same dedication that defined our military
+                  service.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-neutral-50" aria-labelledby="team-heading">
+        <div className="container mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 id="team-heading" className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+              Our Expert Team
+            </h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Four full-time certified inspectors dedicated to protecting your investment
+            </p>
+          </AnimatedSection>
+          <AnimatedSection variant={staggerContainer}>
+            <motion.div variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  variants={fadeInUp}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
+                  tabIndex={0}
+                  role="article"
+                  aria-labelledby={`team-member-${index}-name`}
+                >
+                  <img
+                    src={member.image || "/placeholder.svg"}
+                    alt={`Professional headshot of ${member.name}, ${member.title} at ${contactInfo.company}`}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 id={`team-member-${index}-name`} className="text-xl font-bold text-neutral-800 mb-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-primary font-semibold mb-3">{member.title}</p>
+                    <p className="text-neutral-600 text-sm">{member.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {}
+      {}
+      {}
+      <section className="py-20 px-6 bg-primary text-white" aria-labelledby="contact-cta-heading">
+        <div className="container mx-auto text-center">
+          <AnimatedSection>
+            <h2 id="contact-cta-heading" className="text-4xl lg:text-5xl font-bold mb-6">
+              Ready to Work with Our Team?
+            </h2>
+            <p className="text-xl text-primary-100 mb-12 max-w-3xl mx-auto">
+              Experience the {contactInfo.company} difference. Professional, thorough, and honest home inspections
+              backed by military precision and integrity.
+            </p>
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-8">
+              <motion.a
+                href={`tel:${contactInfo.phone}`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-secondary hover:bg-secondary-600 text-white px-8 py-4 rounded-lg text-xl font-semibold transition-colors flex items-center gap-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:ring-offset-2 focus:ring-offset-primary"
+                aria-label={`Call us at ${contactInfo.phone}`}
+              >
+                <Phone className="w-6 h-6" aria-hidden="true" />
+                {contactInfo.phone}
+              </motion.a>
+              <motion.a
+                href={`mailto:${contactInfo.email}`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg text-xl font-semibold transition-colors flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
+                aria-label={`Email us at ${contactInfo.email}`}
+              >
+                <Mail className="w-6 h-6" aria-hidden="true" />
+                {contactInfo.email}
+              </motion.a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+================
+File: app/about/page.tsx
+================
+import { contactInfo } from "@/lib/contact-info"
+import AboutPageClient from "./AboutPageClient"
+export const metadata = {
+  title: "About Our Licensed Home Inspectors | Mich-Inspect",
+  description: `Meet ${contactInfo.founder} and our team of certified home inspectors. Veteran-owned business with 10+ years experience, InterNACHI certified, serving Michigan with integrity and expertise.`,
+  keywords: [
+    "licensed home inspector Michigan",
+    "certified home inspector",
+    "veteran owned home inspection",
+    "InterNACHI certified inspector",
+    "Charles West home inspector",
+    "Michigan home inspection team",
+    "professional home inspector qualifications",
+  ],
+  openGraph: {
+    title: "About Our Licensed Home Inspectors | Mich-Inspect",
+    description: `Meet ${contactInfo.founder} and our team of certified home inspectors. Veteran-owned business with 10+ years experience.`,
+  },
+}
+export default function AboutPage() {
+  return <AboutPageClient />
+}
+
+================
+File: app/components/Header.tsx
+================
+"use client"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
+import { Phone, Menu, X } from "lucide-react"
+import { contactInfo } from "@/lib/contact-info"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+interface NavigationItem {
+  name: string
+  href: string
+}
+const navigationItems: NavigationItem[] = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+]
+export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
+  const { scrollYProgress } = useScroll()
+  const scrollIndicatorWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isMobileMenuOpen])
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+  const headerVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        staggerChildren: 0.1,
+      },
+    },
+  }
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  }
+  const mobileMenuVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+      transition: { duration: 0.2 },
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.3,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.2,
+        ease: "easeIn",
+      },
+    },
+  }
+  const mobileItemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: { duration: 0.2 },
+    },
+  }
+  return (
+    <>
+      {}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-secondary z-50 origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
+      <motion.header
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+        className={`fixed top-1 left-0 right-0 z-40 transition-all duration-500 ease-out ${
+          isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-primary"
+        }`}
+      >
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            {}
+            <motion.div variants={itemVariants} className="flex-shrink-0">
+              <Link href="/" className="flex flex-col group">
+                <motion.h1
+                  className={`text-xl lg:text-2xl font-bold transition-all duration-300 ${
+                    isScrolled ? "text-primary" : "text-white"
+                  } group-hover:scale-105`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {contactInfo.company}
+                </motion.h1>
+                <motion.span
+                  className={`text-xs lg:text-sm transition-all duration-300 ${
+                    isScrolled ? "text-neutral-600" : "text-primary-100"
+                  }`}
+                  initial={{ opacity: 0.8 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  Professional Home Inspections
+                </motion.span>
+              </Link>
+            </motion.div>
+            {}
+            <motion.nav
+              variants={itemVariants}
+              className="hidden lg:flex items-center space-x-8"
+              role="navigation"
+              aria-label="Main navigation"
+            >
+              {navigationItems.map((item) => (
+                <motion.div key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    href={item.href}
+                    className={`relative text-base font-medium transition-all duration-300 px-3 py-2 rounded-md ${
+                      pathname === item.href
+                        ? isScrolled
+                          ? "text-primary bg-primary-50"
+                          : "text-secondary bg-white/10"
+                        : isScrolled
+                          ? "text-neutral-700 hover:text-primary hover:bg-primary-50"
+                          : "text-white hover:text-primary-200 hover:bg-white/10"
+                    }`}
+                  >
+                    {item.name}
+                    {pathname === item.href && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 ${
+                          isScrolled ? "bg-primary" : "bg-secondary"
+                        }`}
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.nav>
+            {}
+            <div className="flex items-center space-x-4">
+              {}
+              <motion.div variants={itemVariants} className="hidden sm:flex items-center space-x-2">
+                <motion.div whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.9 }}>
+                  <Phone
+                    className={`w-4 h-4 transition-colors duration-300 ${isScrolled ? "text-secondary" : "text-white"}`}
+                  />
+                </motion.div>
+                <motion.a
+                  href={`tel:${contactInfo.phone}`}
+                  className={`text-sm lg:text-base font-semibold transition-all duration-300 px-2 py-1 rounded ${
+                    isScrolled
+                      ? "text-neutral-700 hover:text-secondary hover:bg-secondary-50"
+                      : "text-white hover:text-primary-200 hover:bg-white/10"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {contactInfo.phone}
+                </motion.a>
+              </motion.div>
+              {}
+              <motion.button
+                variants={itemVariants}
+                onClick={toggleMobileMenu}
+                className={`lg:hidden p-3 rounded-md transition-all duration-300 ${
+                  isScrolled
+                    ? "text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+                    : "text-white hover:bg-primary-700 active:bg-primary-800"
+                }`}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </motion.div>
+              </motion.button>
+            </div>
+          </div>
+        </div>
+      </motion.header>
+      {}
+      <AnimatePresence mode="wait">
+        {isMobileMenuOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={mobileMenuVariants}
+            className="fixed inset-0 z-50 lg:hidden"
+            id="mobile-menu"
+          >
+            {}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-primary/95 backdrop-blur-lg"
+              onClick={closeMobileMenu}
+            />
+            {}
+            <motion.div
+              variants={mobileMenuVariants}
+              className="relative flex flex-col items-center justify-center h-full px-6"
+            >
+              {}
+              <motion.button
+                variants={mobileItemVariants}
+                onClick={closeMobileMenu}
+                className="absolute top-6 right-6 p-3 text-white hover:bg-primary-700 rounded-md transition-colors"
+                aria-label="Close menu"
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <X className="w-6 h-6" />
+              </motion.button>
+              {}
+              <motion.div variants={mobileItemVariants} className="text-center mb-12">
+                <motion.h2 className="text-3xl font-bold text-white mb-2" whileHover={{ scale: 1.05 }}>
+                  {contactInfo.company}
+                </motion.h2>
+                <p className="text-primary-100">Professional Home Inspections</p>
+              </motion.div>
+              {}
+              <motion.nav
+                className="flex flex-col items-center space-y-6 mb-12"
+                role="navigation"
+                aria-label="Mobile navigation"
+              >
+                {navigationItems.map((item, index) => (
+                  <motion.div key={item.name} variants={mobileItemVariants} custom={index}>
+                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                      <Link
+                        href={item.href}
+                        onClick={closeMobileMenu}
+                        className={`text-2xl font-semibold transition-all duration-300 px-6 py-3 rounded-lg ${
+                          pathname === item.href
+                            ? "text-secondary bg-white/10 border border-secondary/30"
+                            : "text-white hover:text-secondary hover:bg-white/10"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.nav>
+              {}
+              <motion.div variants={mobileItemVariants} className="text-center space-y-4">
+                <motion.a
+                  href={`tel:${contactInfo.phone}`}
+                  className="flex items-center justify-center space-x-3 text-white hover:text-secondary transition-colors px-6 py-3 rounded-lg hover:bg-white/10"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <motion.div whileHover={{ rotate: 10 }}>
+                    <Phone className="w-5 h-5" />
+                  </motion.div>
+                  <span className="text-xl font-semibold">{contactInfo.phone}</span>
+                </motion.a>
+                <motion.p className="text-primary-100 text-sm" initial={{ opacity: 0.7 }} whileHover={{ opacity: 1 }}>
+                  Serving {contactInfo.serviceAreas.slice(0, 3).join(", ")} & more
+                </motion.p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {}
+      <div className="h-17 lg:h-21" />
+    </>
+  )
+}
+
+================
+File: app/services/page.tsx
+================
+import type { Metadata } from "next"
+import { contactInfo } from "@/lib/contact-info"
+import ServicesPageClient from "./ServicesPageClient"
+export const metadata: Metadata = {
+  title: "Complete Property Inspection Services | Mich-Inspect",
+  description: `Comprehensive home and commercial inspection services in Michigan. Thermal imaging, mold testing, radon testing, septic evaluations. InterNACHI certified. Call ${contactInfo.phone} for professional inspections.`,
+  keywords: [
+    "home inspection services Michigan",
+    "commercial building inspection",
+    "thermal imaging inspection",
+    "mold inspection Michigan",
+    "radon testing Michigan",
+    "septic inspection Michigan",
+    "InterNACHI certified inspection",
+    "pre-listing inspection",
+    "new construction inspection",
+  ],
+  openGraph: {
+    title: "Complete Property Inspection Services | Mich-Inspect",
+    description: `Comprehensive home and commercial inspection services in Michigan. Thermal imaging, mold testing, radon testing, septic evaluations.`,
+  },
+}
+export default function ServicesPage() {
+  return <ServicesPageClient />
+}
+
+================
+File: app/services/ServicesPageClient.tsx
+================
+"use client"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import ServicesPageContent from "./ServicesPageContent"
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const slideInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const slideInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+const cardHover = {
+  rest: { scale: 1, y: 0 },
+  hover: { scale: 1.02, y: -5, transition: { duration: 0.3 } },
+}
+function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variant}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+export default function ServicesPageClient() {
+  return <ServicesPageContent />
+}
+
+================
+File: app/services/ServicesPageContent.tsx
+================
+"use client"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
+import { contactInfo } from "@/lib/contact-info"
+import {
+  Home,
+  Building,
+  CheckCircle,
+  Camera,
+  Droplets,
+  Zap,
+  Shield,
+  FileText,
+  Phone,
+  Mail,
+  Award,
+  Search,
+  Bug,
+  FlaskConical,
+  Thermometer,
+  Wrench,
+  Eye,
+  Clock,
+  Star,
+  ArrowRight,
+} from "lucide-react"
+function PageLoader() {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="fixed inset-0 bg-primary z-50 flex items-center justify-center"
+    >
+      <div className="text-center">
+        <motion.div
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            rotate: { duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+            scale: { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
+          }}
+          className="w-16 h-16 border-4 border-white border-t-secondary rounded-full mx-auto mb-4"
+        />
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-white text-lg font-semibold"
+        >
+          Loading Services
+        </motion.p>
+      </div>
+    </motion.div>
+  )
+}
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+const slideInLeft = {
+  hidden: { opacity: 0, x: -80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+const slideInRight = {
+  hidden: { opacity: 0, x: 80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+const cardHover = {
+  rest: {
+    scale: 1,
+    y: 0,
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+  },
+  hover: {
+    scale: 1.03,
+    y: -8,
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+const buttonHover = {
+  rest: { scale: 1 },
+  hover: {
+    scale: 1.05,
+    transition: { duration: 0.2, ease: "easeOut" },
+  },
+  tap: {
+    scale: 0.95,
+    transition: { duration: 0.1 },
+  },
+}
+function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variant}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+export default function ServicesPageContent() {
+  const [isLoading, setIsLoading] = useState(true)
+  const heroRef = useRef(null)
+  const isHeroInView = useInView(heroRef, { once: true })
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
+  const residentialAreas = [
+    {
+      title: "Roof & Attic",
+      description: "Complete roof structure, materials, ventilation, and attic insulation evaluation",
+      icon: Home,
+      details: ["Shingles & materials", "Gutters & downspouts", "Ventilation systems", "Insulation assessment"],
+    },
+    {
+      title: "Exterior",
+      description: "Siding, windows, doors, and overall structural exterior assessment",
+      icon: Eye,
+      details: ["Siding condition", "Window & door integrity", "Exterior trim", "Paint & caulking"],
+    },
+    {
+      title: "Decks & Porches",
+      description: "Safety and structural integrity of all outdoor structures",
+      icon: Building,
+      details: ["Structural support", "Railing safety", "Deck materials", "Foundation attachment"],
+    },
+    {
+      title: "Grading & Drainage",
+      description: "Property drainage patterns and water management systems",
+      icon: Droplets,
+      details: ["Site grading", "Drainage systems", "Water flow patterns", "Foundation protection"],
+    },
+    {
+      title: "Basement & Foundation",
+      description: "Foundation integrity, basement conditions, and structural elements",
+      icon: Shield,
+      details: ["Foundation walls", "Basement moisture", "Structural beams", "Floor systems"],
+    },
+    {
+      title: "HVAC Systems",
+      description: "Heating, ventilation, and air conditioning system evaluation",
+      icon: Thermometer,
+      details: ["Heating systems", "Cooling systems", "Ductwork", "Ventilation adequacy"],
+    },
+    {
+      title: "Plumbing",
+      description: "Complete water supply and drainage system inspection",
+      icon: Wrench,
+      details: ["Water supply lines", "Drainage systems", "Fixtures & faucets", "Water pressure"],
+    },
+    {
+      title: "Electrical",
+      description: "Electrical panel, wiring, and safety system evaluation",
+      icon: Zap,
+      details: ["Main electrical panel", "Wiring systems", "GFCI protection", "Safety compliance"],
+    },
+    {
+      title: "Interior",
+      description: "Interior walls, floors, ceilings, and built-in components",
+      icon: Home,
+      details: ["Wall conditions", "Floor systems", "Ceiling integrity", "Built-in appliances"],
+    },
+    {
+      title: "Garages",
+      description: "Garage structure, doors, and safety features assessment",
+      icon: Building,
+      details: ["Garage doors", "Structural elements", "Electrical systems", "Safety features"],
+    },
+  ]
+  const additionalServices = [
+    {
+      title: "Commercial Building Inspection",
+      description: "Comprehensive inspections for commercial properties and investment buildings",
+      icon: Building,
+      features: ["Multi-unit properties", "Commercial systems", "Code compliance", "Investment analysis"],
+    },
+    {
+      title: "Pre-Listing Inspection",
+      description: "Identify issues before listing to maximize sale price and reduce negotiations",
+      icon: Star,
+      features: ["Seller advantage", "Issue identification", "Repair prioritization", "Market preparation"],
+    },
+    {
+      title: "New Construction Inspection",
+      description: "Quality assurance for newly built homes and construction oversight",
+      icon: Wrench,
+      features: ["Builder quality check", "Code compliance", "Warranty protection", "Peace of mind"],
+    },
+    {
+      title: "Four-Point Inspection",
+      description: "Insurance-focused inspection of HVAC, electrical, plumbing, and roofing",
+      icon: CheckCircle,
+      features: ["Insurance requirements", "System age verification", "Safety assessment", "Quick turnaround"],
+    },
+    {
+      title: "Re-Inspection",
+      description: "Follow-up inspections to verify completed repairs and improvements",
+      icon: Search,
+      features: ["Repair verification", "Safety confirmation", "Documentation", "Peace of mind"],
+    },
+    {
+      title: "WDO/Termite Inspection",
+      description: "Wood-destroying organism detection and damage assessment",
+      icon: Bug,
+      features: ["Termite detection", "Wood damage assessment", "Treatment recommendations", "Prevention advice"],
+    },
+    {
+      title: "Mold Inspection",
+      description: "Professional mold detection and indoor air quality assessment",
+      icon: FlaskConical,
+      features: ["Visual inspection", "Moisture detection", "Air quality testing", "Health protection"],
+    },
+    {
+      title: "Radon Testing",
+      description: "Professional radon gas testing for health and safety protection",
+      icon: Thermometer,
+      features: ["EPA protocols", "Accurate testing", "Health protection", "Mitigation guidance"],
+    },
+    {
+      title: "Water Testing & Septic Evaluations",
+      description: "Well water quality testing and septic system functionality assessment",
+      icon: Droplets,
+      features: ["Water quality analysis", "Septic pumping evaluation", "System functionality", "Health safety"],
+    },
+    {
+      title: "HUD Manufactured Home Certifications",
+      description: "Specialized inspections for manufactured and mobile homes",
+      icon: Home,
+      features: ["HUD compliance", "Manufactured home expertise", "Certification process", "Financing assistance"],
+    },
+  ]
+  const technologyHighlights = [
+    {
+      title: "Thermal Imaging Technology",
+      description: "Advanced infrared cameras detect hidden moisture, energy loss, and electrical issues",
+      icon: Camera,
+    },
+    {
+      title: "Digital Reports",
+      description: "Comprehensive digital reports delivered within 24 hours with photos and recommendations",
+      icon: FileText,
+    },
+    {
+      title: "Moisture Detection",
+      description: "Professional moisture meters identify hidden water damage and potential mold issues",
+      icon: Droplets,
+    },
+  ]
+  if (isLoading) {
+    return <PageLoader />
+  }
+  return (
+    <div className="min-h-screen">
+      {}
+      <section
+        ref={heroRef}
+        className="relative bg-gradient-to-br from-primary via-primary-800 to-primary-900 text-white py-20 lg:py-32 px-6 overflow-hidden"
+        aria-labelledby="services-hero-heading"
+      >
+        <div className="absolute inset-0 opacity-10" aria-hidden="true">
+          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1200')] bg-cover bg-center"></div>
+        </div>
+        <div className="container mx-auto relative z-10">
+          <motion.div
+            initial="hidden"
+            animate={isHeroInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <motion.h1
+              id="services-hero-heading"
+              variants={fadeInUp}
+              className="text-4xl lg:text-6xl font-bold mb-6 leading-tight"
+            >
+              Complete Property
+              <span className="block text-secondary">Inspection Services</span>
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="text-xl lg:text-2xl mb-8 text-primary-100 leading-relaxed">
+              From residential homes to commercial buildings, we provide comprehensive inspection services using
+              advanced technology and InterNACHI Standards of Practice.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                variants={buttonHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                className="bg-secondary hover:bg-secondary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg min-h-[44px]"
+              >
+                Schedule Inspection
+              </motion.button>
+              <motion.a
+                href={`tel:${contactInfo.phone}`}
+                variants={buttonHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2 min-h-[44px]"
+              >
+                <Phone className="w-5 h-5" />
+                {contactInfo.phone}
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-white" aria-labelledby="residential-heading">
+        <div className="container mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 id="residential-heading" className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+              Residential Home Inspection
+            </h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Our comprehensive residential inspection covers every major system and component of your home, following
+              InterNACHI Standards of Practice for thorough evaluation.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection variant={staggerContainer}>
+            <motion.div variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {residentialAreas.map((area, index) => (
+                <motion.div
+                  key={area.title}
+                  variants={fadeInUp}
+                  initial="rest"
+                  whileHover="hover"
+                  className="bg-neutral-50 rounded-xl p-6 border border-neutral-200 cursor-pointer"
+                  tabIndex={0}
+                  role="article"
+                  aria-labelledby={`area-${index}-title`}
+                >
+                  <motion.div variants={cardHover}>
+                    <div className="bg-primary-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
+                      <area.icon className="w-8 h-8 text-primary" aria-hidden="true" />
+                    </div>
+                    <h3 id={`area-${index}-title`} className="text-xl font-bold text-neutral-800 mb-3">
+                      {area.title}
+                    </h3>
+                    <p className="text-neutral-600 mb-4">{area.description}</p>
+                    <ul className="space-y-2" role="list">
+                      {area.details.map((detail, detailIndex) => (
+                        <li key={detailIndex} className="flex items-center text-sm text-neutral-700">
+                          <CheckCircle className="w-4 h-4 text-success mr-2 flex-shrink-0" aria-hidden="true" />
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-neutral-50" aria-labelledby="additional-services-heading">
+        <div className="container mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 id="additional-services-heading" className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+              Additional Inspection Services
+            </h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Specialized inspection services for unique property needs and specific requirements
+            </p>
+          </AnimatedSection>
+          <AnimatedSection variant={staggerContainer}>
+            <motion.div variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {additionalServices.map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  variants={fadeInUp}
+                  initial="rest"
+                  whileHover="hover"
+                  className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 cursor-pointer group"
+                  tabIndex={0}
+                  role="article"
+                  aria-labelledby={`service-${index}-title`}
+                >
+                  <motion.div variants={cardHover}>
+                    <div className="bg-accent-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent-200 transition-colors">
+                      <service.icon className="w-8 h-8 text-accent" aria-hidden="true" />
+                    </div>
+                    <h3 id={`service-${index}-title`} className="text-xl font-bold text-neutral-800 mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-neutral-600 mb-4">{service.description}</p>
+                    <ul className="space-y-2 mb-4" role="list">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm text-neutral-700">
+                          <ArrowRight className="w-4 h-4 text-secondary mr-2 flex-shrink-0" aria-hidden="true" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex items-center text-primary font-semibold text-sm group-hover:text-secondary transition-colors">
+                      Learn More
+                      <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {}
+      <section
+        className="py-20 px-6 bg-gradient-to-br from-primary to-primary-800 text-white"
+        aria-labelledby="technology-heading"
+      >
+        <div className="container mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 id="technology-heading" className="text-4xl lg:text-5xl font-bold mb-6">
+              Advanced Technology
+            </h2>
+            <p className="text-xl text-primary-100 max-w-3xl mx-auto">
+              We use state-of-the-art equipment and technology to provide the most comprehensive inspections possible
+            </p>
+          </AnimatedSection>
+          <AnimatedSection variant={staggerContainer}>
+            <motion.div variants={staggerContainer} className="grid lg:grid-cols-3 gap-8">
+              {technologyHighlights.map((tech, index) => (
+                <motion.div
+                  key={tech.title}
+                  variants={fadeInUp}
+                  className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
+                  role="article"
+                  aria-labelledby={`tech-${index}-title`}
+                >
+                  <div className="bg-secondary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <tech.icon className="w-10 h-10 text-white" aria-hidden="true" />
+                  </div>
+                  <h3 id={`tech-${index}-title`} className="text-2xl font-bold mb-4">
+                    {tech.title}
+                  </h3>
+                  <p className="text-primary-100 leading-relaxed">{tech.description}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-white" aria-labelledby="standards-heading">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection variant={slideInLeft}>
+              <img
+                src="/placeholder.svg?height=400&width=600"
+                alt="InterNACHI certification and standards documentation"
+                className="w-full h-80 object-cover rounded-2xl shadow-lg"
+              />
+            </AnimatedSection>
+            <AnimatedSection variant={slideInRight}>
+              <h2 id="standards-heading" className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+                InterNACHI Standards of Practice
+              </h2>
+              <p className="text-xl text-neutral-600 mb-8 leading-relaxed">
+                All our inspections follow the rigorous InterNACHI Standards of Practice, ensuring consistent,
+                comprehensive, and professional evaluation of every property component.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Comprehensive inspection protocols",
+                  "Standardized reporting procedures",
+                  "Professional ethics and conduct",
+                  "Continuing education requirements",
+                  "Industry best practices",
+                ].map((standard, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <Award className="w-6 h-6 text-primary flex-shrink-0" aria-hidden="true" />
+                    <span className="text-lg text-neutral-700">{standard}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 p-6 bg-accent-50 rounded-xl border border-accent-200">
+                <p className="text-accent-800 font-semibold">
+                  InterNACHI Certified Professional Inspector ensures you receive the highest quality inspection
+                  services available in the industry.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-secondary" aria-labelledby="discount-heading">
+        <div className="container mx-auto text-center">
+          <AnimatedSection>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/20">
+              <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Shield className="w-10 h-10 text-secondary" aria-hidden="true" />
+              </div>
+              <h2 id="discount-heading" className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                Military & Public Service Discount
+              </h2>
+              <p className="text-xl text-secondary-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                We honor those who serve our communities and country. Special pricing available for active military,
+                veterans, police officers, firefighters, and other public servants on all inspection services.
+              </p>
+              <motion.a
+                href={`tel:${contactInfo.phone}`}
+                variants={buttonHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                className="bg-white text-secondary hover:bg-neutral-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-flex items-center gap-2 shadow-lg min-h-[44px]"
+              >
+                <Phone className="w-5 h-5" aria-hidden="true" />
+                Call for Discount Details
+              </motion.a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {}
+      <section className="py-20 px-6 bg-primary text-white" aria-labelledby="contact-cta-heading">
+        <div className="container mx-auto text-center">
+          <AnimatedSection>
+            <h2 id="contact-cta-heading" className="text-4xl lg:text-5xl font-bold mb-6">
+              Ready to Schedule Your Inspection?
+            </h2>
+            <p className="text-xl text-primary-100 mb-12 max-w-3xl mx-auto">
+              Contact {contactInfo.company} today to schedule your comprehensive property inspection. Professional
+              service, advanced technology, and detailed reporting you can trust.
+            </p>
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-8 mb-8">
+              <motion.a
+                href={`tel:${contactInfo.phone}`}
+                variants={buttonHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                className="bg-secondary hover:bg-secondary-600 text-white px-8 py-4 rounded-lg text-xl font-semibold transition-colors flex items-center gap-3 shadow-lg min-h-[44px]"
+              >
+                <Phone className="w-6 h-6" aria-hidden="true" />
+                {contactInfo.phone}
+              </motion.a>
+              <motion.a
+                href={`mailto:${contactInfo.email}`}
+                variants={buttonHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg text-xl font-semibold transition-colors flex items-center gap-3 min-h-[44px]"
+              >
+                <Mail className="w-6 h-6" aria-hidden="true" />
+                {contactInfo.email}
+              </motion.a>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <Clock className="w-5 h-5 text-secondary" aria-hidden="true" />
+                <span>24-Hour Reports</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Camera className="w-5 h-5 text-secondary" aria-hidden="true" />
+                <span>Thermal Imaging</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Shield className="w-5 h-5 text-secondary" aria-hidden="true" />
+                <span>Veteran-Owned</span>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+================
+File: app/globals.css
+================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  .focus-visible\:ring-2:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--ring);
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:ring-offset-2;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .btn-outline {
+    @apply border-2 border-current text-current hover:bg-current hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-current focus:ring-offset-2;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  }
+  .text-transition {
+    @apply transition-colors duration-300;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hover-lift:hover {
+      transform: none;
+    }
+  }
+  @media (prefers-contrast: high) {
+    .border {
+      border-width: 2px;
+    }
+    .focus\:ring-2:focus {
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+    button,
+    a {
+      border: 2px solid currentColor;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .card-hover {
+      @apply hover:shadow-2xl;
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+html {
+  scroll-behavior: smooth;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
+  transition: outline 0.2s ease-in-out;
+}
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #1e3a8a;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.skip-link:focus {
+  top: 6px;
+  transform: scale(1.05);
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+================
+File: app/HomePageClient.tsx
+================
+"use client";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { contactInfo } from "@/lib/contact-info";
+import {
+    Phone,
+    Mail,
+    Shield,
+    CheckCircle,
+    Clock,
+    Award,
+    Camera,
+    FileText,
+    Home,
+    Zap,
+    Droplets,
+    Star,
+    Calendar,
+} from "lucide-react";
+function PageLoader() {
+    return (
+        <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed inset-0 bg-primary z-50 flex items-center justify-center"
+        >
+            <div className="text-center">
+                <motion.div
+                    animate={{
+                        rotate: 360,
+                        scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                        rotate: {
+                            duration: 1,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "linear",
+                        },
+                        scale: {
+                            duration: 2,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                        },
+                    }}
+                    className="w-16 h-16 border-4 border-white border-t-secondary rounded-full mx-auto mb-4"
+                />
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-white text-lg font-semibold"
+                >
+                    Loading {contactInfo.company}
+                </motion.p>
+            </div>
+        </motion.div>
+    );
+}
+const fadeInUp = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+        },
+    },
+};
+const slideInLeft = {
+    hidden: { opacity: 0, x: -80 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+        },
+    },
+};
+const slideInRight = {
+    hidden: { opacity: 0, x: 80 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+        },
+    },
+};
+const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2,
+        },
+    },
+};
+const cardHover = {
+    rest: {
+        scale: 1,
+        y: 0,
+        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+    },
+    hover: {
+        scale: 1.03,
+        y: -8,
+        boxShadow:
+            "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        transition: {
+            duration: 0.3,
+            ease: [0.25, 0.46, 0.45, 0.94],
+        },
+    },
+};
+const buttonHover = {
+    rest: { scale: 1 },
+    hover: {
+        scale: 1.05,
+        transition: { duration: 0.2, ease: "easeOut" },
+    },
+    tap: {
+        scale: 0.95,
+        transition: { duration: 0.1 },
+    },
+};
+function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    return (
+        <motion.div
+            ref={ref}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={variant}
+            className={className}
+        >
+            {children}
+        </motion.div>
+    );
+}
+export default function HomePageClient() {
+    const [isLoading, setIsLoading] = useState(true);
+    const heroRef = useRef(null);
+    const isHeroInView = useInView(heroRef, { once: true });
+    const { scrollY } = useScroll();
+    const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 1500);
+        return () => clearTimeout(timer);
+    }, []);
+    const services = [
+        {
+            icon: Home,
+            title: "Complete Home Inspections",
+            description:
+                "Comprehensive evaluation of all major systems and components",
+            features: [
+                "Structural assessment",
+                "Electrical systems",
+                "Plumbing evaluation",
+            ],
+            color: "from-blue-500 to-blue-600",
+        },
+        {
+            icon: Camera,
+            title: "Thermal Imaging",
+            description: "Advanced infrared technology to detect hidden issues",
+            features: [
+                "Energy loss detection",
+                "Moisture identification",
+                "Electrical hotspots",
+            ],
+            color: "from-red-500 to-red-600",
+        },
+        {
+            icon: Zap,
+            title: "Electrical Inspections",
+            description: "Thorough electrical system safety evaluations",
+            features: [
+                "Panel inspections",
+                "Wiring assessment",
+                "Safety compliance",
+            ],
+            color: "from-yellow-500 to-yellow-600",
+        },
+        {
+            icon: Droplets,
+            title: "Plumbing Systems",
+            description: "Complete water and drainage system analysis",
+            features: ["Pipe condition", "Water pressure", "Leak detection"],
+            color: "from-cyan-500 to-cyan-600",
+        },
+    ];
+    const trustIndicators = [
+        {
+            number: "3,500+",
+            label: "Inspections Completed",
+            icon: CheckCircle,
+            color: "text-green-600",
+        },
+        {
+            number: "10+",
+            label: "Years Experience",
+            icon: Calendar,
+            color: "text-blue-600",
+        },
+        {
+            number: "24",
+            label: "Hour Report Delivery",
+            icon: Clock,
+            color: "text-orange-600",
+        },
+        {
+            number: "100%",
+            label: "Client Satisfaction",
+            icon: Star,
+            color: "text-yellow-600",
+        },
+    ];
+    const certifications = [
+        {
+            title: "InterNACHI Certified",
+            description:
+                "International Association of Certified Home Inspectors",
+            icon: Award,
+        },
+        {
+            title: "Veteran-Owned Business",
+            description:
+                "Proudly serving with military precision and integrity",
+            icon: Shield,
+        },
+        {
+            title: "Licensed & Insured",
+            description:
+                "Fully licensed in Michigan with comprehensive insurance",
+            icon: FileText,
+        },
+    ];
+    if (isLoading) {
+        return <PageLoader />;
+    }
+    return (
+        <div className="min-h-screen">
+            {}
+            <section
+                ref={heroRef}
+                className="relative bg-gradient-to-br from-primary via-primary-800 to-primary-900 text-white py-20 lg:py-32 px-6 overflow-hidden"
+                aria-labelledby="hero-heading"
+            >
+                {}
+                <motion.div
+                    className="absolute inset-0 opacity-10"
+                    style={{ y: heroY }}
+                    aria-hidden="true"
+                >
+                    <div className="absolute inset-0 bg-[url('/attic.jpg')] bg-cover bg-center"></div>
+                </motion.div>
+                {}
+                <motion.div
+                    className="absolute top-20 right-20 w-32 h-32 bg-secondary/20 rounded-full blur-xl"
+                    animate={{
+                        y: [0, -20, 0],
+                        scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                        duration: 6,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                    }}
+                    aria-hidden="true"
+                />
+                <div className="container mx-auto relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <motion.div
+                            initial="hidden"
+                            animate={isHeroInView ? "visible" : "hidden"}
+                            variants={staggerContainer}
+                            className="text-center lg:text-left"
+                        >
+                            <motion.h1
+                                id="hero-heading"
+                                variants={fadeInUp}
+                                className="text-4xl lg:text-6xl font-bold mb-6 leading-tight"
+                            >
+                                Michigan's Most Trusted
+                                <motion.span
+                                    className="block text-secondary"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Home Inspector
+                                </motion.span>
+                            </motion.h1>
+                            <motion.p
+                                variants={fadeInUp}
+                                className="text-xl lg:text-2xl mb-8 text-primary-100 leading-relaxed"
+                            >
+                                Get peace of mind with comprehensive home
+                                inspections by {contactInfo.founder}.
+                                <span className="block mt-2 font-semibold">
+                                    3,500+ inspections • 24-hour digital reports
+                                    • Thermal imaging technology
+                                </span>
+                            </motion.p>
+                            <motion.div
+                                variants={fadeInUp}
+                                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                            >
+                                <motion.button
+                                    variants={buttonHover}
+                                    initial="rest"
+                                    whileHover="hover"
+                                    whileTap="tap"
+                                    className="bg-secondary hover:bg-secondary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-secondary-300 focus:ring-offset-2 focus:ring-offset-primary min-h-[44px]"
+                                    aria-label="Schedule your home inspection"
+                                >
+                                    <motion.span
+                                        initial={{ opacity: 1 }}
+                                        whileHover={{ opacity: 0.9 }}
+                                    >
+                                        Schedule Inspection
+                                    </motion.span>
+                                </motion.button>
+                                <motion.a
+                                    href={`tel:${contactInfo.phone}`}
+                                    variants={buttonHover}
+                                    initial="rest"
+                                    whileHover="hover"
+                                    whileTap="tap"
+                                    className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary min-h-[44px]"
+                                    aria-label={`Call us at ${contactInfo.phone}`}
+                                >
+                                    <motion.div
+                                        whileHover={{ rotate: 10, scale: 1.1 }}
+                                    >
+                                        <Phone
+                                            className="w-5 h-5"
+                                            aria-hidden="true"
+                                        />
+                                    </motion.div>
+                                    {contactInfo.phone}
+                                </motion.a>
+                            </motion.div>
+                        </motion.div>
+                        <motion.div
+                            initial="hidden"
+                            animate={isHeroInView ? "visible" : "hidden"}
+                            variants={slideInRight}
+                            className="relative"
+                        >
+                            <motion.div
+                                className="relative bg-white rounded-2xl shadow-2xl overflow-hidden"
+                                whileHover={{ scale: 1.02, rotateY: 5 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <img
+                                    src="/placeholder.svg?height=400&width=600"
+                                    alt="Professional home inspector conducting thermal imaging inspection with advanced equipment"
+                                    className="w-full h-64 lg:h-80 object-cover"
+                                />
+                                <div
+                                    className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"
+                                    aria-hidden="true"
+                                ></div>
+                                <motion.div
+                                    className="absolute bottom-4 left-4 right-4 text-white"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.5 }}
+                                >
+                                    <p className="font-semibold text-lg">
+                                        Professional Inspection in Progress
+                                    </p>
+                                    <p className="text-sm opacity-90">
+                                        Thermal imaging and comprehensive
+                                        evaluation
+                                    </p>
+                                </motion.div>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+            {}
+            <section
+                className="py-20 px-6 bg-white"
+                aria-labelledby="services-heading"
+            >
+                <div className="container mx-auto">
+                    <AnimatedSection className="text-center mb-16">
+                        <h2
+                            id="services-heading"
+                            className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6"
+                        >
+                            Comprehensive Inspection Services
+                        </h2>
+                        <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+                            From foundation to roof, we inspect every critical
+                            component of your potential home investment
+                        </p>
+                    </AnimatedSection>
+                    <AnimatedSection variant={staggerContainer}>
+                        <motion.div
+                            variants={staggerContainer}
+                            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+                        >
+                            {services.map((service, index) => (
+                                <motion.div
+                                    key={service.title}
+                                    variants={fadeInUp}
+                                    initial="rest"
+                                    whileHover="hover"
+                                    className="bg-neutral-50 rounded-xl p-6 border border-neutral-200 group cursor-pointer"
+                                    tabIndex={0}
+                                    role="article"
+                                    aria-labelledby={`service-${index}-title`}
+                                >
+                                    <motion.div variants={cardHover}>
+                                        <motion.div
+                                            className="bg-accent-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent-200 transition-colors duration-300"
+                                            whileHover={{
+                                                rotate: 5,
+                                                scale: 1.1,
+                                            }}
+                                        >
+                                            <service.icon
+                                                className="w-8 h-8 text-accent"
+                                                aria-hidden="true"
+                                            />
+                                        </motion.div>
+                                        <h3
+                                            id={`service-${index}-title`}
+                                            className="text-xl font-semibold text-neutral-800 mb-3"
+                                        >
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-neutral-600 mb-4">
+                                            {service.description}
+                                        </p>
+                                        <ul className="space-y-2" role="list">
+                                            {service.features.map(
+                                                (feature, featureIndex) => (
+                                                    <motion.li
+                                                        key={featureIndex}
+                                                        className="flex items-center text-sm text-neutral-700"
+                                                        initial={{
+                                                            opacity: 0,
+                                                            x: -10,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            x: 0,
+                                                        }}
+                                                        transition={{
+                                                            delay:
+                                                                featureIndex *
+                                                                0.1,
+                                                        }}
+                                                    >
+                                                        <CheckCircle
+                                                            className="w-4 h-4 text-success mr-2 flex-shrink-0"
+                                                            aria-hidden="true"
+                                                        />
+                                                        {feature}
+                                                    </motion.li>
+                                                ),
+                                            )}
+                                        </ul>
+                                    </motion.div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </AnimatedSection>
+                </div>
+            </section>
+            {}
+            <section
+                className="py-20 px-6 bg-gradient-to-r from-accent-50 to-primary-50"
+                aria-labelledby="trust-heading"
+            >
+                <div className="container mx-auto">
+                    <AnimatedSection className="text-center mb-16">
+                        <h2
+                            id="trust-heading"
+                            className="text-4xl lg:text-5xl font-bold text-neutral-800 mb-6"
+                        >
+                            Proven Track Record
+                        </h2>
+                        <p className="text-xl text-neutral-600">
+                            Over a decade of experience serving Michigan
+                            homeowners
+                        </p>
+                    </AnimatedSection>
+                    <AnimatedSection variant={staggerContainer}>
+                        <motion.div
+                            variants={staggerContainer}
+                            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+                        >
+                            {trustIndicators.map((indicator, index) => (
+                                <motion.div
+                                    key={indicator.label}
+                                    variants={fadeInUp}
+                                    initial="rest"
+                                    whileHover="hover"
+                                    className="text-center bg-white rounded-xl p-6 shadow-sm border border-neutral-200 cursor-pointer"
+                                    role="article"
+                                    aria-labelledby={`stat-${index}-number`}
+                                >
+                                    <motion.div variants={cardHover}>
+                                        <motion.div
+                                            whileHover={{
+                                                scale: 1.2,
+                                                rotate: 10,
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            <indicator.icon
+                                                className={`w-12 h-12 ${indicator.color} mx-auto mb-4`}
+                                                aria-hidden="true"
+                                            />
+                                        </motion.div>
+                                        <motion.div
+                                            id={`stat-${index}-number`}
+                                            className="text-3xl lg:text-4xl font-bold text-primary mb-2"
+                                            whileHover={{ scale: 1.1 }}
+                                        >
+                                            {indicator.number}
+                                        </motion.div>
+                                        <div className="text-neutral-600 font-medium">
+                                            {indicator.label}
+                                        </div>
+                                    </motion.div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </AnimatedSection>
+                </div>
+            </section>
+            {}
+            <section
+                className="py-20 px-6 bg-secondary"
+                aria-labelledby="cta-heading"
+            >
+                <div className="container mx-auto text-center">
+                    <AnimatedSection>
+                        <motion.h2
+                            id="cta-heading"
+                            className="text-4xl lg:text-5xl font-bold text-white mb-6"
+                            whileHover={{ scale: 1.02 }}
+                        >
+                            Ready to Schedule Your Inspection?
+                        </motion.h2>
+                        <p className="text-xl text-secondary-100 mb-12 max-w-3xl mx-auto">
+                            Don't let hidden issues become costly surprises. Get
+                            your comprehensive home inspection scheduled today
+                            and make your home purchase with confidence.
+                        </p>
+                        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 mb-12">
+                            <motion.a
+                                href={`tel:${contactInfo.phone}`}
+                                variants={buttonHover}
+                                initial="rest"
+                                whileHover="hover"
+                                whileTap="tap"
+                                className="bg-white text-secondary hover:bg-neutral-100 px-8 py-4 rounded-lg text-xl font-semibold transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary min-h-[44px]"
+                                aria-label={`Call us at ${contactInfo.phone} to schedule inspection`}
+                            >
+                                <motion.div
+                                    whileHover={{ rotate: 10, scale: 1.1 }}
+                                >
+                                    <Phone
+                                        className="w-6 h-6"
+                                        aria-hidden="true"
+                                    />
+                                </motion.div>
+                                {contactInfo.phone}
+                            </motion.a>
+                            <motion.a
+                                href={`mailto:${contactInfo.email}`}
+                                variants={buttonHover}
+                                initial="rest"
+                                whileHover="hover"
+                                whileTap="tap"
+                                className="border-2 border-white text-white hover:bg-white hover:text-secondary px-8 py-4 rounded-lg text-xl font-semibold transition-all duration-300 flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary min-h-[44px]"
+                                aria-label={`Email us at ${contactInfo.email}`}
+                            >
+                                <motion.div whileHover={{ scale: 1.1 }}>
+                                    <Mail
+                                        className="w-6 h-6"
+                                        aria-hidden="true"
+                                    />
+                                </motion.div>
+                                {contactInfo.email}
+                            </motion.a>
+                        </div>
+                        <motion.p
+                            className="text-secondary-100 text-lg"
+                            initial={{ opacity: 0.8 }}
+                            whileHover={{ opacity: 1, scale: 1.02 }}
+                        >
+                            <strong>Same-day scheduling available</strong> •
+                            Digital reports within 24 hours
+                        </motion.p>
+                    </AnimatedSection>
+                </div>
+            </section>
+            {}
+            <footer
+                className="bg-neutral-800 text-neutral-300 py-12 px-6"
+                role="contentinfo"
+            >
+                <div className="container mx-auto">
+                    <AnimatedSection>
+                        <div className="grid md:grid-cols-3 gap-8 mb-8">
+                            <div>
+                                <motion.h3
+                                    className="text-2xl font-bold text-white mb-4"
+                                    whileHover={{ scale: 1.02 }}
+                                >
+                                    {contactInfo.company}
+                                </motion.h3>
+                                <p className="text-neutral-400 mb-4">
+                                    Professional home inspection services by{" "}
+                                    {contactInfo.founder}
+                                </p>
+                                <p className="text-sm text-neutral-500">
+                                    InterNACHI Certified • Veteran-Owned •
+                                    Licensed & Insured
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="text-lg font-semibold text-white mb-4">
+                                    Contact Info
+                                </h4>
+                                <div className="space-y-2">
+                                    <motion.p
+                                        className="flex items-center gap-2"
+                                        whileHover={{ x: 5 }}
+                                    >
+                                        <Phone
+                                            className="w-4 h-4"
+                                            aria-hidden="true"
+                                        />
+                                        <motion.a
+                                            href={`tel:${contactInfo.phone}`}
+                                            className="hover:text-white transition-colors focus:outline-none focus:underline"
+                                            whileHover={{ scale: 1.05 }}
+                                        >
+                                            {contactInfo.phone}
+                                        </motion.a>
+                                    </motion.p>
+                                    <motion.p
+                                        className="flex items-center gap-2"
+                                        whileHover={{ x: 5 }}
+                                    >
+                                        <Mail
+                                            className="w-4 h-4"
+                                            aria-hidden="true"
+                                        />
+                                        <motion.a
+                                            href={`mailto:${contactInfo.email}`}
+                                            className="hover:text-white transition-colors focus:outline-none focus:underline"
+                                            whileHover={{ scale: 1.05 }}
+                                        >
+                                            {contactInfo.email}
+                                        </motion.a>
+                                    </motion.p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="text-lg font-semibold text-white mb-4">
+                                    Service Areas
+                                </h4>
+                                <p className="text-sm text-neutral-400">
+                                    {contactInfo.serviceAreas
+                                        .slice(0, 4)
+                                        .join(" • ")}{" "}
+                                    & more
+                                </p>
+                            </div>
+                        </div>
+                        <motion.div
+                            className="border-t border-neutral-700 pt-8 text-center"
+                            initial={{ opacity: 0.8 }}
+                            whileHover={{ opacity: 1 }}
+                        >
+                            <p>
+                                &copy; 2024 {contactInfo.company}. All rights
+                                reserved.
+                            </p>
+                        </motion.div>
+                    </AnimatedSection>
+                </div>
+            </footer>
+        </div>
+    );
+}
+
+================
+File: app/layout.tsx
+================
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { contactInfo } from "@/lib/contact-info"
+import Header from "./components/Header"
+const inter = Inter({ subsets: ["latin"] })
+export const metadata: Metadata = {
+  metadataBase: new URL("https://mich-inspect.com"),
+  title: {
+    default: `${contactInfo.company} - Professional Home Inspections`,
+    template: `%s | ${contactInfo.company}`,
+  },
+  description: `Professional home inspection services by ${contactInfo.founder}. Serving ${contactInfo.serviceAreas.join(", ")} and surrounding areas. Call ${contactInfo.phone} for reliable inspections.`,
+  keywords: [
+    "home inspection",
+    "property inspection",
+    "real estate inspection",
+    "Michigan home inspector",
+    "Grand Rapids home inspection",
+    "Lansing home inspection",
+    "thermal imaging inspection",
+    "veteran owned business",
+    "InterNACHI certified",
+    "mold inspection",
+    "radon testing",
+    "septic inspection",
+  ],
+  authors: [{ name: contactInfo.founder }],
+  creator: contactInfo.company,
+  publisher: contactInfo.company,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://mich-inspect.com",
+    siteName: contactInfo.company,
+    title: `${contactInfo.company} - Professional Home Inspections`,
+    description: `Professional home inspection services serving ${contactInfo.serviceAreas.join(", ")} and surrounding areas.`,
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${contactInfo.company} - Professional Home Inspection Services`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${contactInfo.company} - Professional Home Inspections`,
+    description: `Professional home inspection services serving Michigan communities.`,
+    images: ["/og-image.jpg"],
+  },
+  verification: {
+    google: "your-google-verification-code",
+  },
+  alternates: {
+    canonical: "https://mich-inspect.com",
+  },
+    generator: 'v0.dev'
+}
+interface RootLayoutProps {
+  children: React.ReactNode
+}
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#1e3a8a" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className={inter.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-secondary"
+        >
+          Skip to main content
+        </a>
+        <Header />
+        <main id="main-content" className="min-h-screen bg-background">
+          {children}
+        </main>
+      </body>
+    </html>
+  )
+}
+
+================
+File: app/page.tsx
+================
+import type { Metadata } from "next"
+import { contactInfo } from "@/lib/contact-info"
+import HomePageClient from "./HomePageClient"
+export const metadata: Metadata = {
+  title: "Home Inspection Services | Grand Rapids, Lansing | Mich-Inspect",
+  description: `Professional home inspection services in Grand Rapids, Lansing, and central Michigan. Thermal imaging, 24-hour reports, veteran-owned. Call ${contactInfo.phone} for reliable inspections by ${contactInfo.founder}.`,
+  keywords: [
+    "home inspection Grand Rapids",
+    "home inspection Lansing",
+    "Michigan home inspector",
+    "thermal imaging inspection",
+    "veteran owned home inspection",
+    "InterNACHI certified inspector",
+    "24 hour inspection reports",
+  ],
+  openGraph: {
+    title: "Home Inspection Services | Grand Rapids, Lansing | Mich-Inspect",
+    description: `Professional home inspection services in Grand Rapids, Lansing, and central Michigan. Thermal imaging, 24-hour reports, veteran-owned.`,
+  },
+}
+export default function HomePage() {
+  return <HomePageClient />
+}
+
+================
+File: hooks/use-mobile.tsx
+================
+import * as React from "react"
+const MOBILE_BREAKPOINT = 768
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
+  React.useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
+    const onChange = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    }
+    mql.addEventListener("change", onChange)
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    return () => mql.removeEventListener("change", onChange)
+  }, [])
+  return !!isMobile
+}
+
+================
+File: hooks/use-toast.ts
+================
+"use client"
+import * as React from "react"
+import type {
+  ToastActionElement,
+  ToastProps,
+} from "@/components/ui/toast"
+const TOAST_LIMIT = 1
+const TOAST_REMOVE_DELAY = 1000000
+type ToasterToast = ToastProps & {
+  id: string
+  title?: React.ReactNode
+  description?: React.ReactNode
+  action?: ToastActionElement
+}
+const actionTypes = {
+  ADD_TOAST: "ADD_TOAST",
+  UPDATE_TOAST: "UPDATE_TOAST",
+  DISMISS_TOAST: "DISMISS_TOAST",
+  REMOVE_TOAST: "REMOVE_TOAST",
+} as const
+let count = 0
+function genId() {
+  count = (count + 1) % Number.MAX_SAFE_INTEGER
+  return count.toString()
+}
+type ActionType = typeof actionTypes
+type Action =
+  | {
+      type: ActionType["ADD_TOAST"]
+      toast: ToasterToast
+    }
+  | {
+      type: ActionType["UPDATE_TOAST"]
+      toast: Partial<ToasterToast>
+    }
+  | {
+      type: ActionType["DISMISS_TOAST"]
+      toastId?: ToasterToast["id"]
+    }
+  | {
+      type: ActionType["REMOVE_TOAST"]
+      toastId?: ToasterToast["id"]
+    }
+interface State {
+  toasts: ToasterToast[]
+}
+const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
+const addToRemoveQueue = (toastId: string) => {
+  if (toastTimeouts.has(toastId)) {
+    return
+  }
+  const timeout = setTimeout(() => {
+    toastTimeouts.delete(toastId)
+    dispatch({
+      type: "REMOVE_TOAST",
+      toastId: toastId,
+    })
+  }, TOAST_REMOVE_DELAY)
+  toastTimeouts.set(toastId, timeout)
+}
+export const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "ADD_TOAST":
+      return {
+        ...state,
+        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+      }
+    case "UPDATE_TOAST":
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        ),
+      }
+    case "DISMISS_TOAST": {
+      const { toastId } = action
+      if (toastId) {
+        addToRemoveQueue(toastId)
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id)
+        })
+      }
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === toastId || toastId === undefined
+            ? {
+                ...t,
+                open: false,
+              }
+            : t
+        ),
+      }
+    }
+    case "REMOVE_TOAST":
+      if (action.toastId === undefined) {
+        return {
+          ...state,
+          toasts: [],
+        }
+      }
+      return {
+        ...state,
+        toasts: state.toasts.filter((t) => t.id !== action.toastId),
+      }
+  }
+}
+const listeners: Array<(state: State) => void> = []
+let memoryState: State = { toasts: [] }
+function dispatch(action: Action) {
+  memoryState = reducer(memoryState, action)
+  listeners.forEach((listener) => {
+    listener(memoryState)
+  })
+}
+type Toast = Omit<ToasterToast, "id">
+function toast({ ...props }: Toast) {
+  const id = genId()
+  const update = (props: ToasterToast) =>
+    dispatch({
+      type: "UPDATE_TOAST",
+      toast: { ...props, id },
+    })
+  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
+  dispatch({
+    type: "ADD_TOAST",
+    toast: {
+      ...props,
+      id,
+      open: true,
+      onOpenChange: (open) => {
+        if (!open) dismiss()
+      },
+    },
+  })
+  return {
+    id: id,
+    dismiss,
+    update,
+  }
+}
+function useToast() {
+  const [state, setState] = React.useState<State>(memoryState)
+  React.useEffect(() => {
+    listeners.push(setState)
+    return () => {
+      const index = listeners.indexOf(setState)
+      if (index > -1) {
+        listeners.splice(index, 1)
+      }
+    }
+  }, [state])
+  return {
+    ...state,
+    toast,
+    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+  }
+}
+export { useToast, toast }
+
+================
+File: lib/animations.ts
+================
+export const fadeInUp = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+export const fadeInDown = {
+  hidden: {
+    opacity: 0,
+    y: -60,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+export const slideInLeft = {
+  hidden: {
+    opacity: 0,
+    x: -80,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+export const slideInRight = {
+  hidden: {
+    opacity: 0,
+    x: 80,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+export const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+}
+export const cardHover = {
+  rest: {
+    scale: 1,
+    y: 0,
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+  },
+  hover: {
+    scale: 1.03,
+    y: -8,
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+}
+export const buttonHover = {
+  rest: { scale: 1 },
+  hover: {
+    scale: 1.05,
+    transition: { duration: 0.2, ease: "easeOut" },
+  },
+  tap: {
+    scale: 0.95,
+    transition: { duration: 0.1 },
+  },
+}
+export const iconHover = {
+  rest: { scale: 1, rotate: 0 },
+  hover: {
+    scale: 1.1,
+    rotate: 5,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+}
+export const pageTransition = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: { duration: 0.3, ease: "easeIn" },
+  },
+}
+export const mobileMenuVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    transition: { duration: 0.2 },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn",
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+}
+export const mobileItemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    scale: 0.9,
+    transition: { duration: 0.2 },
+  },
+}
+export const createSpringAnimation = (stiffness = 300, damping = 30) => ({
+  type: "spring",
+  stiffness,
+  damping,
+})
+export const customEasing = [0.25, 0.46, 0.45, 0.94]
+export const performanceSettings = {
+  reducedMotion: {
+    duration: 0.01,
+    ease: "linear",
+  },
+  standard: {
+    duration: 0.3,
+    ease: customEasing,
+  },
+  smooth: {
+    duration: 0.5,
+    ease: customEasing,
+  },
+}
+
+================
+File: lib/contact-info.ts
+================
+export const contactInfo = {
+  company: "Mich-Inspect",
+  phone: "616-755-2255",
+  email: "charlie@mich-inspect.net",
+  serviceAreas: ["Grand Rapids", "Lansing", "Big Rapids", "Mount Pleasant", "Mason", "Kalamazoo", "Ada"],
+  founder: "Charles West",
+} as const
+export type ContactInfo = typeof contactInfo
+
+================
+File: lib/utils.ts
+================
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+================
+File: public/manifest.json
+================
+{
+  "name": "Mich-Inspect - Professional Home Inspections",
+  "short_name": "Mich-Inspect",
+  "description": "Professional home inspection services in Michigan by Charles West. Veteran-owned, InterNACHI certified.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a8a",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+================
+File: public/placeholder-logo.svg
+================
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="48" fill="none"><path fill="#000" d="M57.588 9.6h6L73.828 38h-5.2l-2.36-6.88h-11.36L52.548 38h-5.2l10.24-28.4Zm7.16 17.16-4.16-12.16-4.16 12.16h8.32Zm23.694-2.24c-.186-1.307-.706-2.32-1.56-3.04-.853-.72-1.866-1.08-3.04-1.08-1.68 0-2.986.613-3.92 1.84-.906 1.227-1.36 2.947-1.36 5.16s.454 3.933 1.36 5.16c.934 1.227 2.24 1.84 3.92 1.84 1.254 0 2.307-.373 3.16-1.12.854-.773 1.387-1.867 1.6-3.28l5.12.24c-.186 1.68-.733 3.147-1.64 4.4-.906 1.227-2.08 2.173-3.52 2.84-1.413.667-2.986 1-4.72 1-2.08 0-3.906-.453-5.48-1.36-1.546-.907-2.76-2.2-3.64-3.88-.853-1.68-1.28-3.627-1.28-5.84 0-2.24.427-4.187 1.28-5.84.88-1.68 2.094-2.973 3.64-3.88 1.574-.907 3.4-1.36 5.48-1.36 1.68 0 3.227.32 4.64.96 1.414.64 2.56 1.56 3.44 2.76.907 1.2 1.454 2.6 1.64 4.2l-5.12.28Zm11.486-7.72.12 3.4c.534-1.227 1.307-2.173 2.32-2.84 1.04-.693 2.267-1.04 3.68-1.04 1.494 0 2.76.387 3.8 1.16 1.067.747 1.827 1.813 2.28 3.2.507-1.44 1.294-2.52 2.36-3.24 1.094-.747 2.414-1.12 3.96-1.12 1.414 0 2.64.307 3.68.92s1.84 1.52 2.4 2.72c.56 1.2.84 2.667.84 4.4V38h-4.96V25.92c0-1.813-.293-3.187-.88-4.12-.56-.96-1.413-1.44-2.56-1.44-.906 0-1.68.213-2.32.64-.64.427-1.133 1.053-1.48 1.88-.32.827-.48 1.84-.48 3.04V38h-4.56V25.92c0-1.2-.133-2.213-.4-3.04-.24-.827-.626-1.453-1.16-1.88-.506-.427-1.133-.64-1.88-.64-.906 0-1.68.227-2.32.68-.64.427-1.133 1.053-1.48 1.88-.32.827-.48 1.827-.48 3V38h-4.96V16.8h4.48Zm26.723 10.6c0-2.24.427-4.187 1.28-5.84.854-1.68 2.067-2.973 3.64-3.88 1.574-.907 3.4-1.36 5.48-1.36 1.84 0 3.494.413 4.96 1.24 1.467.827 2.64 2.08 3.52 3.76.88 1.653 1.347 3.693 1.4 6.12v1.32h-15.08c.107 1.813.614 3.227 1.52 4.24.907.987 2.134 1.48 3.68 1.48.987 0 1.88-.253 2.68-.76a4.803 4.803 0 0 0 1.84-2.2l5.08.36c-.64 2.027-1.84 3.64-3.6 4.84-1.733 1.173-3.733 1.76-6 1.76-2.08 0-3.906-.453-5.48-1.36-1.573-.907-2.786-2.2-3.64-3.88-.853-1.68-1.28-3.627-1.28-5.84Zm15.16-2.04c-.213-1.733-.76-3.013-1.64-3.84-.853-.827-1.893-1.24-3.12-1.24-1.44 0-2.6.453-3.48 1.36-.88.88-1.44 2.12-1.68 3.72h9.92ZM163.139 9.6V38h-5.04V9.6h5.04Zm8.322 7.2.24 5.88-.64-.36c.32-2.053 1.094-3.56 2.32-4.52 1.254-.987 2.787-1.48 4.6-1.48 2.32 0 4.107.733 5.36 2.2 1.254 1.44 1.88 3.387 1.88 5.84V38h-4.96V25.92c0-1.253-.12-2.28-.36-3.08-.24-.8-.64-1.413-1.2-1.84-.533-.427-1.253-.64-2.16-.64-1.44 0-2.573.48-3.4 1.44-.8.933-1.2 2.307-1.2 4.12V38h-4.96V16.8h4.48Zm30.003 7.72c-.186-1.307-.706-2.32-1.56-3.04-.853-.72-1.866-1.08-3.04-1.08-1.68 0-2.986.613-3.92 1.84-.906 1.227-1.36 2.947-1.36 5.16s.454 3.933 1.36 5.16c.934 1.227 2.24 1.84 3.92 1.84 1.254 0 2.307-.373 3.16-1.12.854-.773 1.387-1.867 1.6-3.28l5.12.24c-.186 1.68-.733 3.147-1.64 4.4-.906 1.227-2.08 2.173-3.52 2.84-1.413.667-2.986 1-4.72 1-2.08 0-3.906-.453-5.48-1.36-1.546-.907-2.76-2.2-3.64-3.88-.853-1.68-1.28-3.627-1.28-5.84 0-2.24.427-4.187 1.28-5.84.88-1.68 2.094-2.973 3.64-3.88 1.574-.907 3.4-1.36 5.48-1.36 1.68 0 3.227.32 4.64.96 1.414.64 2.56 1.56 3.44 2.76.907 1.2 1.454 2.6 1.64 4.2l-5.12.28Zm11.443 8.16V38h-5.6v-5.32h5.6Z"/><path fill="#171717" fill-rule="evenodd" d="m7.839 40.783 16.03-28.054L20 6 0 40.783h7.839Zm8.214 0H40L27.99 19.894l-4.02 7.032 3.976 6.914H20.02l-3.967 6.943Z" clip-rule="evenodd"/></svg>
+
+================
+File: public/placeholder.svg
+================
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" fill="none"><rect width="1200" height="1200" fill="#EAEAEA" rx="3"/><g opacity=".5"><g opacity=".5"><path fill="#FAFAFA" d="M600.709 736.5c-75.454 0-136.621-61.167-136.621-136.62 0-75.454 61.167-136.621 136.621-136.621 75.453 0 136.62 61.167 136.62 136.621 0 75.453-61.167 136.62-136.62 136.62Z"/><path stroke="#C9C9C9" stroke-width="2.418" d="M600.709 736.5c-75.454 0-136.621-61.167-136.621-136.62 0-75.454 61.167-136.621 136.621-136.621 75.453 0 136.62 61.167 136.62 136.621 0 75.453-61.167 136.62-136.62 136.62Z"/></g><path stroke="url(#a)" stroke-width="2.418" d="M0-1.209h553.581" transform="scale(1 -1) rotate(45 1163.11 91.165)"/><path stroke="url(#b)" stroke-width="2.418" d="M404.846 598.671h391.726"/><path stroke="url(#c)" stroke-width="2.418" d="M599.5 795.742V404.017"/><path stroke="url(#d)" stroke-width="2.418" d="m795.717 796.597-391.441-391.44"/><path fill="#fff" d="M600.709 656.704c-31.384 0-56.825-25.441-56.825-56.824 0-31.384 25.441-56.825 56.825-56.825 31.383 0 56.824 25.441 56.824 56.825 0 31.383-25.441 56.824-56.824 56.824Z"/><g clip-path="url(#e)"><path fill="#666" fill-rule="evenodd" d="M616.426 586.58h-31.434v16.176l3.553-3.554.531-.531h9.068l.074-.074 8.463-8.463h2.565l7.18 7.181V586.58Zm-15.715 14.654 3.698 3.699 1.283 1.282-2.565 2.565-1.282-1.283-5.2-5.199h-6.066l-5.514 5.514-.073.073v2.876a2.418 2.418 0 0 0 2.418 2.418h26.598a2.418 2.418 0 0 0 2.418-2.418v-8.317l-8.463-8.463-7.181 7.181-.071.072Zm-19.347 5.442v4.085a6.045 6.045 0 0 0 6.046 6.045h26.598a6.044 6.044 0 0 0 6.045-6.045v-7.108l1.356-1.355-1.282-1.283-.074-.073v-17.989h-38.689v23.43l-.146.146.146.147Z" clip-rule="evenodd"/></g><path stroke="#C9C9C9" stroke-width="2.418" d="M600.709 656.704c-31.384 0-56.825-25.441-56.825-56.824 0-31.384 25.441-56.825 56.825-56.825 31.383 0 56.824 25.441 56.824 56.825 0 31.383-25.441 56.824-56.824 56.824Z"/></g><defs><linearGradient id="a" x1="554.061" x2="-.48" y1=".083" y2=".087" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="b" x1="796.912" x2="404.507" y1="599.963" y2="599.965" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="c" x1="600.792" x2="600.794" y1="403.677" y2="796.082" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="d" x1="404.85" x2="796.972" y1="403.903" y2="796.02" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><clipPath id="e"><path fill="#fff" d="M581.364 580.535h38.689v38.689h-38.689z"/></clipPath></defs></svg>
+
+================
+File: src/lib/contact-info.ts
+================
+export const contactInfo = {
+  company: "Mich-Inspect",
+  phone: "616-755-2255",
+  email: "charlie@mich-inspect.net",
+  serviceAreas: ["Grand Rapids", "Lansing", "Big Rapids", "Mount Pleasant", "Mason", "Kalamazoo", "Ada"],
+  founder: "Charles West",
+} as const
+export type ContactInfo = typeof contactInfo
+
+================
+File: styles/globals.css
+================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+================
+File: .gitignore
+================
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+================
+File: components.json
+================
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+
+================
+File: next.config.mjs
+================
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true,
+  },
+}
+
+export default nextConfig
+
+================
+File: package.json
+================
+{
+    "name": "my-v0-project",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@emotion/is-prop-valid": "latest",
+        "@hookform/resolvers": "^3.9.1",
+        "autoprefixer": "^10.4.20",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "framer-motion": "latest",
+        "lucide-react": "^0.454.0",
+        "next": "15.2.4",
+        "react": "^19",
+        "react-dom": "^19",
+        "sonner": "^1.7.1",
+        "tailwind-merge": "^2.5.5",
+        "tailwindcss-animate": "^1.0.7",
+        "zod": "^3.24.1"
+    },
+    "devDependencies": {
+        "@types/node": "^22",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "postcss": "^8",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5"
+    }
+}
+
+================
+File: postcss.config.mjs
+================
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    tailwindcss: {},
+  },
+};
+
+export default config;
+
+================
+File: tailwind.config.js
+================
+module.exports = {
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
+  ],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "#1e3a8a",
+          50: "#eff6ff",
+          100: "#dbeafe",
+          200: "#bfdbfe",
+          300: "#93c5fd",
+          400: "#60a5fa",
+          500: "#3b82f6",
+          600: "#2563eb",
+          700: "#1d4ed8",
+          800: "#1e40af",
+          900: "#1e3a8a",
+          950: "#172554",
+          foreground: "#ffffff",
+        },
+        secondary: {
+          DEFAULT: "#ea580c",
+          50: "#fff7ed",
+          100: "#ffedd5",
+          200: "#fed7aa",
+          300: "#fdba74",
+          400: "#fb923c",
+          500: "#f97316",
+          600: "#ea580c",
+          700: "#c2410c",
+          800: "#9a3412",
+          900: "#7c2d12",
+          950: "#431407",
+          foreground: "#ffffff",
+        },
+        accent: {
+          DEFAULT: "#0ea5e9",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1",
+          800: "#075985",
+          900: "#0c4a6e",
+          950: "#082f49",
+          foreground: "#ffffff",
+        },
+        success: {
+          DEFAULT: "#059669",
+          50: "#ecfdf5",
+          100: "#d1fae5",
+          200: "#a7f3d0",
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065f46",
+          900: "#064e3b",
+          950: "#022c22",
+          foreground: "#ffffff",
+        },
+        neutral: {
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+}
+
+================
+File: tsconfig.json
+================
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+
+
+================================================================
+End of Codebase
+================================================================

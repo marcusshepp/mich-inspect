@@ -1,59 +1,49 @@
-"use client"
+"use client";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import AboutHero from "app/_components/about-hero";
+import AboutStory from "app/_components/about-story";
+import AboutTeam from "app/_components/about-team";
+import AboutCertifications from "app/_components/about-certifications";
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import AboutPageContent from "./AboutPageContent"
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+function PageLoader() {
+    return (
+        <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-gradient-to-br from-primary via-primary-800 to-primary-900 z-50 flex items-center justify-center"
+        >
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "linear",
+                }}
+                className="w-20 h-20 border-4 border-white/30 border-t-secondary rounded-full"
+            />
+        </motion.div>
+    );
 }
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.8 } },
-}
+export default function AboutPageContent() {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-const slideInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 1500);
+        return () => clearTimeout(timer);
+    }, []);
 
-const slideInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+    if (isLoading) {
+        return <PageLoader />;
+    }
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-// Animated section wrapper component
-function AnimatedSection({ children, variant = fadeInUp, className = "" }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variant}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-export default function AboutPageClient() {
-  return <AboutPageContent />
+    return (
+        <div className="min-h-screen overflow-hidden">
+            <AboutHero />
+            <AboutStory />
+            <AboutTeam />
+            <AboutCertifications />
+        </div>
+    );
 }
