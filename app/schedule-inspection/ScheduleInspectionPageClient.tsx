@@ -23,7 +23,7 @@ import { contactInfo } from "@/lib/contact-info";
 import "react-datepicker/dist/react-datepicker.css";
 import "./schedule-inspection.css";
 
-// Form validation schema
+// form validation schema using zod
 const inspectionFormSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
     lastName: z.string().min(2, "Last name must be at least 2 characters"),
@@ -57,12 +57,12 @@ const inspectionFormSchema = z.object({
 
 type InspectionFormData = z.infer<typeof inspectionFormSchema>;
 
-// Available time slots with availability simulation
+// monk available time slots
 const TIME_SLOTS = [
     { time: "8:00 AM", available: true },
     { time: "9:00 AM", available: true },
     { time: "10:00 AM", available: true },
-    { time: "11:00 AM", available: false }, // Simulate some unavailable slots
+    { time: "11:00 AM", available: false },
     { time: "12:00 PM", available: true },
     { time: "1:00 PM", available: true },
     { time: "2:00 PM", available: false },
@@ -70,14 +70,14 @@ const TIME_SLOTS = [
     { time: "4:00 PM", available: true },
 ];
 
-// Simulated busy dates (in a real app, this would come from your backend)
+// booked dates. TODO: this should be an api call on page load or a composite call to reduce latency if approved
 const BUSY_DATES = [
     new Date(2025, 4, 27), // May 27, 2025 (month is 0-indexed)
     new Date(2025, 4, 30), // May 30, 2025
     new Date(2025, 5, 3), // June 3, 2025
 ];
 
-// Property types
+// TODO: update actual property types.
 const PROPERTY_TYPES = [
     { value: "single-family", label: "Single Family Home" },
     { value: "condo", label: "Condominium" },
@@ -86,7 +86,7 @@ const PROPERTY_TYPES = [
     { value: "commercial", label: "Commercial Property" },
 ];
 
-// Inspection types
+// TODO: get actual inspection types from old site
 const INSPECTION_TYPES = [
     { value: "standard", label: "Standard Home Inspection", price: "$450-650" },
     {
@@ -126,48 +126,42 @@ export default function ScheduleInspectionPageClient() {
         resolver: zodResolver(inspectionFormSchema),
     });
 
-    // Get tomorrow's date as minimum selectable date
+    // get tomorrows date as minimum available selection date
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    // Get max date (3 months from now)
+    // max date as 3 months from the current date
     const maxDate = new Date();
     maxDate.setMonth(maxDate.getMonth() + 3);
 
-    // Function to check if a date is busy/unavailable
+    // function to check if a date is busy
     const isDateBusy = (date: Date) => {
         return BUSY_DATES.some(
             (busyDate) => busyDate.toDateString() === date.toDateString(),
         );
     };
 
-    // Function to disable weekends, past dates, and busy dates
+    // function to check if a date is available
+    // TODO: again all this should come from an api call.
     const isDateAvailable = (date: Date) => {
         const day = date.getDay();
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-
-        // Not Sunday (0) or Saturday (6), not in the past, and not a busy date
         return day !== 0 && day !== 6 && date >= today && !isDateBusy(date);
     };
 
-    // Update available times when date changes
+    // TODO: this should be an api call to update available times based on selected date
     useEffect(() => {
         if (selectedDate) {
-            // Simulate different availability for different dates
             const dayOfWeek = selectedDate.getDay();
             let timesForDay = [...TIME_SLOTS];
-
-            // Simulate some dates having fewer available slots
             if (dayOfWeek === 1) {
-                // Monday - busier day
                 timesForDay = timesForDay.map((slot) => ({
                     ...slot,
                     available:
                         slot.time !== "11:00 AM" && slot.time !== "2:00 PM",
                 }));
             } else if (dayOfWeek === 5) {
-                // Friday - fewer slots
                 timesForDay = timesForDay.map((slot) => ({
                     ...slot,
                     available:
@@ -177,7 +171,6 @@ export default function ScheduleInspectionPageClient() {
 
             setAvailableTimesForDate(timesForDay);
 
-            // Clear selected time if it's not available for the new date
             const selectedTimeSlot = timesForDay.find(
                 (slot) => slot.time === selectedTime,
             );
@@ -191,7 +184,6 @@ export default function ScheduleInspectionPageClient() {
     }, [selectedDate, selectedTime]);
     const onSubmit = async (data: InspectionFormData) => {
         if (!selectedDate || !selectedTime) {
-            // Show better error message
             const missingFields = [];
             if (!selectedDate) missingFields.push("date");
             if (!selectedTime) missingFields.push("time");
@@ -207,7 +199,7 @@ export default function ScheduleInspectionPageClient() {
         setIsSubmitting(true);
 
         try {
-            // api call simulation
+            //TODO: another api call simulation
             await new Promise((resolve) => setTimeout(resolve, 1500));
 
             const bookingData = {
@@ -220,7 +212,7 @@ export default function ScheduleInspectionPageClient() {
 
             console.log("Inspection booking submitted:", bookingData);
 
-            // TODO: If demo is approved, hit endpoint to save booking in db.
+            // TODO: api simulation to save booking data.
             // const response = await fetch('/api/bookings', {
             //     method: 'POST',
             //     headers: { 'Content-Type': 'application/json' },
@@ -547,7 +539,7 @@ export default function ScheduleInspectionPageClient() {
                             </Card>
                         </div>
 
-                        {/* Right Column - Form */}
+                        {/* right column info form */}
                         <div className="space-y-6">
                             <Card className="p-6">
                                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
@@ -757,7 +749,6 @@ export default function ScheduleInspectionPageClient() {
                                     "Schedule Inspection"
                                 )}
                             </Button>
-                            {/* Booking Summary */}
                             {(selectedDate ||
                                 selectedTime ||
                                 watch("inspectionType")) && (
