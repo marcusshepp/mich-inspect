@@ -12,25 +12,25 @@ export default function AboutStory() {
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     variants={slideInLeft}
                     className="lg:col-span-6"
                 >
                     <div className="relative">
                         <img
-                            src="/placeholder.svg?height=600&width=700"
+                            src="/attic.webp?height=600&width=700"
                             alt={`${contactInfo.founder} transitioning from military service to professional home inspection career`}
-                            className="w-full h-96 lg:h-[500px] object-cover rounded-3xl shadow-2xl"
+                            className="w-full h-96 lg:h-[500px] object-cover rounded-3xl shadow-lg"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-3xl" />
-                        <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-3xl blur-xl -z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent rounded-3xl" />
+                        <div className="absolute -inset-2 bg-gradient-to-r from-primary/5 via-neutral-200/5 to-primary/5 rounded-3xl blur-xl -z-10" />
                     </div>
                 </motion.div>
 
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     variants={slideInRight}
                     className="lg:col-span-6"
                 >
@@ -43,9 +43,9 @@ export default function AboutStory() {
                         className="mb-8"
                     />
 
-                    <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                    <div className="space-y-6 text-lg text-neutral-600 leading-relaxed">
                         <p>
-                            <strong className="text-slate-800">
+                            <strong className="text-neutral-900">
                                 {contactInfo.company}
                             </strong>{" "}
                             was founded by{" "}
@@ -56,6 +56,7 @@ export default function AboutStory() {
                             critical need for thorough, honest home inspections
                             throughout Michigan.
                         </p>
+
                         <p>
                             After serving our country with honor and
                             distinction, Charlie brought the same level of
@@ -63,6 +64,7 @@ export default function AboutStory() {
                             integrity that defined his military service to the
                             home inspection industry.
                         </p>
+
                         <p>
                             What began as a one-person mission has evolved into
                             a team of four full-time certified inspectors, each
@@ -70,11 +72,12 @@ export default function AboutStory() {
                             commitment to protecting Michigan families through
                             comprehensive, technology-enhanced home evaluations.
                         </p>
-                        <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 border border-primary/20">
+
+                        <div className="bg-gradient-to-r from-primary/10 to-neutral-100/50 rounded-2xl p-6 border border-primary/20">
                             <p className="text-primary font-semibold text-xl mb-2">
                                 Over 3,500 inspections later...
                             </p>
-                            <p className="text-slate-700">
+                            <p className="text-neutral-700">
                                 We continue to serve with the same dedication,
                                 precision, and unwavering commitment to
                                 excellence that defined our military service.

@@ -26,7 +26,7 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: "easeOut" },
+            transition: { duration: 0.4, ease: "easeOut" },
         },
     };
 
@@ -48,11 +48,11 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                         className={`relative text-base font-medium transition-all duration-300 px-4 py-2.5 rounded-xl ${
                             pathname === item.href
                                 ? isScrolled
-                                    ? "text-primary bg-primary/10 shadow-md border border-primary/20"
-                                    : "text-secondary bg-white/15 shadow-lg border border-white/20 backdrop-blur-sm"
+                                    ? "text-primary bg-primary/10 shadow-sm border border-primary/20"
+                                    : "text-white bg-white/15 shadow-lg border border-white/20"
                                 : isScrolled
-                                  ? "text-slate-700 hover:text-primary hover:bg-primary/5"
-                                  : "text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm"
+                                  ? "text-neutral-700 hover:text-primary hover:bg-primary/5"
+                                  : "text-white/90 hover:text-white hover:bg-white/10"
                         }`}
                     >
                         {item.name}
@@ -60,7 +60,7 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                             <motion.div
                                 layoutId="activeTab"
                                 className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
-                                    isScrolled ? "bg-primary" : "bg-secondary"
+                                    isScrolled ? "bg-primary" : "bg-white"
                                 }`}
                                 initial={false}
                                 transition={{

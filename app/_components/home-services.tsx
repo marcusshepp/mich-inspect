@@ -11,6 +11,7 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
+
 export default function HomeServices() {
     const services = [
         {
@@ -24,8 +25,8 @@ export default function HomeServices() {
                 "Plumbing evaluation",
                 "HVAC inspection",
             ],
-            gradient: "from-blue-500 to-blue-600",
-            iconBg: "from-blue-100 to-blue-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
         {
             icon: Camera,
@@ -38,8 +39,8 @@ export default function HomeServices() {
                 "Electrical hotspots",
                 "Insulation gaps",
             ],
-            gradient: "from-red-500 to-red-600",
-            iconBg: "from-red-100 to-red-200",
+            gradient: "from-neutral-700 to-neutral-800",
+            iconBg: "from-neutral-100 to-neutral-200",
         },
         {
             icon: Zap,
@@ -52,8 +53,8 @@ export default function HomeServices() {
                 "Safety compliance",
                 "Load calculations",
             ],
-            gradient: "from-yellow-500 to-yellow-600",
-            iconBg: "from-yellow-100 to-yellow-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
         {
             icon: Droplets,
@@ -66,10 +67,11 @@ export default function HomeServices() {
                 "Leak detection",
                 "Fixture testing",
             ],
-            gradient: "from-cyan-500 to-cyan-600",
-            iconBg: "from-cyan-100 to-cyan-200",
+            gradient: "from-neutral-700 to-neutral-800",
+            iconBg: "from-neutral-100 to-neutral-200",
         },
     ];
+
     return (
         <Section background="gray" aria-labelledby="services-heading">
             <SectionHeader
@@ -79,10 +81,11 @@ export default function HomeServices() {
                 subtitle="From foundation to roof, we inspect every critical component of your investment with military precision and advanced technology"
                 titleGradient={true}
             />
+
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
                 className="grid-cards-4"
             >
@@ -105,30 +108,30 @@ export default function HomeServices() {
                                 variants={cardHover}
                                 className="card-content-lg h-full flex flex-col"
                             >
-                                <div className="mb-8 flex justify-center">
+                                <div className="mb-6 flex justify-center">
                                     <IconBox
                                         icon={
                                             <service.icon className="w-8 h-8" />
                                         }
                                         gradient={service.iconBg}
                                         size="lg"
-                                        className="group-hover:scale-110 transition-transform duration-300"
+                                        className="group-hover:scale-105 transition-transform duration-200"
                                     />
                                 </div>
+
                                 <div className="text-center flex-grow flex flex-col">
                                     <h3
                                         id={`service-${index}-title`}
-                                        className="text-2xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                        className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary transition-colors"
                                     >
                                         {service.title}
                                     </h3>
-                                    <p className="text-slate-600 mb-8 leading-relaxed text-base">
+                                    <p className="text-neutral-600 mb-6 leading-relaxed text-base">
                                         {service.description}
                                     </p>
                                     <div className="flex-grow">
                                         <FeatureList
                                             features={service.features}
-                                            iconColor="text-emerald-500"
                                         />
                                     </div>
                                 </div>

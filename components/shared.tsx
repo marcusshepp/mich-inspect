@@ -2,14 +2,26 @@
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "lib/utils";
 import { ReactNode, forwardRef } from "react";
+
 interface ButtonProps extends HTMLMotionProps<"button"> {
     variant?: "primary" | "secondary" | "outline" | "ghost";
     size?: "sm" | "md" | "lg";
     children: ReactNode;
+    as?: "button" | "a";
+    href?: string;
 }
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (
-        { variant = "primary", size = "md", className, children, ...props },
+        {
+            variant = "primary",
+            size = "md",
+            className,
+            children,
+            as = "button",
+            href,
+            ...props
+        },
         ref,
     ) => {
         const baseClasses = "btn";
@@ -24,9 +36,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             md: "px-6 py-3 text-base",
             lg: "px-8 py-4 text-lg",
         };
+
+        const Component = as === "a" ? motion.a : motion.button;
+
         return (
-            <motion.button
+            <Component
                 ref={ref}
+                href={as === "a" ? href : undefined}
                 className={cn(
                     baseClasses,
                     variantClasses[variant],
@@ -35,34 +51,35 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 )}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.15 }}
                 {...props}
             >
                 {children}
-            </motion.button>
+            </Component>
         );
     },
 );
 Button.displayName = "Button";
+
 interface CardProps extends HTMLMotionProps<"div"> {
     hover?: boolean;
     children: ReactNode;
 }
+
 export const Card = forwardRef<HTMLDivElement, CardProps>(
     ({ hover = true, className, children, ...props }, ref) => {
         return (
             <motion.div
                 ref={ref}
                 className={cn(
-                    "bg-white rounded-3xl border border-gray-100 shadow-sm transition-all duration-500 ease-out overflow-hidden",
-                    hover &&
-                        "hover:shadow-2xl hover:shadow-gray-200/50 hover:-translate-y-2 hover:border-gray-200",
+                    "bg-white rounded-2xl border border-gray-200 shadow-sm transition-shadow duration-200 overflow-hidden",
+                    hover && "hover:shadow-md",
                     className,
                 )}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
                 {...props}
             >
                 {children}
@@ -71,12 +88,14 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     },
 );
 Card.displayName = "Card";
+
 interface SectionProps {
     children: ReactNode;
     className?: string;
     id?: string;
     background?: "white" | "gray" | "gradient" | "dark";
 }
+
 export const Section: React.FC<SectionProps> = ({
     children,
     className,
@@ -85,34 +104,25 @@ export const Section: React.FC<SectionProps> = ({
 }) => {
     const backgroundClasses = {
         white: "bg-white",
-        gray: "bg-gradient-to-br from-gray-50 to-white",
-        gradient: "bg-gradient-to-br from-primary-50 via-white to-accent-50",
-        dark: "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white",
+        gray: "bg-gray-50",
+        gradient: "bg-gradient-to-br from-gray-50 to-white",
+        dark: "bg-neutral-900 text-white",
     };
+
     return (
         <section
             id={id}
             className={cn(
-                "py-32 px-6 relative overflow-hidden",
+                "py-20 px-6 relative",
                 backgroundClasses[background],
                 className,
             )}
         >
-            {background === "gradient" && (
-                <div className="absolute inset-0 opacity-5">
-                    <div className="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full blur-3xl" />
-                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-                </div>
-            )}
-            {background === "dark" && (
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover bg-center"></div>
-                </div>
-            )}
             <div className="container-custom relative z-10">{children}</div>
         </section>
     );
 };
+
 interface SectionHeaderProps {
     badge?: string;
     badgeIcon?: ReactNode;
@@ -122,6 +132,7 @@ interface SectionHeaderProps {
     centered?: boolean;
     className?: string;
 }
+
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
     badge,
     badgeIcon,
@@ -135,21 +146,21 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         <motion.div
             className={cn(
                 centered ? "text-center" : "text-left",
-                "mb-24",
+                "mb-16",
                 className,
             )}
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
         >
             {badge && (
                 <motion.div
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8"
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6"
+                    initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
                 >
                     {badgeIcon}
                     <span>{badge}</span>
@@ -157,29 +168,21 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             )}
             <h2
                 className={cn(
-                    "text-5xl lg:text-6xl font-bold mb-10 leading-tight",
-                    titleGradient ? "text-slate-800" : "text-slate-800",
+                    "text-4xl lg:text-5xl font-bold mb-6 leading-tight",
+                    titleGradient ? "gradient-text" : "text-neutral-900",
                 )}
             >
-                {titleGradient ? (
-                    <>
-                        {title.split(" ").slice(0, -1).join(" ")}
-                        <span className="block gradient-text">
-                            {title.split(" ").slice(-1)}
-                        </span>
-                    </>
-                ) : (
-                    title
-                )}
+                {title}
             </h2>
             {subtitle && (
-                <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-lg text-neutral-600 max-w-3xl mx-auto leading-relaxed">
                     {subtitle}
                 </p>
             )}
         </motion.div>
     );
 };
+
 interface IconBoxProps {
     icon: ReactNode;
     gradient?: string;
@@ -187,60 +190,65 @@ interface IconBoxProps {
     className?: string;
     animate?: boolean;
 }
+
 export const IconBox: React.FC<IconBoxProps> = ({
     icon,
-    gradient = "from-primary to-primary-600",
+    gradient = "from-primary to-primary/80",
     size = "md",
     className,
     animate = true,
 }) => {
     const sizeClasses = {
-        sm: "w-14 h-14",
-        md: "w-20 h-20",
-        lg: "w-24 h-24",
+        sm: "w-12 h-12",
+        md: "w-16 h-16",
+        lg: "w-20 h-20",
     };
+
     const iconSizes = {
-        sm: "w-7 h-7",
-        md: "w-10 h-10",
-        lg: "w-12 h-12",
+        sm: "w-6 h-6",
+        md: "w-8 h-8",
+        lg: "w-10 h-10",
     };
+
     return (
         <motion.div
             className={cn(
                 sizeClasses[size],
-                `rounded-3xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`,
+                `rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-sm`,
                 className,
             )}
-            whileHover={animate ? { scale: 1.1, rotate: 5 } : {}}
-            transition={{ duration: 0.3 }}
+            whileHover={animate ? { scale: 1.05 } : {}}
+            transition={{ duration: 0.2 }}
         >
             <div className={cn(iconSizes[size], "text-white")}>{icon}</div>
         </motion.div>
     );
 };
+
 interface FeatureListProps {
     features: string[];
     iconColor?: string;
     className?: string;
 }
+
 export const FeatureList: React.FC<FeatureListProps> = ({
     features,
-    iconColor = "text-emerald-500",
+    iconColor = "text-success-600",
     className,
 }) => {
     return (
-        <ul className={cn("space-y-4", className)} role="list">
+        <ul className={cn("space-y-3", className)} role="list">
             {features.map((feature: string, index: number) => (
                 <motion.li
                     key={index}
-                    className="flex items-center text-sm text-slate-700 leading-relaxed"
+                    className="flex items-center text-sm text-neutral-700 leading-relaxed"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
                 >
                     <svg
-                        className={cn("w-5 h-5 mr-4 flex-shrink-0", iconColor)}
+                        className={cn("w-5 h-5 mr-3 flex-shrink-0", iconColor)}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                     >
@@ -256,15 +264,17 @@ export const FeatureList: React.FC<FeatureListProps> = ({
         </ul>
     );
 };
+
 interface GradientTextProps {
     children: ReactNode;
     className?: string;
     gradient?: string;
 }
+
 export const GradientText: React.FC<GradientTextProps> = ({
     children,
     className,
-    gradient = "from-primary via-accent to-secondary",
+    gradient = "from-primary to-primary/80",
 }) => {
     return (
         <span
@@ -277,6 +287,7 @@ export const GradientText: React.FC<GradientTextProps> = ({
         </span>
     );
 };
+
 interface AnimatedCounterProps {
     from: number;
     to: number;
@@ -284,10 +295,11 @@ interface AnimatedCounterProps {
     suffix?: string;
     className?: string;
 }
+
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     from,
     to,
-    duration = 2,
+    duration = 1.5,
     suffix = "",
     className,
 }) => {
@@ -297,10 +309,10 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
         >
             <motion.span
-                initial={{ scale: 0.5 }}
+                initial={{ scale: 0.8 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration, ease: "easeOut" }}
@@ -311,29 +323,30 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
         </motion.span>
     );
 };
+
 interface FloatingElementProps {
     children: ReactNode;
     delay?: number;
     duration?: number;
     className?: string;
 }
+
 export const FloatingElement: React.FC<FloatingElementProps> = ({
     children,
     delay = 0,
-    duration = 6,
+    duration = 4,
     className,
 }) => {
     return (
         <motion.div
             className={className}
             animate={{
-                y: [0, -20, 0],
-                scale: [1, 1.05, 1],
-                opacity: [0.3, 0.6, 0.3],
+                y: [0, -10, 0],
+                opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
                 duration,
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 ease: "easeInOut",
                 delay,
             }}
@@ -342,55 +355,56 @@ export const FloatingElement: React.FC<FloatingElementProps> = ({
         </motion.div>
     );
 };
+
 export const fadeInUp = {
-    hidden: { opacity: 0, y: 80 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
+
 export const slideInLeft = {
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: -30 },
     visible: {
         opacity: 1,
         x: 0,
-        transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
+
 export const slideInRight = {
-    hidden: { opacity: 0, x: 100 },
+    hidden: { opacity: 0, x: 30 },
     visible: {
         opacity: 1,
         x: 0,
-        transition: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
+
 export const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.3,
+            staggerChildren: 0.1,
+            delayChildren: 0.1,
         },
     },
 };
+
 export const cardHover = {
     rest: {
         scale: 1,
         y: 0,
-        rotateY: 0,
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
     },
     hover: {
         scale: 1.02,
-        y: -8,
-        rotateY: 1,
-        boxShadow: "0 30px 60px rgba(0, 0, 0, 0.15)",
+        y: -4,
         transition: {
-            duration: 0.4,
-            ease: [0.25, 0.46, 0.45, 0.94],
+            duration: 0.2,
+            ease: "easeOut",
         },
     },
 };

@@ -22,6 +22,7 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
+
 export default function ServicesAdditional() {
     const additionalServices = [
         {
@@ -35,7 +36,7 @@ export default function ServicesAdditional() {
                 "Code compliance verification",
                 "Investment risk assessment",
             ],
-            gradient: "from-slate-500 to-slate-600",
+            gradient: "from-neutral-600 to-neutral-700",
             popular: false,
         },
         {
@@ -49,7 +50,7 @@ export default function ServicesAdditional() {
                 "Repair cost estimation",
                 "Market preparation strategy",
             ],
-            gradient: "from-emerald-500 to-emerald-600",
+            gradient: "from-success-500 to-success-600",
             popular: true,
         },
         {
@@ -63,7 +64,7 @@ export default function ServicesAdditional() {
                 "Warranty issue identification",
                 "Move-in confidence assurance",
             ],
-            gradient: "from-blue-500 to-blue-600",
+            gradient: "from-primary to-primary/80",
             popular: false,
         },
         {
@@ -77,7 +78,7 @@ export default function ServicesAdditional() {
                 "Safety compliance assessment",
                 "Fast turnaround service",
             ],
-            gradient: "from-green-500 to-green-600",
+            gradient: "from-success-500 to-success-600",
             popular: false,
         },
         {
@@ -91,7 +92,7 @@ export default function ServicesAdditional() {
                 "Detailed documentation",
                 "Quality assurance guarantee",
             ],
-            gradient: "from-orange-500 to-orange-600",
+            gradient: "from-neutral-600 to-neutral-700",
             popular: false,
         },
         {
@@ -105,7 +106,7 @@ export default function ServicesAdditional() {
                 "Treatment recommendations",
                 "Prevention strategy planning",
             ],
-            gradient: "from-red-500 to-red-600",
+            gradient: "from-primary to-primary/80",
             popular: false,
         },
         {
@@ -119,7 +120,7 @@ export default function ServicesAdditional() {
                 "Air quality testing",
                 "Health risk assessment",
             ],
-            gradient: "from-purple-500 to-purple-600",
+            gradient: "from-neutral-600 to-neutral-700",
             popular: true,
         },
         {
@@ -133,7 +134,7 @@ export default function ServicesAdditional() {
                 "Health risk evaluation",
                 "Mitigation system guidance",
             ],
-            gradient: "from-gray-500 to-gray-600",
+            gradient: "from-neutral-500 to-neutral-600",
             popular: false,
         },
         {
@@ -147,10 +148,11 @@ export default function ServicesAdditional() {
                 "Bacterial contamination testing",
                 "System functionality assessment",
             ],
-            gradient: "from-cyan-500 to-cyan-600",
+            gradient: "from-primary to-primary/80",
             popular: true,
         },
     ];
+
     return (
         <Section
             background="white"
@@ -163,10 +165,11 @@ export default function ServicesAdditional() {
                 subtitle="Advanced inspection services tailored to unique property needs and specific industry requirements"
                 titleGradient={true}
             />
+
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
                 className="grid-cards-3"
             >
@@ -178,7 +181,7 @@ export default function ServicesAdditional() {
                     >
                         <Card
                             hover={true}
-                            className={`card-premium group cursor-pointer relative overflow-hidden h-full ${service.popular ? "ring-2 ring-secondary/20" : ""}`}
+                            className={`card-premium group cursor-pointer relative overflow-hidden h-full ${service.popular ? "ring-2 ring-primary/20" : ""}`}
                             initial="rest"
                             whileHover="hover"
                             tabIndex={0}
@@ -186,36 +189,39 @@ export default function ServicesAdditional() {
                             aria-labelledby={`service-${index}-title`}
                         >
                             {service.popular && (
-                                <div className="absolute top-6 right-6 px-4 py-2 bg-gradient-to-r from-secondary to-secondary-600 text-white text-xs font-bold rounded-full z-10">
+                                <div className="absolute top-6 right-6 px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-white text-xs font-bold rounded-full z-10">
                                     Popular
                                 </div>
                             )}
+
                             <motion.div
                                 variants={cardHover}
                                 className="card-content h-full flex flex-col"
                             >
-                                <div className="mb-8 flex justify-center">
+                                <div className="mb-6 flex justify-center">
                                     <IconBox
                                         icon={
                                             <service.icon className="w-8 h-8" />
                                         }
                                         gradient={service.gradient}
                                         size="lg"
-                                        className="group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                                        className="group-hover:scale-105 transition-transform duration-200 shadow-sm"
                                     />
                                 </div>
+
                                 <div className="text-center flex-grow flex flex-col">
                                     <h3
                                         id={`service-${index}-title`}
-                                        className="text-xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                        className="text-xl font-bold text-neutral-900 mb-4 group-hover:text-primary transition-colors"
                                     >
                                         {service.title}
                                     </h3>
-                                    <p className="text-slate-600 mb-8 leading-relaxed text-base">
+                                    <p className="text-neutral-600 mb-6 leading-relaxed text-base">
                                         {service.description}
                                     </p>
+
                                     <ul
-                                        className="space-y-4 mb-8 flex-grow"
+                                        className="space-y-3 mb-6 flex-grow"
                                         role="list"
                                     >
                                         {service.features.map(
@@ -225,15 +231,16 @@ export default function ServicesAdditional() {
                                             ) => (
                                                 <li
                                                     key={featureIndex}
-                                                    className="flex items-center text-sm text-slate-700 leading-relaxed"
+                                                    className="flex items-center text-sm text-neutral-700 leading-relaxed"
                                                 >
-                                                    <ArrowRight className="w-4 h-4 text-secondary mr-3 flex-shrink-0" />
+                                                    <ArrowRight className="w-4 h-4 text-primary mr-3 flex-shrink-0" />
                                                     {feature}
                                                 </li>
                                             ),
                                         )}
                                     </ul>
-                                    <div className="flex items-center justify-center text-primary font-semibold text-sm group-hover:text-secondary transition-colors pt-6 border-t border-slate-100">
+
+                                    <div className="flex items-center justify-center text-primary font-semibold text-sm group-hover:text-primary transition-colors pt-4 border-t border-neutral-100">
                                         <span>Learn More</span>
                                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                     </div>

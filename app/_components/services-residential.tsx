@@ -20,6 +20,7 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
+
 export default function ServicesResidential() {
     const residentialAreas = [
         {
@@ -33,8 +34,8 @@ export default function ServicesResidential() {
                 "Ventilation system analysis",
                 "Insulation evaluation",
             ],
-            gradient: "from-red-500 to-red-600",
-            iconBg: "from-red-100 to-red-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
         {
             title: "Exterior Systems",
@@ -47,8 +48,8 @@ export default function ServicesResidential() {
                 "Exterior trim evaluation",
                 "Weather seal inspection",
             ],
-            gradient: "from-green-500 to-green-600",
-            iconBg: "from-green-100 to-green-200",
+            gradient: "from-success-500 to-success-600",
+            iconBg: "from-success-100 to-success-200",
         },
         {
             title: "Decks & Outdoor Structures",
@@ -61,8 +62,8 @@ export default function ServicesResidential() {
                 "Deck material assessment",
                 "Foundation attachment",
             ],
-            gradient: "from-blue-500 to-blue-600",
-            iconBg: "from-blue-100 to-blue-200",
+            gradient: "from-neutral-600 to-neutral-700",
+            iconBg: "from-neutral-100 to-neutral-200",
         },
         {
             title: "Grading & Drainage",
@@ -75,8 +76,8 @@ export default function ServicesResidential() {
                 "Water flow pattern analysis",
                 "Foundation protection assessment",
             ],
-            gradient: "from-cyan-500 to-cyan-600",
-            iconBg: "from-cyan-100 to-cyan-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
         {
             title: "Foundation & Basement",
@@ -89,8 +90,8 @@ export default function ServicesResidential() {
                 "Structural beam evaluation",
                 "Floor system assessment",
             ],
-            gradient: "from-purple-500 to-purple-600",
-            iconBg: "from-purple-100 to-purple-200",
+            gradient: "from-neutral-600 to-neutral-700",
+            iconBg: "from-neutral-100 to-neutral-200",
         },
         {
             title: "HVAC Systems",
@@ -103,8 +104,8 @@ export default function ServicesResidential() {
                 "Ductwork evaluation",
                 "Ventilation adequacy assessment",
             ],
-            gradient: "from-orange-500 to-orange-600",
-            iconBg: "from-orange-100 to-orange-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
         {
             title: "Plumbing Systems",
@@ -117,8 +118,8 @@ export default function ServicesResidential() {
                 "Fixture & faucet testing",
                 "Water pressure analysis",
             ],
-            gradient: "from-teal-500 to-teal-600",
-            iconBg: "from-teal-100 to-teal-200",
+            gradient: "from-neutral-600 to-neutral-700",
+            iconBg: "from-neutral-100 to-neutral-200",
         },
         {
             title: "Electrical Systems",
@@ -131,10 +132,11 @@ export default function ServicesResidential() {
                 "GFCI protection verification",
                 "Safety code compliance",
             ],
-            gradient: "from-yellow-500 to-yellow-600",
-            iconBg: "from-yellow-100 to-yellow-200",
+            gradient: "from-primary to-primary/80",
+            iconBg: "from-primary/10 to-primary/20",
         },
     ];
+
     return (
         <Section background="gray" aria-labelledby="residential-heading">
             <SectionHeader
@@ -144,10 +146,11 @@ export default function ServicesResidential() {
                 subtitle="Our comprehensive residential inspection covers every major system and component following InterNACHI Standards of Practice for thorough evaluation and your complete peace of mind"
                 titleGradient={true}
             />
+
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
                 className="grid-cards-3"
             >
@@ -170,28 +173,26 @@ export default function ServicesResidential() {
                                 variants={cardHover}
                                 className="card-content h-full flex flex-col"
                             >
-                                <div className="mb-8 flex justify-center">
+                                <div className="mb-6 flex justify-center">
                                     <IconBox
                                         icon={<area.icon className="w-8 h-8" />}
                                         gradient={area.iconBg}
                                         size="lg"
-                                        className="group-hover:scale-110 transition-transform duration-300"
+                                        className="group-hover:scale-105 transition-transform duration-200"
                                     />
                                 </div>
+
                                 <div className="text-center flex-grow flex flex-col">
                                     <h3
                                         id={`area-${index}-title`}
-                                        className="text-xl font-bold text-slate-800 mb-6 group-hover:text-primary transition-colors"
+                                        className="text-xl font-bold text-neutral-900 mb-4 group-hover:text-primary transition-colors"
                                     >
                                         {area.title}
                                     </h3>
-                                    <p className="text-slate-600 mb-8 leading-relaxed flex-grow text-base">
+                                    <p className="text-neutral-600 mb-6 leading-relaxed flex-grow text-base">
                                         {area.description}
                                     </p>
-                                    <FeatureList
-                                        features={area.details}
-                                        iconColor="text-emerald-500"
-                                    />
+                                    <FeatureList features={area.details} />
                                 </div>
                             </motion.div>
                         </Card>

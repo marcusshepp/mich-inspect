@@ -8,29 +8,28 @@ export default function HomeCTA() {
     return (
         <Section
             background="dark"
-            className="py-24 px-6 bg-gradient-to-br from-secondary via-secondary-600 to-secondary-700 text-white relative overflow-hidden"
+            className="py-24 px-6 bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white relative overflow-hidden"
             aria-labelledby="cta-heading"
         >
             <FloatingElement
                 delay={0}
-                duration={8}
-                className="absolute top-20 right-20 w-96 h-96 bg-white/20 rounded-full blur-3xl"
+                duration={6}
+                className="absolute top-20 right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"
             />
-
             <FloatingElement
                 delay={2}
-                duration={6}
-                className="absolute bottom-20 left-20 w-72 h-72 bg-accent/30 rounded-full blur-2xl"
+                duration={4}
+                className="absolute bottom-20 left-20 w-48 h-48 bg-white/5 rounded-full blur-2xl"
             />
 
             <div className="text-center relative z-10">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     variants={fadeInUp}
                 >
-                    <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8 border border-white/30">
+                    <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-sm font-medium mb-8 border border-white/20">
                         <Phone className="w-4 h-4" />
                         <span>Ready to Get Started?</span>
                     </motion.div>
@@ -44,7 +43,7 @@ export default function HomeCTA() {
                         <span className="block text-white/90">Today</span>
                     </motion.h2>
 
-                    <p className="text-xl text-secondary-100 mb-12 max-w-4xl mx-auto leading-relaxed">
+                    <p className="text-xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
                         Don't let hidden issues become costly surprises. Get
                         your comprehensive home inspection scheduled today and
                         make your home purchase with complete confidence.
@@ -54,7 +53,7 @@ export default function HomeCTA() {
                         <Button
                             variant="ghost"
                             size="lg"
-                            className="bg-white text-secondary hover:bg-slate-100 px-10 py-5 text-xl font-bold shadow-2xl"
+                            className="bg-white text-primary hover:bg-white/90 px-10 py-5 text-xl font-bold shadow-2xl"
                             as="a"
                             href={`tel:${contactInfo.phone}`}
                             aria-label={`Call us at ${contactInfo.phone} to schedule inspection`}
@@ -62,11 +61,10 @@ export default function HomeCTA() {
                             <Phone className="w-6 h-6" />
                             {contactInfo.phone}
                         </Button>
-
                         <Button
                             variant="outline"
                             size="lg"
-                            className="border-2 border-white text-white hover:bg-white hover:text-secondary px-10 py-5 text-xl font-bold"
+                            className="border-2 border-white text-white hover:bg-white hover:text-primary px-10 py-5 text-xl font-bold"
                             as="a"
                             href={`mailto:${contactInfo.email}`}
                             aria-label={`Email us at ${contactInfo.email}`}
@@ -77,15 +75,15 @@ export default function HomeCTA() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6 text-center">
-                        <div className="flex items-center justify-center gap-2 text-secondary-100">
+                        <div className="flex items-center justify-center gap-2 text-white/80">
                             <Clock className="w-5 h-5 text-white" />
                             <span className="font-medium">24-Hour Reports</span>
                         </div>
-                        <div className="flex items-center justify-center gap-2 text-secondary-100">
+                        <div className="flex items-center justify-center gap-2 text-white/80">
                             <Camera className="w-5 h-5 text-white" />
                             <span className="font-medium">Thermal Imaging</span>
                         </div>
-                        <div className="flex items-center justify-center gap-2 text-secondary-100">
+                        <div className="flex items-center justify-center gap-2 text-white/80">
                             <Shield className="w-5 h-5 text-white" />
                             <span className="font-medium">Veteran-Owned</span>
                         </div>
@@ -96,7 +94,7 @@ export default function HomeCTA() {
                         initial={{ opacity: 0.8 }}
                         whileHover={{ opacity: 1, scale: 1.02 }}
                     >
-                        <div className="flex items-center justify-center gap-2 text-secondary-100 mb-2">
+                        <div className="flex items-center justify-center gap-2 text-white/80 mb-2">
                             <MapPin className="w-4 h-4" />
                             <span className="font-medium">Service Areas:</span>
                         </div>
@@ -104,7 +102,7 @@ export default function HomeCTA() {
                             {contactInfo.serviceAreas.slice(0, 4).join(" • ")} &
                             more
                         </p>
-                        <p className="text-secondary-100 mt-2">
+                        <p className="text-white/80 mt-2">
                             <strong>Same-day scheduling available</strong> •
                             Digital reports within 24 hours
                         </p>

@@ -16,6 +16,7 @@ import {
     staggerContainer,
     cardHover,
 } from "components/shared";
+
 export default function ServicesTechnology() {
     const technologyHighlights = [
         {
@@ -29,7 +30,7 @@ export default function ServicesTechnology() {
                 "Electrical hot spot detection",
                 "Structural anomaly visualization",
             ],
-            gradient: "from-red-500 to-red-600",
+            gradient: "from-primary to-primary/80",
         },
         {
             title: "Comprehensive Digital Reports",
@@ -42,7 +43,7 @@ export default function ServicesTechnology() {
                 "Detailed findings documentation",
                 "Actionable repair recommendations",
             ],
-            gradient: "from-blue-500 to-blue-600",
+            gradient: "from-neutral-700 to-neutral-800",
         },
         {
             title: "Professional Moisture Detection",
@@ -55,25 +56,27 @@ export default function ServicesTechnology() {
                 "Structural moisture analysis",
                 "HVAC humidity evaluation",
             ],
-            gradient: "from-cyan-500 to-cyan-600",
+            gradient: "from-primary to-primary/80",
         },
     ];
+
     return (
         <Section background="dark" aria-labelledby="technology-heading">
             <SectionHeader
                 badge="Advanced Technology"
                 badgeIcon={
-                    <div className="bg-white/10 backdrop-blur-sm rounded-full p-1">
+                    <div className="bg-white/10 rounded-full p-1">
                         <Lightbulb className="w-3 h-3" />
                     </div>
                 }
                 title="State-of-the-Art Inspection Technology"
                 subtitle="We utilize cutting-edge equipment and advanced technology to provide the most comprehensive and accurate inspections available in the industry"
             />
+
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
                 className="grid-cards-3"
             >
@@ -85,7 +88,7 @@ export default function ServicesTechnology() {
                     >
                         <Card
                             hover={true}
-                            className="glass rounded-3xl border border-white/20 backdrop-blur-lg group cursor-pointer h-full bg-white/5 hover:bg-white/10 shadow-2xl hover:shadow-white/10"
+                            className="glass-dark rounded-2xl border border-white/20 group cursor-pointer h-full bg-white/5 hover:bg-white/10 shadow-lg hover:shadow-white/5"
                             initial="rest"
                             whileHover="hover"
                             role="article"
@@ -95,26 +98,29 @@ export default function ServicesTechnology() {
                                 variants={cardHover}
                                 className="card-content-lg h-full flex flex-col text-center"
                             >
-                                <div className="mb-8 flex justify-center">
+                                <div className="mb-6 flex justify-center">
                                     <IconBox
                                         icon={
                                             <tech.icon className="w-10 h-10" />
                                         }
                                         gradient={tech.gradient}
                                         size="lg"
-                                        className="group-hover:scale-110 transition-transform duration-300 shadow-2xl"
+                                        className="group-hover:scale-105 transition-transform duration-200 shadow-lg"
                                     />
                                 </div>
+
                                 <h3
                                     id={`tech-${index}-title`}
-                                    className="text-2xl font-bold mb-6 group-hover:text-secondary transition-colors text-white"
+                                    className="text-2xl font-bold mb-4 group-hover:text-white transition-colors text-white"
                                 >
                                     {tech.title}
                                 </h3>
-                                <p className="text-slate-300 leading-relaxed mb-8 group-hover:text-white transition-colors flex-grow text-base">
+
+                                <p className="text-neutral-300 leading-relaxed mb-6 group-hover:text-white transition-colors flex-grow text-base">
                                     {tech.description}
                                 </p>
-                                <ul className="space-y-4" role="list">
+
+                                <ul className="space-y-3" role="list">
                                     {tech.features.map(
                                         (
                                             feature: string,
@@ -122,9 +128,9 @@ export default function ServicesTechnology() {
                                         ) => (
                                             <li
                                                 key={featureIndex}
-                                                className="flex items-center text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed"
+                                                className="flex items-center text-sm text-neutral-300 group-hover:text-white transition-colors leading-relaxed"
                                             >
-                                                <CheckCircle className="w-5 h-5 text-secondary mr-4 flex-shrink-0" />
+                                                <CheckCircle className="w-5 h-5 text-primary mr-4 flex-shrink-0" />
                                                 {feature}
                                             </li>
                                         ),

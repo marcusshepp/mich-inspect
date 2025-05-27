@@ -6,11 +6,11 @@ import {
     Section,
     SectionHeader,
     Card,
-    FeatureList,
     fadeInUp,
     staggerContainer,
     cardHover,
 } from "components/shared";
+
 export default function AboutTeam() {
     const teamMembers = [
         {
@@ -25,7 +25,7 @@ export default function AboutTeam() {
                 "Military Veteran",
                 "10+ Years Experience",
             ],
-            gradient: "from-primary to-primary-600",
+            gradient: "from-primary to-primary/80",
         },
         {
             name: "Senior Inspector #2",
@@ -39,7 +39,7 @@ export default function AboutTeam() {
                 "Code Expertise",
                 "Quality Assurance",
             ],
-            gradient: "from-secondary to-secondary-600",
+            gradient: "from-neutral-700 to-neutral-800",
         },
         {
             name: "Certified Inspector #3",
@@ -53,7 +53,7 @@ export default function AboutTeam() {
                 "Energy Efficiency",
                 "Safety Standards",
             ],
-            gradient: "from-accent to-accent-600",
+            gradient: "from-primary to-primary/80",
         },
         {
             name: "Water Systems Expert #4",
@@ -67,9 +67,10 @@ export default function AboutTeam() {
                 "Moisture Detection",
                 "Leak Analysis",
             ],
-            gradient: "from-emerald-500 to-emerald-600",
+            gradient: "from-neutral-700 to-neutral-800",
         },
     ];
+
     return (
         <Section background="white" aria-labelledby="team-heading">
             <SectionHeader
@@ -79,10 +80,11 @@ export default function AboutTeam() {
                 subtitle="Each team member brings specialized expertise and unwavering commitment to protecting your investment"
                 titleGradient={true}
             />
+
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
                 className="grid-cards-4"
             >
@@ -109,17 +111,18 @@ export default function AboutTeam() {
                                     <img
                                         src={member.image}
                                         alt={`Professional headshot of ${member.name}, ${member.title} at ${contactInfo.company}`}
-                                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                                        className="w-full h-72 object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                     <div
-                                        className={`absolute inset-0 bg-gradient-to-t ${member.gradient}/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                                        className={`absolute inset-0 bg-gradient-to-t ${member.gradient}/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                                     />
                                 </div>
+
                                 <div className="card-content flex-grow flex flex-col">
                                     <div className="text-center mb-6">
                                         <h3
                                             id={`team-member-${index}-name`}
-                                            className="text-xl font-bold text-slate-800 mb-2 group-hover:text-primary transition-colors"
+                                            className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary transition-colors"
                                         >
                                             {member.name}
                                         </h3>
@@ -128,10 +131,11 @@ export default function AboutTeam() {
                                         >
                                             {member.title}
                                         </p>
-                                        <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                                        <p className="text-neutral-600 text-sm leading-relaxed mb-6">
                                             {member.description}
                                         </p>
                                     </div>
+
                                     <div className="space-y-3 flex-grow">
                                         {member.specialties.map(
                                             (
@@ -140,9 +144,9 @@ export default function AboutTeam() {
                                             ) => (
                                                 <div
                                                     key={specialtyIndex}
-                                                    className="flex items-center text-xs text-slate-600"
+                                                    className="flex items-center text-xs text-neutral-600"
                                                 >
-                                                    <CheckCircle className="w-4 h-4 text-emerald-500 mr-3 flex-shrink-0" />
+                                                    <CheckCircle className="w-4 h-4 text-success-600 mr-3 flex-shrink-0" />
                                                     {specialty}
                                                 </div>
                                             ),
