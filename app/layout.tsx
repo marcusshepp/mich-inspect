@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { contactInfo } from "@/lib/contact-info";
 import Header from "./components/Header";
+import FloatingActions from "components/ui/floating-actions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <main id="main-content" className="min-h-screen bg-background">
                     {children}
                 </main>
+                <FloatingActions />
             </body>
         </html>
     );

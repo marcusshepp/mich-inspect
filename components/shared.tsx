@@ -106,7 +106,7 @@ export const Section: React.FC<SectionProps> = ({
         white: "bg-white",
         gray: "bg-gray-50",
         gradient: "bg-gradient-to-br from-gray-50 to-white",
-        dark: "bg-neutral-900 text-white",
+        dark: "bg-secondary-900 text-white",
     };
 
     return (
@@ -156,7 +156,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         >
             {badge && (
                 <motion.div
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-accent-50 border border-accent-200 rounded-full text-accent-700 text-sm font-medium mb-6"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -175,7 +175,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 {title}
             </h2>
             {subtitle && (
-                <p className="text-lg text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg text-secondary-600 max-w-3xl mx-auto leading-relaxed">
                     {subtitle}
                 </p>
             )}
@@ -193,7 +193,7 @@ interface IconBoxProps {
 
 export const IconBox: React.FC<IconBoxProps> = ({
     icon,
-    gradient = "from-primary to-primary/80",
+    gradient = "from-accent-500 to-tertiary-500",
     size = "md",
     className,
     animate = true,
@@ -233,7 +233,7 @@ interface FeatureListProps {
 
 export const FeatureList: React.FC<FeatureListProps> = ({
     features,
-    iconColor = "text-success-600",
+    iconColor = "text-tertiary-600",
     className,
 }) => {
     return (
@@ -241,7 +241,7 @@ export const FeatureList: React.FC<FeatureListProps> = ({
             {features.map((feature: string, index: number) => (
                 <motion.li
                     key={index}
-                    className="flex items-center text-sm text-neutral-700 leading-relaxed"
+                    className="flex items-center text-sm text-secondary-700 leading-relaxed"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -274,7 +274,7 @@ interface GradientTextProps {
 export const GradientText: React.FC<GradientTextProps> = ({
     children,
     className,
-    gradient = "from-primary to-primary/80",
+    gradient = "from-primary via-accent-600 to-tertiary",
 }) => {
     return (
         <span

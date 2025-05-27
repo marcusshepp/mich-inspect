@@ -51,7 +51,7 @@ export default function HomeHero() {
                 className="absolute bottom-40 left-20 w-24 h-24 bg-white/5 rounded-full blur-xl"
             />
 
-            <div className="container-custom relative z-10">
+            <div className="container-custom relative z-10 mt-20">
                 <div className="grid lg:grid-cols-12 gap-12 items-center">
                     <motion.div
                         initial="hidden"

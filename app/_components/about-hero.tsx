@@ -30,7 +30,7 @@ export default function AboutHero() {
                 className="absolute top-20 right-20 w-32 h-32 bg-white/10 rounded-full blur-2xl"
             />
 
-            <div className="container-custom relative z-10">
+            <div className="container-custom relative z-10 mb-10 mt-20">
                 <div className="grid lg:grid-cols-12 gap-12 items-center">
                     <motion.div
                         initial="hidden"
