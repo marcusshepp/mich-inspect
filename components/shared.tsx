@@ -2,7 +2,6 @@
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "lib/utils";
 import { ReactNode, forwardRef } from "react";
-
 interface ButtonProps extends HTMLMotionProps<"button"> {
     variant?: "primary" | "secondary" | "outline" | "ghost";
     size?: "sm" | "md" | "lg";
@@ -10,7 +9,6 @@ interface ButtonProps extends HTMLMotionProps<"button"> {
     as?: "button" | "a";
     href?: string;
 }
-
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (
         {
@@ -24,7 +22,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         },
         ref,
     ) => {
-        const baseClasses = "btn";
+        const baseClasses: string = "btn";
         const variantClasses = {
             primary: "btn-primary",
             secondary: "btn-secondary",
@@ -36,9 +34,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             md: "px-6 py-3 text-base",
             lg: "px-8 py-4 text-lg",
         };
-
         const Component = as === "a" ? motion.a : motion.button;
-
         return (
             <Component
                 ref={ref}
@@ -60,12 +56,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
 );
 Button.displayName = "Button";
-
 interface CardProps extends HTMLMotionProps<"div"> {
     hover?: boolean;
     children: ReactNode;
 }
-
 export const Card = forwardRef<HTMLDivElement, CardProps>(
     ({ hover = true, className, children, ...props }, ref) => {
         return (
@@ -88,27 +82,24 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     },
 );
 Card.displayName = "Card";
-
 interface SectionProps {
     children: ReactNode;
     className?: string;
     id?: string;
     background?: "white" | "gray" | "gradient" | "dark";
 }
-
 export const Section: React.FC<SectionProps> = ({
     children,
     className,
     id,
     background = "white",
-}) => {
+}: SectionProps) => {
     const backgroundClasses = {
         white: "bg-white",
         gray: "bg-gray-50",
         gradient: "bg-gradient-to-br from-gray-50 to-white",
         dark: "bg-secondary-900 text-white",
     };
-
     return (
         <section
             id={id}
@@ -122,7 +113,6 @@ export const Section: React.FC<SectionProps> = ({
         </section>
     );
 };
-
 interface SectionHeaderProps {
     badge?: string;
     badgeIcon?: ReactNode;
@@ -132,7 +122,6 @@ interface SectionHeaderProps {
     centered?: boolean;
     className?: string;
 }
-
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
     badge,
     badgeIcon,
@@ -141,7 +130,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     titleGradient = false,
     centered = true,
     className,
-}) => {
+}: SectionHeaderProps) => {
     return (
         <motion.div
             className={cn(
@@ -166,12 +155,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                     <span>{badge}</span>
                 </motion.div>
             )}
-            <h2
-                className={cn(
-                    "text-4xl lg:text-5xl font-bold mb-6 leading-tight",
-                    titleGradient ? "gradient-text" : "text-neutral-900",
-                )}
-            >
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-neutral-900">
                 {title}
             </h2>
             {subtitle && (
@@ -182,7 +166,6 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </motion.div>
     );
 };
-
 interface IconBoxProps {
     icon: ReactNode;
     gradient?: string;
@@ -190,26 +173,23 @@ interface IconBoxProps {
     className?: string;
     animate?: boolean;
 }
-
 export const IconBox: React.FC<IconBoxProps> = ({
     icon,
     gradient = "from-accent-500 to-tertiary-500",
     size = "md",
     className,
     animate = true,
-}) => {
+}: IconBoxProps) => {
     const sizeClasses = {
         sm: "w-12 h-12",
         md: "w-16 h-16",
         lg: "w-20 h-20",
     };
-
     const iconSizes = {
         sm: "w-6 h-6",
         md: "w-8 h-8",
         lg: "w-10 h-10",
     };
-
     return (
         <motion.div
             className={cn(
@@ -224,18 +204,16 @@ export const IconBox: React.FC<IconBoxProps> = ({
         </motion.div>
     );
 };
-
 interface FeatureListProps {
     features: string[];
     iconColor?: string;
     className?: string;
 }
-
 export const FeatureList: React.FC<FeatureListProps> = ({
     features,
     iconColor = "text-tertiary-600",
     className,
-}) => {
+}: FeatureListProps) => {
     return (
         <ul className={cn("space-y-3", className)} role="list">
             {features.map((feature: string, index: number) => (
@@ -264,18 +242,16 @@ export const FeatureList: React.FC<FeatureListProps> = ({
         </ul>
     );
 };
-
 interface GradientTextProps {
     children: ReactNode;
     className?: string;
     gradient?: string;
 }
-
 export const GradientText: React.FC<GradientTextProps> = ({
     children,
     className,
     gradient = "from-primary via-accent-600 to-tertiary",
-}) => {
+}: GradientTextProps) => {
     return (
         <span
             className={cn(
@@ -287,7 +263,6 @@ export const GradientText: React.FC<GradientTextProps> = ({
         </span>
     );
 };
-
 interface AnimatedCounterProps {
     from: number;
     to: number;
@@ -295,14 +270,13 @@ interface AnimatedCounterProps {
     suffix?: string;
     className?: string;
 }
-
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     from,
     to,
     duration = 1.5,
     suffix = "",
     className,
-}) => {
+}: AnimatedCounterProps) => {
     return (
         <motion.span
             className={className}
@@ -323,20 +297,18 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
         </motion.span>
     );
 };
-
 interface FloatingElementProps {
     children: ReactNode;
     delay?: number;
     duration?: number;
     className?: string;
 }
-
 export const FloatingElement: React.FC<FloatingElementProps> = ({
     children,
     delay = 0,
     duration = 4,
     className,
-}) => {
+}: FloatingElementProps) => {
     return (
         <motion.div
             className={className}
@@ -355,7 +327,6 @@ export const FloatingElement: React.FC<FloatingElementProps> = ({
         </motion.div>
     );
 };
-
 export const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -364,7 +335,6 @@ export const fadeInUp = {
         transition: { duration: 0.4, ease: "easeOut" },
     },
 };
-
 export const slideInLeft = {
     hidden: { opacity: 0, x: -30 },
     visible: {
@@ -373,7 +343,6 @@ export const slideInLeft = {
         transition: { duration: 0.4, ease: "easeOut" },
     },
 };
-
 export const slideInRight = {
     hidden: { opacity: 0, x: 30 },
     visible: {
@@ -382,7 +351,6 @@ export const slideInRight = {
         transition: { duration: 0.4, ease: "easeOut" },
     },
 };
-
 export const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -393,7 +361,6 @@ export const staggerContainer = {
         },
     },
 };
-
 export const cardHover = {
     rest: {
         scale: 1,

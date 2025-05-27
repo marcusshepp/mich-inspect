@@ -4,29 +4,24 @@ import { Phone, X, Shield, Award } from "lucide-react";
 import { contactInfo } from "@/lib/contact-info";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 interface NavigationItem {
     name: string;
     href: string;
 }
-
 const navigationItems: NavigationItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
 ];
-
 interface MobileNavigationProps {
     isMobileMenuOpen: boolean;
     closeMobileMenu: () => void;
 }
-
 export default function MobileNavigation({
     isMobileMenuOpen,
     closeMobileMenu,
 }: MobileNavigationProps) {
     const pathname: string = usePathname();
-
     const mobileMenuVariants = {
         hidden: {
             opacity: 0,
@@ -52,7 +47,6 @@ export default function MobileNavigation({
             },
         },
     };
-
     const mobileItemVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: {
@@ -66,7 +60,6 @@ export default function MobileNavigation({
             transition: { duration: 0.15 },
         },
     };
-
     return (
         <AnimatePresence mode="wait">
             {isMobileMenuOpen && (
@@ -85,10 +78,9 @@ export default function MobileNavigation({
                         className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/90"
                         onClick={closeMobileMenu}
                     />
-
                     <motion.div
                         variants={mobileMenuVariants}
-                        className="relative flex flex-col items-center justify-center h-full px-6"
+                        className="relative flex flex-col items-center justify-center h-full px-8"
                     >
                         <motion.button
                             variants={mobileItemVariants}
@@ -100,17 +92,15 @@ export default function MobileNavigation({
                         >
                             <X className="w-6 h-6" />
                         </motion.button>
-
                         <motion.div
                             variants={mobileItemVariants}
-                            className="text-center mb-12"
+                            className="text-center mb-16"
                         >
                             <div className="flex items-center justify-center gap-4 mb-4">
                                 <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center">
                                     <Shield className="w-8 h-8 text-white" />
                                 </div>
                             </div>
-
                             <motion.h2 className="text-3xl font-bold text-white mb-2">
                                 {contactInfo.company}
                             </motion.h2>
@@ -124,9 +114,8 @@ export default function MobileNavigation({
                                 </span>
                             </div>
                         </motion.div>
-
                         <motion.nav
-                            className="flex flex-col items-center space-y-4 mb-12"
+                            className="flex flex-col items-center space-y-8 mb-16 w-full max-w-sm"
                             role="navigation"
                             aria-label="Mobile navigation"
                         >
@@ -136,15 +125,17 @@ export default function MobileNavigation({
                                         key={item.name}
                                         variants={mobileItemVariants}
                                         custom={index}
+                                        className="w-full"
                                     >
                                         <motion.div
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
+                                            className="w-full"
                                         >
                                             <Link
                                                 href={item.href}
                                                 onClick={closeMobileMenu}
-                                                className={`text-2xl font-semibold transition-all duration-300 px-8 py-4 rounded-2xl ${
+                                                className={`w-full text-2xl font-semibold transition-all duration-300 px-12 py-6 rounded-2xl block text-center ${
                                                     pathname === item.href
                                                         ? "text-primary bg-white/15 border border-white/30 shadow-lg"
                                                         : "text-white hover:text-white/80 hover:bg-white/10 border border-transparent hover:border-white/20"
@@ -157,14 +148,13 @@ export default function MobileNavigation({
                                 ),
                             )}
                         </motion.nav>
-
                         <motion.div
                             variants={mobileItemVariants}
-                            className="text-center space-y-6"
+                            className="text-center space-y-6 w-full max-w-sm"
                         >
                             <motion.a
                                 href={`tel:${contactInfo.phone}`}
-                                className="flex items-center justify-center space-x-4 text-white hover:text-white/80 transition-colors px-8 py-4 rounded-2xl hover:bg-white/10 border border-white/20"
+                                className="flex items-center justify-center space-x-4 text-white hover:text-white/80 transition-colors px-8 py-4 rounded-2xl hover:bg-white/10 border border-white/20 w-full"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
@@ -180,8 +170,7 @@ export default function MobileNavigation({
                                     </div>
                                 </div>
                             </motion.a>
-
-                            <motion.p className="text-white/70 text-sm max-w-xs">
+                            <motion.p className="text-white/70 text-sm max-w-xs mx-auto">
                                 Serving{" "}
                                 {contactInfo.serviceAreas
                                     .slice(0, 3)
