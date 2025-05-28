@@ -48,7 +48,7 @@ export default function ServicesHero() {
                     className="text-center max-w-5xl mx-auto"
                 >
                     <motion.div variants={fadeInUp} className="mb-6">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 text-white text-sm font-medium">
+                        <div className="mt-20 inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 text-white text-sm font-medium">
                             <Award className="w-4 h-4" />
                             <span>
                                 InterNACHI Standards • Advanced Technology

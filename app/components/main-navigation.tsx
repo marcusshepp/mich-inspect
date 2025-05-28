@@ -2,26 +2,21 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 interface NavigationItem {
     name: string;
     href: string;
 }
-
 const navigationItems: NavigationItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Schedule Inspection", href: "/schedule-inspection" },
 ];
-
 interface MainNavigationProps {
     isScrolled: boolean;
 }
-
 export default function MainNavigation({ isScrolled }: MainNavigationProps) {
     const pathname: string = usePathname();
-
     const itemVariants = {
         hidden: { opacity: 0, y: -20 },
         visible: {
@@ -30,7 +25,6 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
             transition: { duration: 0.4, ease: "easeOut" },
         },
     };
-
     return (
         <motion.nav
             variants={itemVariants}
@@ -49,10 +43,10 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                         className={`relative text-base font-medium transition-all duration-300 px-4 py-2.5 rounded-xl ${
                             pathname === item.href
                                 ? isScrolled
-                                    ? "text-primary bg-primary/10 shadow-sm border border-primary/20"
+                                    ? "text-white bg-primary shadow-sm border border-primary/20"
                                     : "text-white bg-white/15 shadow-lg border border-white/20"
                                 : isScrolled
-                                  ? "text-neutral-700 hover:text-primary hover:bg-primary/5"
+                                  ? "text-neutral-700 hover:text-white hover:bg-primary"
                                   : "text-white/90 hover:text-white hover:bg-white/10"
                         }`}
                     >
@@ -60,9 +54,7 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                         {pathname === item.href && (
                             <motion.div
                                 layoutId="activeTab"
-                                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
-                                    isScrolled ? "bg-primary" : "bg-white"
-                                }`}
+                                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white"
                                 initial={false}
                                 transition={{
                                     type: "spring",

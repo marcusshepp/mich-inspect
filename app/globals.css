@@ -63,6 +63,7 @@
         -moz-osx-font-smoothing: grayscale;
         overscroll-behavior: none;
         -webkit-overflow-scrolling: touch;
+        background-color: rgb(255, 255, 255);
     }
     body {
         @apply bg-background text-foreground font-sans;
@@ -73,6 +74,18 @@
         -webkit-overflow-scrolling: touch;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
+        background-color: rgb(255, 255, 255);
+        will-change: auto;
+    }
+    main {
+        background-color: rgb(255, 255, 255);
+        min-height: 100vh;
+    }
+    section {
+        background-color: inherit;
+        will-change: auto;
+    }
+    div {
     }
     @media (max-width: 768px) {
         html,
@@ -80,6 +93,7 @@
             -webkit-overflow-scrolling: touch;
             overscroll-behavior-y: none;
             -webkit-text-size-adjust: 100%;
+            background-color: rgb(255, 255, 255);
         }
         body {
             overscroll-behavior: contain;
@@ -144,12 +158,14 @@
     }
     .card {
         @apply bg-card text-card-foreground rounded-2xl border border-gray-200 shadow-sm transition-shadow duration-200;
+        background-color: rgb(255, 255, 255);
     }
     .card-hover {
         @apply hover:shadow-md;
     }
     .card-premium {
         @apply bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden;
+        background-color: rgb(255, 255, 255);
     }
     .card-content {
         @apply p-6 h-full flex flex-col;
@@ -163,10 +179,12 @@
     .glass {
         background: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8px);
     }
     .glass-dark {
         background: rgba(0, 0, 0, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
     }
     .section-padding {
         @apply px-6 sm:px-8 lg:px-12;
