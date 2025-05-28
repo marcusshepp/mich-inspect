@@ -137,8 +137,8 @@ export default function MobileNavigation({
                                                 onClick={closeMobileMenu}
                                                 className={`w-full text-2xl font-semibold transition-all duration-300 px-12 py-6 rounded-2xl block text-center ${
                                                     pathname === item.href
-                                                        ? "text-primary bg-white/15 border border-white/30 shadow-lg"
-                                                        : "text-white hover:text-white/80 hover:bg-white/10 border border-transparent hover:border-white/20"
+                                                        ? "text-white bg-white/15 border border-white/30 shadow-lg"
+                                                        : "text-white hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20"
                                                 }`}
                                             >
                                                 {item.name}
@@ -154,7 +154,7 @@ export default function MobileNavigation({
                         >
                             <motion.a
                                 href={`tel:${contactInfo.phone}`}
-                                className="flex items-center justify-center space-x-4 text-white hover:text-white/80 transition-colors px-8 py-4 rounded-2xl hover:bg-white/10 border border-white/20 w-full"
+                                className="flex items-center justify-center space-x-4 text-white hover:text-white transition-colors px-8 py-4 rounded-2xl hover:bg-white/10 border border-white/20 w-full"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
