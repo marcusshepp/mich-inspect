@@ -16,7 +16,7 @@ export default function HomeStats() {
     const trustIndicators = [
         {
             number: "3,500+",
-            label: "Inspections Completed",
+            label: "Inspections",
             icon: CheckCircle,
             color: "text-success-600",
             bgColor: "from-success-100 to-success-200",

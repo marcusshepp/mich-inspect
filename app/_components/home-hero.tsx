@@ -94,7 +94,7 @@ export default function HomeHero() {
                             </span>
                             .
                             <span className="block mt-4 text-lg">
-                                ✓ 3,500+ inspections completed
+                                ✓ 3,500+ inspections
                                 <br />
                                 ✓ 24-hour digital reports with photos
                                 <br />✓ Advanced thermal imaging technology
