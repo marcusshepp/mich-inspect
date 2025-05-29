@@ -14,9 +14,8 @@
         --primary-foreground: 255 255 255;
         --secondary: 15 23 42;
         --secondary-foreground: 255 255 255;
-        --muted: 248 250 252;
-        --muted-foreground: 100 116 139;
-        --accent: 14 165 233;
+        --muted: 248 250 252;        --muted-foreground: 100 116 139;
+        --accent: 115 16 23;
         --accent-foreground: 255 255 255;
         --destructive: 239 68 68;
         --destructive-foreground: 255 255 255;
@@ -36,9 +35,8 @@
         --primary-foreground: 255 255 255;
         --secondary: 2 6 23;
         --secondary-foreground: 255 255 255;
-        --muted: 30 41 59;
-        --muted-foreground: 148 163 184;
-        --accent: 14 165 233;
+        --muted: 30 41 59;        --muted-foreground: 148 163 184;
+        --accent: 115 16 23;
         --accent-foreground: 255 255 255;
         --destructive: 248 113 113;
         --destructive-foreground: 0 0 0;
@@ -70,10 +68,11 @@
         line-height: 1.6;
         overflow-x: hidden;
         min-height: 100vh;
-        overscroll-behavior: none;
-        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: none;        -webkit-overflow-scrolling: touch;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         background-color: rgb(255, 255, 255);
         will-change: auto;
     }
@@ -245,7 +244,7 @@
     background: rgb(100 116 139);
 }
 ::selection {
-    background: rgba(14, 165, 233, 0.2);
+    background: rgba(115, 16, 23, 0.2);
     color: rgb(0 0 0);
 }
 .skip-link {
@@ -263,6 +262,216 @@
 }
 .skip-link:focus {
     top: 6px;
+}
+/* Comprehensive prevention of yellow focus outlines during fast scrolling */
+*,
+*::before,
+*::after {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Aggressive reset of ALL possible focus states */
+*:focus,
+*:focus-within,
+*:active,
+*:hover,
+*:target {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    border-color: inherit !important;
+}
+
+/* Remove webkit focus rings completely */
+::-webkit-focus-ring,
+::-webkit-focus-ring-color {
+    outline: none !important;
+    color: transparent !important;
+}
+
+/* Target ALL possible interactive elements */
+a, a:focus, a:active, a:hover,
+button, button:focus, button:active, button:hover,
+input, input:focus, input:active,
+textarea, textarea:focus, textarea:active,
+select, select:focus, select:active,
+div, div:focus, div:active,
+span, span:focus, span:active,
+svg, svg:focus, svg:active,
+path, path:focus, path:active {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Specific overrides for navigation elements */
+nav *, nav *:focus, nav *:active, nav *:hover,
+header *, header *:focus, header *:active, header *:hover {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Force override for any remaining yellow borders */
+[style*="border"], [style*="outline"] {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Custom focus styles for accessibility - only apply to interactive elements with focus-visible */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid rgb(115 16 23 / 0.5) !important;
+    outline-offset: 2px !important;
+    border-color: inherit !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Prevent any selection highlights during fast scrolling */
+::-moz-selection {
+    background: rgba(115, 16, 23, 0.2);
+    color: rgb(0 0 0);
+}
+
+::selection {
+    background: rgba(115, 16, 23, 0.2);
+    color: rgb(0 0 0);
+}
+
+/* Ensure the scroll indicator doesn't flicker or cause visual issues */
+.scroll-indicator {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Prevent any yellow borders on header elements */
+header,
+header *,
+.glass,
+.glass *,
+nav,
+nav *,
+nav a,
+nav button,
+nav svg {
+    outline: none !important;
+    border-color: inherit !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Specifically target navigation links and icons */
+nav a:focus,
+nav a:active,
+nav button:focus,
+nav button:active,
+.lucide:focus,
+.lucide:active,
+svg:focus,
+svg:active,
+[data-lucide]:focus,
+[data-lucide]:active {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Remove focus states from icon containers and all icon types */
+.w-10.h-10:focus,
+.w-10.h-10:active,
+.w-4.h-4:focus,
+.w-4.h-4:active,
+.w-12.h-12:focus,
+.w-12.h-12:active,
+.w-6.h-6:focus,
+.w-6.h-6:active,
+.w-5.h-5:focus,
+.w-5.h-5:active {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Prevent webkit focus rings */
+::-webkit-focus-ring {
+    outline: none !important;
+}
+
+/* Ultra-specific rules to eliminate yellow borders on problem elements */
+/* Target active navigation links specifically */
+nav a[class*="bg-primary"],
+nav a[class*="bg-white"],
+.bg-primary,
+.bg-white\/15,
+[class*="border-primary"],
+[class*="border-white"] {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    border-color: inherit !important;
+}
+
+/* Target shield and phone icon containers */
+.w-10.h-10.rounded-xl,
+.w-4.h-4.rounded-full,
+.w-12.h-12.rounded-xl {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Target all SVG icons directly */
+svg[class*="lucide"],
+svg[data-lucide],
+.lucide,
+[data-lucide] {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    pointer-events: none !important;
+}
+
+/* Force remove any possible yellow styling */
+*[style*="yellow"],
+*[style*="#ff"],
+*[style*="rgb(255, 255, 0)"],
+*[style*="hsl(60"] {
+    outline: none !important;
+    border: none !important;
+    background: inherit !important;
+}
+
+/* Additional safety net for Motion components */
+[data-framer-component-type],
+.motion-div,
+.motion-a,
+.motion-button {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -282,4 +491,91 @@
     a {
         border: 2px solid currentColor;
     }
+}
+
+/* Nuclear option: completely disable all focus rings and yellow borders */
+html * {
+    -webkit-focus-ring: none !important;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Override any browser default focus colors */
+:root {
+    --webkit-focus-ring-color: transparent !important;
+}
+
+/* Disable focus rings on all elements using attribute selectors */
+*[tabindex],
+*[href],
+*[onclick],
+*[onmousedown],
+*[role="button"],
+*[role="link"] {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Browser-specific overrides */
+@-moz-document url-prefix() {
+    * {
+        outline: none !important;
+    }
+}
+
+/* Webkit/Chrome specific */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    * {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+    }
+}
+
+/* FINAL OVERRIDE - Maximum specificity to eliminate ANY yellow borders */
+html body * {
+    outline: none !important;
+    border-color: inherit !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+html body *:focus,
+html body *:active,
+html body *:hover,
+html body *:target {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Absolutely prevent any yellow or gold coloring */
+* {
+    outline-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Override any possible browser agent stylesheets */
+* {
+    outline-style: none !important;
+    outline-width: 0 !important;
+}
+
+/* Last resort: disable ALL outlines and borders on interactive elements */
+a, button, input, textarea, select, div[role], span[role], [tabindex] {
+    outline: 0 !important;
+    border-color: inherit !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
+
+/* Ensure custom focus-visible still works for accessibility */
+html body *:focus-visible {
+    outline: 2px solid rgb(115 16 23 / 0.5) !important;
+    outline-offset: 2px !important;
 }

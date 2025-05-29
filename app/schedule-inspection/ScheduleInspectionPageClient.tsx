@@ -241,7 +241,6 @@ export default function ScheduleInspectionPageClient() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center max-w-3xl mx-auto"
                 >
-
                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle className="w-10 h-10 text-green-600" />
                     </div>
@@ -253,7 +252,6 @@ export default function ScheduleInspectionPageClient() {
                         received your inspection request and will contact you
                         within 2 hours to confirm your appointment.
                     </p>
-
                     <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 text-left">
                         <h3 className="font-semibold text-gray-900 mb-4 text-center">
                             Booking Confirmation
@@ -292,37 +290,38 @@ export default function ScheduleInspectionPageClient() {
                                 </span>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-                        <h3 className="font-semibold text-blue-900 mb-3">
+                    </div>{" "}
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+                        <h3 className="font-semibold text-red-900 mb-3">
                             What happens next?
                         </h3>
                         <div className="grid md:grid-cols-2 gap-4 text-left">
                             <div className="space-y-3">
                                 <div className="flex items-start gap-3">
-                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                    {" "}
+                                    <div className="w-6 h-6 bg-[#731017] text-white rounded-full flex items-center justify-center text-sm font-bold">
                                         1
                                     </div>
                                     <div>
-                                        <p className="font-medium text-blue-900">
+                                        <p className="font-medium text-red-900">
                                             Confirmation Call
                                         </p>
-                                        <p className="text-blue-800 text-sm">
-                                            We'll call within the next business day to confirm
-                                            details
+                                        <p className="text-red-800 text-sm">
+                                            We'll call within the next business
+                                            day to confirm details
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                    {" "}
+                                    <div className="w-6 h-6 bg-[#731017] text-white rounded-full flex items-center justify-center text-sm font-bold">
                                         2
                                     </div>
                                     <div>
-                                        <p className="font-medium text-blue-900">
+                                        <p className="font-medium text-red-900">
                                             Email Instructions
                                         </p>
-                                        <p className="text-blue-800 text-sm">
+                                        <p className="text-red-800 text-sm">
                                             Preparation checklist and what to
                                             expect
                                         </p>
@@ -331,28 +330,30 @@ export default function ScheduleInspectionPageClient() {
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-start gap-3">
-                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                    {" "}
+                                    <div className="w-6 h-6 bg-[#731017] text-white rounded-full flex items-center justify-center text-sm font-bold">
                                         3
                                     </div>
                                     <div>
-                                        <p className="font-medium text-blue-900">
+                                        <p className="font-medium text-red-900">
                                             Inspection Day
                                         </p>
-                                        <p className="text-blue-800 text-sm">
+                                        <p className="text-red-800 text-sm">
                                             Professional inspection at scheduled
                                             time
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                    {" "}
+                                    <div className="w-6 h-6 bg-[#731017] text-white rounded-full flex items-center justify-center text-sm font-bold">
                                         4
                                     </div>
                                     <div>
-                                        <p className="font-medium text-blue-900">
+                                        <p className="font-medium text-red-900">
                                             Detailed Report
                                         </p>
-                                        <p className="text-blue-800 text-sm">
+                                        <p className="text-red-800 text-sm">
                                             Comprehensive report within 24 hours
                                         </p>
                                     </div>
@@ -360,7 +361,6 @@ export default function ScheduleInspectionPageClient() {
                             </div>
                         </div>
                     </div>
-
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button onClick={() => setIsSubmitted(false)}>
                             Schedule Another Inspection
@@ -388,165 +388,194 @@ export default function ScheduleInspectionPageClient() {
                     subtitle={`Choose your preferred date and time for a professional home inspection with ${contactInfo.founder}`}
                     badge="Book Now"
                     badgeIcon={<Calendar className="w-4 h-4" />}
-                />
-
+                />{" "}
                 <div className="max-w-6xl mx-auto">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="grid lg:grid-cols-2 gap-8"
+                        className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8"
                     >
                         {/* left column with calendar and time selection*/}
                         <div className="space-y-6">
+                            {" "}
+                            {/* Unified Date & Time Selection Card */}
                             <Card className="p-6">
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                    <Calendar className="w-5 h-5 text-blue-600" />
-                                    Select Date
-                                </h3>{" "}
-                                <div className="calendar-container">
-                                    <DatePicker
-                                        selected={selectedDate}
-                                        onChange={(date: Date | null) =>
-                                            setSelectedDate(date)
-                                        }
-                                        minDate={tomorrow}
-                                        maxDate={maxDate}
-                                        filterDate={isDateAvailable}
-                                        inline
-                                        className="w-full"
-                                        onMonthChange={(date) =>
-                                            setCalendarMonth(date)
-                                        }
-                                        dayClassName={(date) => {
-                                            if (!isDateAvailable(date)) {
-                                                return "unavailable-date";
-                                            }
-                                            if (isDateBusy(date)) {
-                                                return "busy-date";
-                                            }
-                                            return "available-date";
-                                        }}
-                                        renderDayContents={(day, date) => {
-                                            const isBusy = isDateBusy(date);
-                                            const isAvailable =
-                                                isDateAvailable(date);
-
-                                            return (
-                                                <div className="relative">
-                                                    <span>{day}</span>
-                                                    {isBusy && (
-                                                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
-                                                    )}
-                                                </div>
-                                            );
-                                        }}
-                                    />
-                                </div>
-                                <div className="mt-4 space-y-2">
-                                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                                        <div className="flex items-center gap-1">
-                                            <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                                            <span>Available</span>
-                                        </div>
-                                        <div className="flex items-center gap-1">
-                                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                            <span>Busy</span>
-                                        </div>
-                                        <div className="flex items-center gap-1">
-                                            <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                                            <span>Unavailable</span>
-                                        </div>
-                                    </div>
-                                    <p className="text-sm text-gray-500">
-                                        * Inspections are available Monday
-                                        through Friday. Weekend appointments may
-                                        be available upon request.
-                                    </p>
-                                </div>
-                            </Card>
-
-                            <Card className="p-6">
-                                {" "}
-                                <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                    <Clock className="w-5 h-5 text-blue-600" />
-                                    Select Time
-                                    {selectedDate && (
-                                        <span className="text-sm font-normal text-gray-500">
-                                            for{" "}
-                                            {selectedDate.toLocaleDateString()}
-                                        </span>
-                                    )}
+                                <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                                    <Calendar className="w-5 h-5 text-[#731017]" />
+                                    Select Date & Time
                                 </h3>
-                                {selectedDate ? (
-                                    <>
-                                        <div className="grid grid-cols-3 gap-3 time-slots-grid">
-                                            {availableTimesForDate.map(
-                                                (slot) => (
-                                                    <button
-                                                        key={slot.time}
-                                                        type="button"
-                                                        onClick={() =>
-                                                            slot.available &&
-                                                            setSelectedTime(
-                                                                slot.time,
-                                                            )
-                                                        }
-                                                        disabled={
-                                                            !slot.available
-                                                        }
-                                                        className={`time-slot-button p-3 text-sm font-medium rounded-lg border transition-all ${
-                                                            selectedTime ===
-                                                            slot.time
-                                                                ? "selected bg-blue-600 text-white border-blue-600"
-                                                                : slot.available
-                                                                ? "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-                                                                : "bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed"
-                                                        }`}
-                                                    >
-                                                        {slot.time}
-                                                        {!slot.available && (
-                                                            <div className="text-xs mt-1">
-                                                                Booked
-                                                            </div>
-                                                        )}
-                                                    </button>
-                                                ),
-                                            )}
+                                <div className="flex flex-col lg:flex-row xl:flex-col 2xl:flex-row gap-6 lg:gap-8">
+                                    {/* Date Selection */}
+                                    <div className="flex-1 space-y-4">
+                                        <h4 className="text-lg font-medium text-gray-800 flex items-center gap-2">
+                                            <Calendar className="w-4 h-4 text-[#731017]" />
+                                            Choose Date
+                                        </h4>
+                                        <div className="calendar-container">
+                                            <DatePicker
+                                                selected={selectedDate}
+                                                onChange={(date: Date | null) =>
+                                                    setSelectedDate(date)
+                                                }
+                                                minDate={tomorrow}
+                                                maxDate={maxDate}
+                                                filterDate={isDateAvailable}
+                                                inline
+                                                className="w-full"
+                                                onMonthChange={(date) =>
+                                                    setCalendarMonth(date)
+                                                }
+                                                dayClassName={(date) => {
+                                                    if (
+                                                        !isDateAvailable(date)
+                                                    ) {
+                                                        return "unavailable-date";
+                                                    }
+                                                    if (isDateBusy(date)) {
+                                                        return "busy-date";
+                                                    }
+                                                    return "available-date";
+                                                }}
+                                                renderDayContents={(
+                                                    day,
+                                                    date,
+                                                ) => {
+                                                    const isBusy =
+                                                        isDateBusy(date);
+
+                                                    return (
+                                                        <div className="relative">
+                                                            <span>{day}</span>
+                                                            {isBusy && (
+                                                                <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                }}
+                                            />
                                         </div>
-                                        {selectedDate && selectedTime && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg"
-                                            >
-                                                <p className="text-green-800 font-medium">
-                                                    Selected:{" "}
-                                                    {selectedDate.toLocaleDateString()}{" "}
-                                                    at {selectedTime}
-                                                </p>
-                                            </motion.div>
-                                        )}
-                                    </>
-                                ) : (
-                                    <div className="flex items-center justify-center h-32 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                                        <div className="text-center">
-                                            <Info className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                                            <p className="text-gray-500">
-                                                Please select a date first
+                                        <div className="space-y-2">
+                                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                                                <div className="flex items-center gap-1">
+                                                    <div className="w-3 h-3 bg-[#731017] rounded-full"></div>
+                                                    <span>Available</span>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                                    <span>Busy</span>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                                    <span>Unavailable</span>
+                                                </div>
+                                            </div>
+                                            <p className="text-sm text-gray-500">
+                                                * Inspections available
+                                                Monday-Friday. Weekend
+                                                appointments upon request.
                                             </p>
                                         </div>
+                                    </div>{" "}
+                                    {/* Time Selection */}
+                                    <div className="flex-1 space-y-4">
+                                        <h4 className="text-lg font-medium text-gray-800 flex items-center gap-2">
+                                            <Clock className="w-4 h-4 text-[#731017]" />
+                                            Choose Time
+                                            {selectedDate && (
+                                                <span className="text-sm font-normal text-gray-500 ml-2">
+                                                    (
+                                                    {selectedDate.toLocaleDateString()}
+                                                    )
+                                                </span>
+                                            )}
+                                        </h4>
+                                        {selectedDate ? (
+                                            <>
+                                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2 gap-2 time-slots-grid">
+                                                    {availableTimesForDate.map(
+                                                        (slot) => (
+                                                            <button
+                                                                key={slot.time}
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    slot.available &&
+                                                                    setSelectedTime(
+                                                                        slot.time,
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    !slot.available
+                                                                }
+                                                                className={`time-slot-button p-3 text-sm font-medium rounded-lg border transition-all ${
+                                                                    selectedTime ===
+                                                                    slot.time
+                                                                        ? "selected bg-[#731017] text-white border-[#731017] shadow-md"
+                                                                        : slot.available
+                                                                        ? "bg-white text-gray-700 border-gray-200 hover:border-[#731017] hover:bg-red-50"
+                                                                        : "bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed"
+                                                                }`}
+                                                            >
+                                                                {slot.time}
+                                                                {!slot.available && (
+                                                                    <div className="text-xs mt-1">
+                                                                        Booked
+                                                                    </div>
+                                                                )}
+                                                            </button>
+                                                        ),
+                                                    )}
+                                                </div>
+                                                {selectedDate &&
+                                                    selectedTime && (
+                                                        <motion.div
+                                                            initial={{
+                                                                opacity: 0,
+                                                                y: 10,
+                                                            }}
+                                                            animate={{
+                                                                opacity: 1,
+                                                                y: 0,
+                                                            }}
+                                                            className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg"
+                                                        >
+                                                            <div className="flex items-center gap-2">
+                                                                <CheckCircle className="w-5 h-5 text-green-600" />
+                                                                <p className="text-green-800 font-medium">
+                                                                    Selected:{" "}
+                                                                    {selectedDate.toLocaleDateString()}{" "}
+                                                                    at{" "}
+                                                                    {
+                                                                        selectedTime
+                                                                    }
+                                                                </p>
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                            </>
+                                        ) : (
+                                            <div className="flex items-center justify-center h-32 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                                                <div className="text-center">
+                                                    <Info className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                                                    <p className="text-gray-500">
+                                                        Please select a date
+                                                        first
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
+                                </div>
                             </Card>
                         </div>
 
                         {/* right column info form */}
                         <div className="space-y-6">
+                            {" "}
                             <Card className="p-6">
                                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                    <User className="w-5 h-5 text-blue-600" />
+                                    <User className="w-5 h-5 text-[#731017]" />
                                     Contact Information
                                 </h3>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             First Name *
@@ -554,13 +583,18 @@ export default function ScheduleInspectionPageClient() {
                                         <input
                                             {...register("firstName")}
                                             type="text"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                             placeholder="John"
                                         />
                                         {errors.firstName && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.firstName.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
                                     <div>
@@ -570,17 +604,22 @@ export default function ScheduleInspectionPageClient() {
                                         <input
                                             {...register("lastName")}
                                             type="text"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                             placeholder="Doe"
                                         />
                                         {errors.lastName && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.lastName.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-4">
+                                <div className="grid sm:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Email Address *
@@ -588,13 +627,18 @@ export default function ScheduleInspectionPageClient() {
                                         <input
                                             {...register("email")}
                                             type="email"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                             placeholder="john@example.com"
                                         />
                                         {errors.email && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.email.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
                                     <div>
@@ -604,20 +648,25 @@ export default function ScheduleInspectionPageClient() {
                                         <input
                                             {...register("phone")}
                                             type="tel"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                             placeholder="(616) 555-0123"
                                         />
                                         {errors.phone && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.phone.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
                                 </div>
                             </Card>
                             <Card className="p-6">
                                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                    <Home className="w-5 h-5 text-blue-600" />
+                                    <Home className="w-5 h-5 text-[#731017]" />
                                     Property Information
                                 </h3>
                                 <div>
@@ -627,23 +676,28 @@ export default function ScheduleInspectionPageClient() {
                                     <input
                                         {...register("propertyAddress")}
                                         type="text"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                         placeholder="123 Main Street, Grand Rapids, MI 49503"
                                     />
                                     {errors.propertyAddress && (
-                                        <p className="text-red-500 text-sm mt-1">
+                                        <motion.p
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                        >
+                                            <AlertCircle className="w-4 h-4" />
                                             {errors.propertyAddress.message}
-                                        </p>
+                                        </motion.p>
                                     )}
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-4">
+                                <div className="grid sm:grid-cols-2 gap-4 mt-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Property Type *
                                         </label>
                                         <select
                                             {...register("propertyType")}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                         >
                                             <option value="">
                                                 Select property type
@@ -658,9 +712,14 @@ export default function ScheduleInspectionPageClient() {
                                             ))}
                                         </select>
                                         {errors.propertyType && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.propertyType.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
                                     <div>
@@ -669,7 +728,7 @@ export default function ScheduleInspectionPageClient() {
                                         </label>
                                         <select
                                             {...register("inspectionType")}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors"
                                         >
                                             <option value="">
                                                 Select inspection type
@@ -684,12 +743,17 @@ export default function ScheduleInspectionPageClient() {
                                             ))}
                                         </select>
                                         {errors.inspectionType && (
-                                            <p className="text-red-500 text-sm mt-1">
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                                            >
+                                                <AlertCircle className="w-4 h-4" />
                                                 {errors.inspectionType.message}
-                                            </p>
+                                            </motion.p>
                                         )}
                                     </div>
-                                </div>
+                                </div>{" "}
                                 <div className="mt-4">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Special Requests or Notes
@@ -697,7 +761,7 @@ export default function ScheduleInspectionPageClient() {
                                     <textarea
                                         {...register("specialRequests")}
                                         rows={3}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#731017] focus:border-transparent transition-colors resize-none"
                                         placeholder="Any special areas of concern, access instructions, etc."
                                     />
                                 </div>
@@ -708,16 +772,16 @@ export default function ScheduleInspectionPageClient() {
                                         {...register("agreedToTerms")}
                                         type="checkbox"
                                         id="terms"
-                                        className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                        className="mt-1 w-5 h-5 text-[#731017] border-gray-300 rounded focus:ring-[#731017] focus:ring-2"
                                     />
                                     <label
                                         htmlFor="terms"
-                                        className="text-sm text-gray-700"
+                                        className="text-sm text-gray-700 leading-relaxed"
                                     >
                                         I agree to the{" "}
                                         <a
                                             href="/terms"
-                                            className="text-blue-600 hover:underline"
+                                            className="text-[#731017] hover:underline font-medium"
                                         >
                                             terms and conditions
                                         </a>{" "}
@@ -726,9 +790,14 @@ export default function ScheduleInspectionPageClient() {
                                     </label>
                                 </div>
                                 {errors.agreedToTerms && (
-                                    <p className="text-red-500 text-sm mt-2">
+                                    <motion.p
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="text-red-500 text-sm mt-2 flex items-center gap-1"
+                                    >
+                                        <AlertCircle className="w-4 h-4" />
                                         {errors.agreedToTerms.message}
-                                    </p>
+                                    </motion.p>
                                 )}
                             </Card>{" "}
                             <Button
@@ -757,17 +826,18 @@ export default function ScheduleInspectionPageClient() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="mt-6"
                                 >
-                                    <Card className="p-6 bg-blue-50 border-blue-200">
-                                        <h4 className="font-semibold text-blue-900 mb-3">
+                                    {" "}
+                                    <Card className="p-6 bg-red-50 border-red-200">
+                                        <h4 className="font-semibold text-red-900 mb-3">
                                             Booking Summary
                                         </h4>
                                         <div className="space-y-2 text-sm">
                                             {selectedDate && (
                                                 <div className="flex justify-between">
-                                                    <span className="text-blue-700">
+                                                    <span className="text-red-700">
                                                         Date:
                                                     </span>
-                                                    <span className="font-medium text-blue-900">
+                                                    <span className="font-medium text-red-900">
                                                         {selectedDate.toLocaleDateString(
                                                             "en-US",
                                                             {
@@ -779,23 +849,23 @@ export default function ScheduleInspectionPageClient() {
                                                         )}
                                                     </span>
                                                 </div>
-                                            )}
+                                            )}{" "}
                                             {selectedTime && (
                                                 <div className="flex justify-between">
-                                                    <span className="text-blue-700">
+                                                    <span className="text-red-700">
                                                         Time:
                                                     </span>
-                                                    <span className="font-medium text-blue-900">
+                                                    <span className="font-medium text-red-900">
                                                         {selectedTime}
                                                     </span>
                                                 </div>
                                             )}
                                             {watch("inspectionType") && (
                                                 <div className="flex justify-between">
-                                                    <span className="text-blue-700">
+                                                    <span className="text-red-700">
                                                         Type:
                                                     </span>
-                                                    <span className="font-medium text-blue-900">
+                                                    <span className="font-medium text-red-900">
                                                         {
                                                             INSPECTION_TYPES.find(
                                                                 (t) =>
@@ -845,7 +915,6 @@ export default function ScheduleInspectionPageClient() {
                         </div>
                     </form>
                 </div>
-
                 {/* right column contact info section*/}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -861,9 +930,10 @@ export default function ScheduleInspectionPageClient() {
                             your inspection.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            {" "}
                             <a
                                 href={`tel:${contactInfo.phone}`}
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-[#731017] text-white rounded-lg hover:bg-[#651014] transition-colors"
                             >
                                 <Phone className="w-5 h-5" />
                                 {contactInfo.phone}

@@ -45,12 +45,12 @@
 }
 
 .schedule-inspection-page .react-datepicker__day:hover {
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: #fee2e2;
+    color: #731017;
 }
 
 .schedule-inspection-page .react-datepicker__day--selected {
-    background-color: #2563eb;
+    background-color: #731017;
     color: white;
 }
 
@@ -66,14 +66,14 @@
 
 /* Custom day styling */
 .schedule-inspection-page .available-date {
-    background-color: #f0f9ff;
-    color: #0369a1;
-    border: 1px solid #e0f2fe;
+    background-color: #fef2f2;
+    color: #731017;
+    border: 1px solid #fee2e2;
 }
 
 .schedule-inspection-page .available-date:hover {
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: #fee2e2;
+    color: #651014;
 }
 
 .schedule-inspection-page .busy-date {
@@ -115,13 +115,13 @@
 
 .time-slot-button.selected {
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgb(37 99 235 / 0.3);
+    box-shadow: 0 4px 6px -1px rgb(115 16 23 / 0.3);
 }
 
 /* Form input focus styles */
 .form-input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
+    box-shadow: 0 0 0 2px rgb(115 16 23 / 0.5);
     border-color: transparent;
 }
 
@@ -151,18 +151,234 @@
 }
 
 /* Mobile responsiveness for calendar */
+@media (max-width: 768px) {
+    .schedule-inspection-page .react-datepicker {
+        transform: scale(0.95);
+        transform-origin: center top;
+        margin: 0 auto;
+    }
+    
+    .schedule-inspection-page .react-datepicker__month-container {
+        width: 100%;
+    }
+    
+    .schedule-inspection-page .react-datepicker__day {
+        margin: 0.15rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        line-height: 2.2rem;
+        font-size: 0.875rem;
+    }
+    
+    .schedule-inspection-page .react-datepicker__day-name {
+        margin: 0.15rem;
+        width: 2.2rem;
+        font-size: 0.75rem;
+    }
+    
+    .time-slots-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .form-grid-mobile {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
 @media (max-width: 640px) {
     .schedule-inspection-page .react-datepicker {
         transform: scale(0.9);
         transform-origin: center top;
     }
     
+    .schedule-inspection-page .react-datepicker__day {
+        margin: 0.1rem;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.8rem;
+    }
+    
+    .schedule-inspection-page .react-datepicker__day-name {
+        margin: 0.1rem;
+        width: 2rem;
+        font-size: 0.7rem;
+    }
+    
     .time-slots-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 0.5rem;
     }
     
-    .form-grid-mobile {
-        grid-template-columns: 1fr;
+    .time-slot-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
     }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+    .schedule-inspection-page .react-datepicker {
+        transform: scale(0.85);
+        transform-origin: center top;
+    }
+    
+    .schedule-inspection-page .react-datepicker__day {
+        margin: 0.05rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        font-size: 0.75rem;
+    }
+    
+    .schedule-inspection-page .react-datepicker__day-name {
+        margin: 0.05rem;
+        width: 1.8rem;
+        font-size: 0.65rem;
+    }
+    
+    .schedule-inspection-page .react-datepicker__header {
+        padding: 0.75rem;
+    }
+    
+    .schedule-inspection-page .react-datepicker__current-month {
+        font-size: 1rem;
+    }
+    
+    .time-slot-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Improved calendar responsiveness */
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.schedule-inspection-page .react-datepicker {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+    background-color: white;
+}
+
+/* Better form styling */
+.form-section {
+    margin-bottom: 1.5rem;
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced button hover effects */
+.time-slot-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(115, 16, 23, 0.3);
+}
+
+.time-slot-button.selected:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(115, 16, 23, 0.5);
+}
+
+/* Loading state improvements */
+.submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Success state improvements */
+.success-confirmation {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fecaca;
+}
+
+/* Enhanced error styling */
+.error-input {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1) !important;
+}
+
+.error-input:focus {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Better spacing for mobile forms */
+@media (max-width: 640px) {
+    .form-section {
+        margin-bottom: 1rem;
+    }
+    
+    .schedule-form-container {
+        gap: 1rem;
+    }
+    
+    .datetime-picker-container {
+        gap: 1rem;
+    }
+}
+
+/* Enhanced responsive grid layout */
+.schedule-form-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+    .schedule-form-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+}
+
+/* Improved datetime picker container */
+.datetime-picker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .datetime-picker-container {
+        flex-direction: row;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+}
+
+.date-picker-section,
+.time-picker-section {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Better form field spacing */
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-field:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced validation error styles */
+.error-message {
+    color: rgb(239 68 68);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.error-message svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
 }

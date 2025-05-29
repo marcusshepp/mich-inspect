@@ -38,6 +38,7 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
+                    {" "}
                     <Link
                         href={item.href}
                         className={`relative text-base font-medium transition-all duration-300 px-4 py-2.5 rounded-xl ${
@@ -46,9 +47,16 @@ export default function MainNavigation({ isScrolled }: MainNavigationProps) {
                                     ? "text-white bg-primary shadow-sm border border-primary/20"
                                     : "text-white bg-white/15 shadow-lg border border-white/20"
                                 : isScrolled
-                                  ? "text-neutral-700 hover:text-white hover:bg-primary"
-                                  : "text-white/90 hover:text-white hover:bg-white/10"
+                                ? "text-neutral-700 hover:text-white hover:bg-primary"
+                                : "text-white/90 hover:text-white hover:bg-white/10"
                         }`}
+                        style={
+                            {
+                                outline: "none",
+                                WebkitTapHighlightColor: "transparent",
+                                WebkitFocusRingColor: "transparent",
+                            } as React.CSSProperties
+                        }
                     >
                         {item.name}
                         {pathname === item.href && (
