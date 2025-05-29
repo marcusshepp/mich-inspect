@@ -10,6 +10,7 @@ const navigationItems: NavigationItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
+    { name: "Schedule Inspection", href: "/schedule-inspection" },
 ];
 interface MainNavigationProps {
     isScrolled: boolean;

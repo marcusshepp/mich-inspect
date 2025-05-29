@@ -11,6 +11,7 @@
     "dependencies": {
         "@emotion/is-prop-valid": "latest",
         "@hookform/resolvers": "^3.9.1",
+        "@types/react-datepicker": "^6.2.0",
         "autoprefixer": "^10.4.20",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -18,7 +19,9 @@
         "lucide-react": "^0.454.0",
         "next": "15.2.4",
         "react": "^19",
+        "react-datepicker": "^8.4.0",
         "react-dom": "^19",
+        "react-hook-form": "^7.56.4",
         "sonner": "^1.7.1",
         "tailwind-merge": "^2.5.5",
         "tailwindcss-animate": "^1.0.7",
