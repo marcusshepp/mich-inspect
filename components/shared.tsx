@@ -155,7 +155,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                     <span>{badge}</span>
                 </motion.div>
             )}
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-neutral-900">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-neutral-600">
                 {title}
             </h2>
             {subtitle && (
