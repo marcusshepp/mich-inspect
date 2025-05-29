@@ -213,11 +213,10 @@ export default function Header() {
                                 >
                                     {contactInfo.phone}
                                 </motion.a>
-                            </motion.div>
-
+                            </motion.div>{" "}
                             <motion.button
                                 onClick={toggleMobileMenu}
-                                className={`lg:hidden p-3 rounded-xl transition-all duration-300 ${
+                                className={`lg:hidden p-2 sm:p-3 rounded-xl transition-all duration-300 ${
                                     isScrolled
                                         ? "text-neutral-700 hover:bg-neutral-100"
                                         : "text-white hover:bg-white/10"
@@ -230,6 +229,10 @@ export default function Header() {
                                 aria-expanded={isMobileMenuOpen}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                style={{
+                                    minHeight: "44px",
+                                    minWidth: "44px",
+                                }}
                             >
                                 <motion.div
                                     animate={{
@@ -237,10 +240,11 @@ export default function Header() {
                                     }}
                                     transition={{ duration: 0.2 }}
                                 >
+                                    {" "}
                                     {isMobileMenuOpen ? (
-                                        <X className="w-6 h-6" />
+                                        <X className="w-5 h-5 sm:w-6 sm:h-6" />
                                     ) : (
-                                        <Menu className="w-6 h-6" />
+                                        <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
                                     )}
                                 </motion.div>
                             </motion.button>
